@@ -1,12 +1,11 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import './App.css';
+import Login from './login/Login';
 
 function App() {
   return (
     <div>
-      Hola esta es la aplicación de Juli y Uri
-      <Button>Nice Button</Button>
+      <Login />
     </div>
   );
 }
