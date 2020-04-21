@@ -1,25 +1,31 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Link } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import styles from './../styles.css'
 
-class SideBar extends React.Component {
+class SideBar extends React.Component {    
+    constructor(props){
+        super(props)
+    }
     render() {
         return (
-            <Navbar bg="dark" variant="dark" className={styles.container}>
-                <Navbar.Brand>Options</Navbar.Brand>
-                <Nav className="mr-auto" >
-                    <Link className="Nav.Link" to="/login">
-                        Login
-                    </Link>
-                    <Link className="Nav.Link" to="/users" className={styles.padding15px}>
-                        Users
-                    </Link>
-                </Nav>
-            </Navbar>
+            <Nav className="col-md-12 d-none d-md-block bg-light sidebar">
+                <div className="sidebar-sticky"></div>
+                <Nav.Item id="borderbottom">
+                    <Nav.Link  onClick={() => this.props.history.push("/login")}>Login</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link onClick={() => this.props.history.push("/users")}>Users</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link onClick={() => this.props.history.push("/media-server")}>Media Server</Nav.Link>
+                </Nav.Item>
+            </Nav>
         )
     }
 }
 
-export default SideBar;
+const SideBis = withRouter(SideBar);
+
+export default SideBis;

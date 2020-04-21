@@ -4,7 +4,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
-class Login extends React.Component {
+class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,9 +15,9 @@ class Login extends React.Component {
     }
 
     handleSubmit() {
-        console.log("Trying to submit.")
-        console.log(this.state.username)
-        console.log(this.state.password)
+        if(this.state.username === "uriel") {
+            this.props.setAuth()
+        }
     }
 
     render() {
@@ -47,4 +47,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default LoginPage;
