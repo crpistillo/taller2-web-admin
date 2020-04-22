@@ -15,7 +15,7 @@ class LoginPage extends React.Component {
     }
 
     handleSubmit() {
-        if(this.state.username === "uriel") {
+        if (this.state.username === "uriel") {
             this.props.setAuth()
         }
     }

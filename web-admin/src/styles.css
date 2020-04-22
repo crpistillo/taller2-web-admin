@@ -9,6 +9,8 @@
 
 .sidebar {
     min-height: 100vh !important;
+    font-size: large;
+    font-family: Arial;
 }
 
 .borderbottom {
