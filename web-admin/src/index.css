@@ -60,8 +60,12 @@ body, html, .App, #root, .auth-wrapper {
 }
 
 .auth-wrapper .form-control:focus {
-  border-color: #167bff;
+  border-color: #167bff;  
   box-shadow: none;
+}
+
+.auth-wrapper .form-control-invalid{
+  border-color: red
 }
 
 .auth-wrapper h3 {
