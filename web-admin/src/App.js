@@ -50,6 +50,7 @@ export default App;
 import Login from "./login/loginForm";
 import SignUp from "./login/signUpForm";
 import LoginNavbar from './login/LoginNavbar';
+import LoginContainer from './login/loginForm';
 
 function App() {
   return (<Router>
@@ -60,7 +61,7 @@ function App() {
         <div className="auth-inner">
           <Switch>
             <Route exact path='/' component={Login} />
-            <Route path="/sign-in" component={Login} />
+            <Route path="/sign-in" component={LoginContainer} />
             <Route path="/sign-up" component={SignUp} />
           </Switch>
         </div>

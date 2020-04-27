@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import {connect} from 'react-redux';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -15,8 +16,11 @@ class LoginPage extends React.Component {
     }
 
     handleSubmit() {
+        console.log(this.props.token)
         if (this.state.username === "uriel") {
-            this.props.setAuth()
+            this.props.onClickedLoginButton("urielsinho_token")
+        } else {
+            this.props.onClickedLoginButton("juliansinho_token")
         }
     }
 
@@ -46,5 +50,3 @@ class LoginPage extends React.Component {
         )
     }
 }
-
-export default LoginPage;
