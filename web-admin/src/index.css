@@ -92,6 +92,8 @@ body, html, .App, #root, .auth-wrapper {
   color: #167bff;
 }
 
+/* Sidebar */
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
@@ -107,8 +109,8 @@ body, html, .App, #root, .auth-wrapper {
 }
 
 /* Color/shape of burger icon bars on hover*/
-.bm-burger-bars-hover {
-  background: #a90000;
+.bm-burger-bars:hover{
+  background: #555353;
 }
 
 /* Position and sizing of clickable cross button */
@@ -135,7 +137,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-menu {
   background: #373a47;
   padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
+  font-size: 1.30em;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -147,14 +149,23 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-item-list {
   color: #b8b7ad;
   padding: 0.8em;
+  text-align: center;
 }
 
 /* Individual item */
 .bm-item {
   display: inline-block;
+  color: #ffffff;
+  font-family: 'Fira Sans', sans-serif;
+  padding: 0.5em;
+}
+
+.bm-item:hover{
+  color: rgb(192, 189, 189);
 }
 
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
+
