@@ -3,10 +3,10 @@ import {combineReducers} from 'redux';
 export const ADD_TOKEN = 'ADD_TOKEN';
 
 const initialState = {
-    token:''
+    token: undefined
 };
 
-const simpleReducer = (state=initialState, action) => {
+const simpleReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_TOKEN:
             return {...state, token: action.payload}
@@ -14,6 +14,7 @@ const simpleReducer = (state=initialState, action) => {
             return state
     }
 };
+
 
 export const reducers = combineReducers({simpleReducer});
 

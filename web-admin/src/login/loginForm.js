@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
 
-
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -54,18 +53,16 @@ class Login extends Component {
 const mapStateToProps = (state) => {
     /*Esta linea hay que agregarle .simpleReducer porque es el nombre con el que cree el reducer,
     si hubiera uno solo no hace falta. El state divide el state segun los reducers que haya.*/
-    console.log(state.simpleReducer.token)
-    return {token: state.token}
+    return {token: state.simpleReducer.token}
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onClickedLoginButton: (token) =>{
-            console.log(token)
             dispatch({type: 'ADD_TOKEN', payload: token})  
-        } 
+        }
     }
-} 
+}
 
 const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(Login);
 

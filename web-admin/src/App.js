@@ -49,13 +49,13 @@ export default App;
 
 import Login from "./login/loginForm";
 import SignUp from "./login/signUpForm";
-import LoginNavbar from './login/LoginNavbar';
+import NavigatorContainer from './Navigator';
 import LoginContainer from './login/loginForm';
 
 function App() {
   return (<Router>
     <div className="App">
-      <LoginNavbar />
+      <NavigatorContainer />
 
       <div className="auth-wrapper">
         <div className="auth-inner">
