@@ -4,9 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { reducers } from './redux/reducers';
+import { simpleReducer } from './redux/reducers';
+import { loginErrorReducer } from './redux/loginErrorReducer'
+
+let reducers = combineReducers({simpleReducer, loginErrorReducer});
 
 let store = createStore(reducers);
 
