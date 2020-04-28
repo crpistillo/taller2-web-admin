@@ -47,10 +47,9 @@ export default App;
 */
 
 
-import Login from "./login/loginForm";
 import SignUp from "./login/signUpForm";
 import NavigatorContainer from './Navigator';
-import LoginContainer from './login/loginForm';
+import LoginContainer from './login/Login';
 
 function App() {
   return (<Router>
@@ -60,7 +59,7 @@ function App() {
       <div className="auth-wrapper">
         <div className="auth-inner">
           <Switch>
-            <Route exact path='/' component={Login} />
+            <Route exact path='/' component={LoginContainer} />
             <Route path="/sign-in" component={LoginContainer} />
             <Route path="/sign-up" component={SignUp} />
           </Switch>
