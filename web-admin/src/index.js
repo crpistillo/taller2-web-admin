@@ -8,8 +8,9 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { simpleReducer } from './redux/reducers';
 import { loginErrorReducer } from './redux/loginErrorReducer'
+import { signUpErrorReducer } from './redux/signUpErrorReducer'
 
-let reducers = combineReducers({simpleReducer, loginErrorReducer});
+let reducers = combineReducers({simpleReducer, loginErrorReducer, signUpErrorReducer});
 
 let store = createStore(reducers);
 

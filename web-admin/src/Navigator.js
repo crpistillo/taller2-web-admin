@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import LoginNavbar from './login/LoginNavbar';
+import LoginNavbar from './loginPages/LoginNavbar';
 import { connect } from 'react-redux';
 
 class Navigator extends Component {
