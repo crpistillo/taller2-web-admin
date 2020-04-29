@@ -155,13 +155,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .bm-item:hover{
-  color: rgb(192, 189, 189);
+  color:white;
   background-color: #54596e;
-  transform: scale(1.1);
+  transform: scale(1.15);
   transition: transform 0.5s;
   transition: all 0.5s;
   transition-delay: 100ms;
-  border-radius: 2mm;
+  border-radius: 3mm;
 }
 
 /* Styling of overlay */

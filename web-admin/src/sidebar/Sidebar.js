@@ -11,7 +11,7 @@ class Sidebar extends Component {
             <Menu>
                 <Link className="nav-link" to={"/"}>Home</Link>
                 <Link className="nav-link" to={"/users"}>Users</Link>
-                <Link className="nav-link" to={"/media"}>Media</Link>
+                <Link className="nav-link" to={"/media"}>Media Server</Link>
             </Menu>
         );
     }
