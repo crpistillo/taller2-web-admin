@@ -54,11 +54,11 @@ import Sidebar from './sidebar/Sidebar';
 
 function App() {
   return (<Router>
-    <div>
+    {/* <div>
       <Sidebar></Sidebar>
-    </div>
+    </div> */}
     <div className="App">
-      {/* <NavigatorContainer /> */}
+      <NavigatorContainer />
 
       <div className="auth-wrapper">
         <div className="auth-inner">

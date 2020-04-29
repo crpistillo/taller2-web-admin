@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu'
+import { Link } from 'react-router-dom';
 
 class Sidebar extends Component {
     showSettings(event) {
@@ -8,9 +9,9 @@ class Sidebar extends Component {
     render() {
         return (
             <Menu>
-                <a id="home" className="menu-item" href="/">Home</a>
-                <a id="users" className="menu-item" href="/users">Users</a>
-                <a id="media-server" className="menu-item" href="/media">Media</a>
+                <Link className="nav-link" to={"/"}>Home</Link>
+                <Link className="nav-link" to={"/users"}>Users</Link>
+                <Link className="nav-link" to={"/media"}>Media</Link>
             </Menu>
         );
     }
