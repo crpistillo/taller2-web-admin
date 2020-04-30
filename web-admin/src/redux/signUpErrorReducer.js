@@ -1,13 +1,15 @@
-export const SHOW_EMAIL_SIGNUP_ERROR_MESSAGE = 'SHOW_EMAIL_SIGNUP_ERROR_MESSAGE'
+export const SHOW_SIGNUP_ERROR_MESSAGE = 'SHOW_LOGIN_ERROR_MESSAGE'
 
 const initialState = {
-    showEmailErrorMessage: false
+    showErrorMessage: false,
+    errorMessage: ''
 }
 
 export const signUpErrorReducer = (state = initialState, action) => {
     switch(action.type) {
-        case SHOW_EMAIL_SIGNUP_ERROR_MESSAGE:
-            return {...state, showEmailErrorMessage: action.payload}
+        case SHOW_SIGNUP_ERROR_MESSAGE:
+            return {...state, showErrorMessage: action.payload.showErrorMessage,
+                        errorMessage: action.payload.errorMessage}
         default:
             return state
     }

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 
-import { SHOW_LOGIN_EMAIL_ERROR_MESSAGE } from '../redux/loginErrorReducer';
+import { SHOW_LOGIN_ERROR_MESSAGE } from '../redux/loginErrorReducer';
 import GeneralForm from "./GeneralForm";
+import { LOGIN_ENDPOINT } from "../vars/endpoints";
+import FormContainer from "./FormContainer";
 
 class Login extends Component {
     constructor(props) {
@@ -29,31 +31,49 @@ class Login extends Component {
         this.errorEmailText = "Please, enter a valid email."
     }
 
-    validateEmail() {
-        return this.emailRegex.test(this.state.emailAddress)
+    generateRequest(){
+        let data = {
+            email: this.state.emailAddress,
+            password: this.state.password
+        }
+
+        let requestHeaders = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+
+        let request = new Request(LOGIN_ENDPOINT, {
+            method: 'POST',
+            headers: requestHeaders,
+            body: JSON.stringify(data)
+        }) 
+        
+        return request;
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        if (!this.validateEmail()) {
-            this.props.setShowEmailErrorMesage(true);
-        }
+    processRequest(request) { 
+        fetch(request)
+            .then(response => Response.text())
+            .then(text => console.log(text))
     }
 
     render() {
         return (
             <div>
-                <GeneralForm
+                <FormContainer
                     formHeader="Sign in"
-                    handleSubmit={this.handleSubmit.bind(this)}
                     formFields={this.formFields}
                     submitButtonText="Submit"
                     extraLinkSuffix="Forgot"
                     extraLinkHref="#"
                     extraLinkText="password?"
+                    errorMessage={this.props.errorMessage}
+                    showErrorMessage={this.props.showErrorMessage}
+                    setErrorMessage={this.props.setErrorMessage}
                     errorEmailText={this.errorEmailText}
-                    showEmailError={this.props.showEmailError}
-                    setShowEmailErrorMesage={this.props.setShowEmailErrorMesage} />
+                    generateRequest={this.generateRequest.bind(this)}
+                    processRequest={this.processRequest.bind(this)}
+                    emailAddress={this.state.emailAddress} />
             </div>
         );
     }
@@ -61,13 +81,17 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        showEmailError: state.loginErrorReducer.showEmailErrorMessage
+        showErrorMessage: state.loginErrorReducer.showErrorMessage,
+        errorMessage: state.loginErrorReducer.errorMessage
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setShowEmailErrorMesage: (value) => dispatch({ type: SHOW_LOGIN_EMAIL_ERROR_MESSAGE, payload: value })
+        setErrorMessage: (value, message) => {
+            console.log(value, message)
+            dispatch({ type: SHOW_LOGIN_ERROR_MESSAGE, payload: {showErrorMessage: value, errorMessage: message} })
+        } 
     }
 }
 

@@ -10,7 +10,7 @@ class GeneralForm extends Component {
     render() {
         return (
             <div>
-                <AlertError errorText={this.props.errorEmailText} show={this.props.showEmailError} setShow={this.props.setShowEmailErrorMesage} />
+                <AlertError errorText={this.props.errorMessage} show={this.props.showError} setShow={this.props.setErrorMessage} />
 
                 <form onSubmit={e => this.props.handleSubmit(e)}>
                     <h3>{this.props.formHeader}</h3>

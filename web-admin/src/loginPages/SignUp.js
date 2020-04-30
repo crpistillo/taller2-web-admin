@@ -1,33 +1,23 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 
-import { SHOW_EMAIL_SIGNUP_ERROR_MESSAGE } from '../redux/signUpErrorReducer';
+import { SHOW_SIGNUP_ERROR_MESSAGE } from '../redux/signUpErrorReducer';
 
+import { USERS_ENDPOINT } from '../vars/endpoints';
 
-import GeneralForm from "./GeneralForm";
+import FormContainer from "./FormContainer";
 
 class SignUp extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            firstName: '',
-            lastName: '',
+            fullName: '',
             emailAddress: '',
             password: '',
         };
 
         this.formFields = [{
-            label: 'First name',
-            type: 'text',
-            placeholder: 'First name',
-            onChangeAction: (value) => (this.setState({ firstName: value })),
-        }, {
-            label: 'Last name',
-            type: 'text',
-            placeholder: 'Last name',
-            onChangeAction: (value) => (this.setState({ lastName: value })),
-        }, {
             label: 'Email address',
             type: 'text',
             placeholder: 'Enter email',
@@ -37,37 +27,74 @@ class SignUp extends Component {
             type: 'password',
             placeholder: 'Enter password',
             onChangeAction: (value) => (this.setState({ password: value }))
+        }, {
+            label: 'Full name',
+            type: 'text',
+            placeholder: 'Full name',
+            onChangeAction: (value) => (this.setState({ fullName: value })),
         }]
         
-        this.emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         this.errorEmailText = "Please, review your email."
     }
 
-    validateEmail() {
-        return this.emailRegex.test(this.state.emailAddress)
+    generateRequest() {        
+        let data = {
+            email: this.state.emailAddress,
+            password: this.state.password,
+            fullname: this.state.fullName,
+            phone_number: "1111-1111",
+            photo: ""
+        }
+
+        let requestHeaders = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+
+        console.log(JSON.stringify(data))
+
+        let request = new Request(USERS_ENDPOINT, {
+            method: 'POST',
+            headers: requestHeaders,
+            body: JSON.stringify(data)
+        })
+
+        return request; 
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        if (!this.validateEmail()) {
-            this.props.setShowEmailErrorMesage(true)
+    processResponse(response) {
+        if(response.ok) {
+            response.json().then(json => console.log(json))
         }
+
+        else {
+            response.json().then(json => console.log("Error", json))
+        }
+          
+    }
+
+    processRequest(request) {
+        fetch(request)
+            .then(response => this.processResponse(response))
     }
 
     render() {
         return (
             <div>
-                <GeneralForm
+                <FormContainer
                     formHeader="Sign up"
-                    handleSubmit={this.handleSubmit.bind(this)}
                     formFields={this.formFields}
                     submitButtonText="Sign up"
                     extraLinkSuffix="Already registered"
                     extraLinkHref="/sign-in"
                     extraLinkText="sign in?"
+                    errorMessage={this.props.errorMessage}
+                    showErrorMessage={this.props.showErrorMessage}
+                    setErrorMessage={this.props.setErrorMessage}
                     errorEmailText={this.errorEmailText}
-                    showEmailError={this.props.showEmailError}
-                    setShowEmailErrorMesage={this.props.setShowEmailErrorMesage} />
+                    generateRequest={this.generateRequest.bind(this)}
+                    processRequest={this.processRequest.bind(this)}
+                    emailAddress={this.state.emailAddress} />
             </div>
         );
     }
@@ -75,13 +102,16 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        showEmailError: state.signUpErrorReducer.showEmailErrorMessage
+        showErrorMessage: state.signUpErrorReducer.showErrorMessage,
+        errorMessage: state.signUpErrorReducer.errorMessage
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setShowEmailErrorMesage: (value) => dispatch({ type: SHOW_EMAIL_SIGNUP_ERROR_MESSAGE, payload: value})
+        setErrorMessage: (value, message) =>{
+            dispatch({ type: SHOW_SIGNUP_ERROR_MESSAGE, payload: {showErrorMessage: value, errorMessage: message} })
+        } 
     }
 }
 
