@@ -50,6 +50,7 @@ export default App;
 import SignUpContainer from "./loginPages/SignUp";
 import NavigatorContainer from './Navigator';
 import LoginContainer from './loginPages/Login';
+import Sidebar from './sidebar/Sidebar';
 
 function App() {
   return (<Router>
