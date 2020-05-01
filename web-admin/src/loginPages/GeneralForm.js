@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AlertError from "../common/AlertError";
+import WaitingSpinner from "../common/WaitingSpinner";
 
 
 class GeneralForm extends Component {
@@ -28,6 +29,8 @@ class GeneralForm extends Component {
                         {this.props.extraLinkSuffix} <a href={this.props.extraLinkHref}>{this.props.extraLinkText}</a>
                     </p>
                 </form>
+
+                <WaitingSpinner activated={this.props.showSpinner}/>
             </div>
 
         )

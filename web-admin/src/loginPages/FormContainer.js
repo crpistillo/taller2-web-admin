@@ -9,8 +9,14 @@ class FormContainer extends Component {
     }
 
     validateEmail() {
-        console.log(this.props.emailAddress)
         return this.emailRegex.test(this.props.emailAddress)
+    }
+
+    processRequest(request) {
+        this.props.setOnSpinner()
+        fetch(request)
+            .then(response => this.props.processResponse(response))
+            .catch() 
     }
 
     handleSubmit(e) {
@@ -19,7 +25,7 @@ class FormContainer extends Component {
             this.props.setErrorMessage(true, this.props.errorEmailText)
         } else {
             let request = this.props.generateRequest()
-            this.props.processRequest(request)
+            this.processRequest(request)
         }
     }
 
@@ -36,7 +42,8 @@ class FormContainer extends Component {
                     extraLinkText={this.props.extraLinkText}
                     errorMessage={this.props.errorMessage}
                     showError={this.props.showErrorMessage}
-                    setErrorMessage={this.props.setErrorMessage} />
+                    setErrorMessage={this.props.setErrorMessage}
+                    showSpinner={this.props.showSpinner} />
             </div>
         );
     }

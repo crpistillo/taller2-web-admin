@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 
-import { SHOW_LOGIN_ERROR_MESSAGE } from '../redux/loginErrorReducer';
-import GeneralForm from "./GeneralForm";
+import { SHOW_LOGIN_ERROR_MESSAGE, SHOW_LOGIN_SPINNER } from '../redux/loginReducer';
+import { ADD_TOKEN } from '../redux/appReducers';
 import { LOGIN_ENDPOINT } from "../vars/endpoints";
 import FormContainer from "./FormContainer";
 
@@ -19,8 +19,8 @@ class Login extends Component {
             type: 'text',
             placeholder: 'Enter email',
             onChangeAction: value => this.setState({ emailAddress: value })
-            },
-        , {
+        },
+            , {
             label: 'Password',
             type: 'password',
             placeholder: 'Enter password',
@@ -31,7 +31,10 @@ class Login extends Component {
         this.errorEmailText = "Please, enter a valid email."
     }
 
-    generateRequest(){
+    setOnSpinner = () => this.props.setSpinner(true)
+    setOffSpinner = () => this.props.setSpinner(false)
+
+    generateRequest() {
         let data = {
             email: this.state.emailAddress,
             password: this.state.password
@@ -46,15 +49,27 @@ class Login extends Component {
             method: 'POST',
             headers: requestHeaders,
             body: JSON.stringify(data)
-        }) 
-        
+        })
+
         return request;
     }
 
-    processRequest(request) { 
-        fetch(request)
-            .then(response => Response.text())
-            .then(text => console.log(text))
+    processResponse(response) {
+        if (response.ok) {
+            response.json().then(json => {
+                console.log(json)
+                this.props.setToken(json.loginToken)
+            })
+        }
+
+        else {
+            response.json().then(json => {
+                console.log(json)
+                this.props.setErrorMessage(true, json.message)
+            })
+        }
+
+        this.setOffSpinner()
     }
 
     render() {
@@ -72,8 +87,10 @@ class Login extends Component {
                     setErrorMessage={this.props.setErrorMessage}
                     errorEmailText={this.errorEmailText}
                     generateRequest={this.generateRequest.bind(this)}
-                    processRequest={this.processRequest.bind(this)}
-                    emailAddress={this.state.emailAddress} />
+                    emailAddress={this.state.emailAddress}
+                    showSpinner={this.props.showSpinner}
+                    setOnSpinner={this.setOnSpinner.bind(this)}
+                    processResponse={this.processResponse.bind(this)} />
             </div>
         );
     }
@@ -81,17 +98,21 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        showErrorMessage: state.loginErrorReducer.showErrorMessage,
-        errorMessage: state.loginErrorReducer.errorMessage
+        showErrorMessage: state.loginReducer.showErrorMessage,
+        errorMessage: state.loginReducer.errorMessage,
+        showSpinner: state.loginReducer.showLoginSpinner
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         setErrorMessage: (value, message) => {
-            console.log(value, message)
-            dispatch({ type: SHOW_LOGIN_ERROR_MESSAGE, payload: {showErrorMessage: value, errorMessage: message} })
-        } 
+            dispatch({ type: SHOW_LOGIN_ERROR_MESSAGE, payload: { showErrorMessage: value, errorMessage: message } })
+        },
+
+        setSpinner: (value) => dispatch({ type: SHOW_LOGIN_SPINNER, payload: value }),
+
+        setToken: (token) => dispatch({ type: ADD_TOKEN, payload: token })
     }
 }
 

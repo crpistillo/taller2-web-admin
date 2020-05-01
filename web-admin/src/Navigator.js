@@ -20,7 +20,7 @@ class Navigator extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {token: state.simpleReducer.token}
+    return {token: state.appReducer.token}
 }
 
 const NavigatorContainer = connect(mapStateToProps, )(Navigator)

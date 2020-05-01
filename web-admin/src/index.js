@@ -6,11 +6,11 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { simpleReducer } from './redux/reducers';
-import { loginErrorReducer } from './redux/loginErrorReducer'
-import { signUpErrorReducer } from './redux/signUpErrorReducer'
+import { appReducer } from './redux/appReducers';
+import { loginReducer } from './redux/loginReducer'
+import { signUpReducer } from './redux/signUpReducer'
 
-let reducers = combineReducers({simpleReducer, loginErrorReducer, signUpErrorReducer});
+let reducers = combineReducers({appReducer, loginReducer, signUpReducer});
 
 let store = createStore(reducers);
 

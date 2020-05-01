@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 
-import { SHOW_SIGNUP_ERROR_MESSAGE } from '../redux/signUpErrorReducer';
+import { SHOW_SIGNUP_ERROR_MESSAGE, SHOW_SIGNUP_SPINNER } from '../redux/signUpReducer';
 
 import { USERS_ENDPOINT } from '../vars/endpoints';
 
@@ -37,6 +37,9 @@ class SignUp extends Component {
         this.errorEmailText = "Please, review your email."
     }
 
+    setOnSpinner = () => this.props.setSpinner(true)
+    setOffSpinner = () => this.props.setSpinner(false) 
+
     generateRequest() {        
         let data = {
             email: this.state.emailAddress,
@@ -51,8 +54,6 @@ class SignUp extends Component {
             'Content-Type': 'application/json',
         }
 
-        console.log(JSON.stringify(data))
-
         let request = new Request(USERS_ENDPOINT, {
             method: 'POST',
             headers: requestHeaders,
@@ -64,18 +65,17 @@ class SignUp extends Component {
 
     processResponse(response) {
         if(response.ok) {
-            response.json().then(json => console.log(json))
+            response.json().then(json => {console.log(json)})
         }
 
         else {
-            response.json().then(json => console.log("Error", json))
+            response.json().then(json => 
+                {   
+                    this.props.setErrorMessage(true, json.message)
+                })
         }
-          
-    }
 
-    processRequest(request) {
-        fetch(request)
-            .then(response => this.processResponse(response))
+        this.setOffSpinner()
     }
 
     render() {
@@ -93,8 +93,10 @@ class SignUp extends Component {
                     setErrorMessage={this.props.setErrorMessage}
                     errorEmailText={this.errorEmailText}
                     generateRequest={this.generateRequest.bind(this)}
-                    processRequest={this.processRequest.bind(this)}
-                    emailAddress={this.state.emailAddress} />
+                    emailAddress={this.state.emailAddress}
+                    showSpinner={this.props.showSpinner}
+                    setOnSpinner={this.setOnSpinner.bind(this)}
+                    processResponse={this.processResponse.bind(this)} />
             </div>
         );
     }
@@ -102,16 +104,18 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        showErrorMessage: state.signUpErrorReducer.showErrorMessage,
-        errorMessage: state.signUpErrorReducer.errorMessage
+        showErrorMessage: state.signUpReducer.showErrorMessage,
+        errorMessage: state.signUpReducer.errorMessage,
+        showSpinner: state.signUpReducer.showSignUpSpinner
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         setErrorMessage: (value, message) =>{
-            dispatch({ type: SHOW_SIGNUP_ERROR_MESSAGE, payload: {showErrorMessage: value, errorMessage: message} })
-        } 
+            dispatch({ type: SHOW_SIGNUP_ERROR_MESSAGE, payload: {showErrorMessage: value, errorMessage: message}}) 
+        },
+        setSpinner: (value) => dispatch({type: SHOW_SIGNUP_SPINNER, payload: value}) 
     }
 }
 
