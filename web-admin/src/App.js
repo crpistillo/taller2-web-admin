@@ -54,9 +54,6 @@ import Sidebar from './sidebar/Sidebar';
 
 function App() {
   return (<Router>
-    {/* <div>
-      <Sidebar></Sidebar>
-    </div> */}
     <div className="App">
       <NavigatorContainer />
 
