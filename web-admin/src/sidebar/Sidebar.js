@@ -3,9 +3,6 @@ import { slide as Menu } from 'react-burger-menu'
 import { Link } from 'react-router-dom';
 
 class Sidebar extends Component {
-    showSettings(event) {
-        event.preventDefault();
-    }
     render() {
         return (
             <Menu>

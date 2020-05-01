@@ -5,7 +5,7 @@ import Sidebar from "./sidebar/Sidebar";
 
 class Navigator extends Component {
     _navigatorComponent() {
-        if (this.props.token !== undefined) {
+        if (this.props.token === undefined) {
             return (<LoginNavbar />)
         } else {
             return (<Sidebar />)
