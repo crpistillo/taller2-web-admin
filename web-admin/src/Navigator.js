@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import LoginNavbar from './login/LoginNavbar';
+import LoginNavbar from './loginPages/LoginNavbar';
 import { connect } from 'react-redux';
 
 class Navigator extends Component {
@@ -20,7 +20,7 @@ class Navigator extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {token: state.simpleReducer.token}
+    return {token: state.appReducer.token}
 }
 
 const NavigatorContainer = connect(mapStateToProps, )(Navigator)
