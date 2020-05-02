@@ -21,7 +21,7 @@ class Login extends Component {
             placeholder: 'Enter email',
             onChangeAction: value => this.setState({ emailAddress: value })
         },
-            , {
+         {
             label: 'Password',
             type: 'password',
             placeholder: 'Enter password',

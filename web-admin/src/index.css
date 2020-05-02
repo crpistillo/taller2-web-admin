@@ -180,9 +180,41 @@ Note: Beware of modifying this element as it can break the animations - you shou
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #1C8EF9 !important;
 }
 
 .home-inner {
   width: 600px;
+}
+
+.admin-page-wrapper {
+  background: #1C8EF9 !important;
+  height: 100%;
+  width: 100%;
+}
+
+.row-inversion {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.padding-top-100-px {
+  padding-top: 100px;
+}
+
+.padding-left-100-px {
+  padding-left: 150px;
+}
+
+.padding-bottom-100-px {
+  padding-bottom: 100px;
+}
+
+.occupy-whole-height {
+  height: 100%;
+}
+
+.white-backgound-color {
+  background: white
 }
 
