@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { SHOW_LOGIN_ERROR_MESSAGE, SHOW_LOGIN_SPINNER } from '../redux/loginReducer';
 import { ADD_TOKEN } from '../redux/appReducers';
@@ -57,14 +58,12 @@ class Login extends Component {
     processResponse(response) {
         if (response.ok) {
             response.json().then(json => {
-                console.log(json)
-                this.props.setToken(json.loginToken)
+                this.props.setToken(json.login_token)
             })
         }
 
         else {
             response.json().then(json => {
-                console.log(json)
                 this.props.setErrorMessage(true, json.message)
             })
         }
@@ -73,25 +72,25 @@ class Login extends Component {
     }
 
     render() {
+        console.log(this.props.loggedIn)
+        if(this.props.loggedIn) return <Redirect to="/home" /> 
         return (
-            <div>
-                <FormContainer
-                    formHeader="Sign in"
-                    formFields={this.formFields}
-                    submitButtonText="Submit"
-                    extraLinkSuffix="Forgot"
-                    extraLinkHref="#"
-                    extraLinkText="password?"
-                    errorMessage={this.props.errorMessage}
-                    showErrorMessage={this.props.showErrorMessage}
-                    setErrorMessage={this.props.setErrorMessage}
-                    errorEmailText={this.errorEmailText}
-                    generateRequest={this.generateRequest.bind(this)}
-                    emailAddress={this.state.emailAddress}
-                    showSpinner={this.props.showSpinner}
-                    setOnSpinner={this.setOnSpinner.bind(this)}
-                    processResponse={this.processResponse.bind(this)} />
-            </div>
+            <FormContainer
+                formHeader="Sign in"
+                formFields={this.formFields}
+                submitButtonText="Submit"
+                extraLinkSuffix="Forgot"
+                extraLinkHref="#"
+                extraLinkText="password?"
+                errorMessage={this.props.errorMessage}
+                showErrorMessage={this.props.showErrorMessage}
+                setErrorMessage={this.props.setErrorMessage}
+                errorEmailText={this.errorEmailText}
+                generateRequest={this.generateRequest.bind(this)}
+                emailAddress={this.state.emailAddress}
+                showSpinner={this.props.showSpinner}
+                setOnSpinner={this.setOnSpinner.bind(this)}
+                processResponse={this.processResponse.bind(this)} />
         );
     }
 }
@@ -100,7 +99,8 @@ const mapStateToProps = (state) => {
     return {
         showErrorMessage: state.loginReducer.showErrorMessage,
         errorMessage: state.loginReducer.errorMessage,
-        showSpinner: state.loginReducer.showLoginSpinner
+        showSpinner: state.loginReducer.showLoginSpinner,
+        loggedIn: state.appReducer.loggedIn
     }
 }
 
