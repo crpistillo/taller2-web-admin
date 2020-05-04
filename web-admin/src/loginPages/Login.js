@@ -21,7 +21,7 @@ class Login extends Component {
             placeholder: 'Enter email',
             onChangeAction: value => this.setState({ emailAddress: value })
         },
-         {
+        {
             label: 'Password',
             type: 'password',
             placeholder: 'Enter password',
@@ -30,6 +30,8 @@ class Login extends Component {
 
         this.emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         this.errorEmailText = "Please, enter a valid email."
+        this.notAdminErrorText = "You don't have access permission."
+
     }
 
     setOnSpinner = () => this.props.setSpinner(true)
@@ -58,7 +60,13 @@ class Login extends Component {
     processResponse(response) {
         if (response.ok) {
             response.json().then(json => {
-                this.props.setToken(json.login_token)
+                console.log(json.user.admin)
+                if (!json.user.admin) {
+                    this.props.setErrorMessage(true, this.notAdminErrorText)
+                }
+                else {
+                    this.props.setToken(json.login_token)
+                }
             })
         }
 
@@ -72,8 +80,7 @@ class Login extends Component {
     }
 
     render() {
-        console.log(this.props.loggedIn)
-        if(this.props.loggedIn) return <Redirect to="/home" /> 
+        if (this.props.loggedIn) return <Redirect to="/home" />
         return (
             <FormContainer
                 formHeader="Sign in"
@@ -82,6 +89,7 @@ class Login extends Component {
                 extraLinkSuffix="Forgot"
                 extraLinkHref="#"
                 extraLinkText="password?"
+                showExtraLink={true}
                 errorMessage={this.props.errorMessage}
                 showErrorMessage={this.props.showErrorMessage}
                 setErrorMessage={this.props.setErrorMessage}

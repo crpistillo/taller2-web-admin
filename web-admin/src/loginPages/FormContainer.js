@@ -30,6 +30,7 @@ class FormContainer extends Component {
     }
 
     render() {
+        console.log("asd", this.props.showExtraLink)
         return (
             <div className="auth-wrapper">
                 <div className="auth-inner">
@@ -41,6 +42,7 @@ class FormContainer extends Component {
                         extraLinkSuffix={this.props.extraLinkSuffix}
                         extraLinkHref={this.props.extraLinkHref}
                         extraLinkText={this.props.extraLinkText}
+                        showExtraLink={this.props.showExtraLink}
                         errorMessage={this.props.errorMessage}
                         showError={this.props.showErrorMessage}
                         setErrorMessage={this.props.setErrorMessage}

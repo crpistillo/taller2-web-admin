@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 
-import { SHOW_SIGNUP_ERROR_MESSAGE, SHOW_SIGNUP_SPINNER } from '../redux/signUpReducer';
+import { SHOW_SIGNUP_ERROR_MESSAGE, SHOW_SIGNUP_SPINNER, SHOW_SUCCESSFUL_SIGNUP } from '../redux/signUpReducer';
 
 import { USERS_ENDPOINT } from '../vars/endpoints';
 
@@ -66,6 +66,7 @@ class SignUp extends Component {
     processResponse(response) {
         if (response.ok) {
             response.json().then(json => { console.log(json) })
+            this.props.setSuccessful()
         }
 
         else {
@@ -80,12 +81,13 @@ class SignUp extends Component {
     render() {
         return (
             <FormContainer
-                formHeader="Sign up"
+                formHeader={this.props.text}
                 formFields={this.formFields}
-                submitButtonText="Sign up"
+                submitButtonText={this.props.text}
                 extraLinkSuffix="Already registered"
                 extraLinkHref="/sign-in"
                 extraLinkText="sign in?"
+                showExtraLink={this.props.showLink}
                 errorMessage={this.props.errorMessage}
                 showErrorMessage={this.props.showErrorMessage}
                 setErrorMessage={this.props.setErrorMessage}
@@ -103,7 +105,7 @@ const mapStateToProps = (state) => {
     return {
         showErrorMessage: state.signUpReducer.showErrorMessage,
         errorMessage: state.signUpReducer.errorMessage,
-        showSpinner: state.signUpReducer.showSignUpSpinner
+        showSpinner: state.signUpReducer.showSignUpSpinner,
     }
 }
 
@@ -112,7 +114,9 @@ const mapDispatchToProps = (dispatch) => {
         setErrorMessage: (value, message) => {
             dispatch({ type: SHOW_SIGNUP_ERROR_MESSAGE, payload: { showErrorMessage: value, errorMessage: message } })
         },
-        setSpinner: (value) => dispatch({ type: SHOW_SIGNUP_SPINNER, payload: value })
+        setSpinner: (value) => dispatch({ type: SHOW_SIGNUP_SPINNER, payload: value }),
+
+        setSuccessful: (value) => dispatch( {type: SHOW_SUCCESSFUL_SIGNUP, payload: value})
     }
 }
 

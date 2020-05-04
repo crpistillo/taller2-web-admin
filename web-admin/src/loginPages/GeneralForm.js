@@ -8,7 +8,21 @@ class GeneralForm extends Component {
         super(props);
     }
 
+    _showExtraLink() {
+        if (this.props.showExtraLink) {
+            return (
+                <p className="forgot-password text-right">
+                    {this.props.extraLinkSuffix} <a href={this.props.extraLinkHref}>{this.props.extraLinkText}</a>
+                </p>
+            )
+        } else {
+            return <div />
+        }
+
+    }
+
     render() {
+        const showExtraLink = this._showExtraLink()
         return (
             <div>
                 <AlertError errorText={this.props.errorMessage} show={this.props.showError} setShow={this.props.setErrorMessage} />
@@ -25,12 +39,11 @@ class GeneralForm extends Component {
                     ))}
 
                     <button type="submit" className="btn btn-primary btn-block">{this.props.submitButtonText}</button>
-                    <p className="forgot-password text-right">
-                        {this.props.extraLinkSuffix} <a href={this.props.extraLinkHref}>{this.props.extraLinkText}</a>
-                    </p>
+                    
+                    {showExtraLink}
                 </form>
 
-                <WaitingSpinner activated={this.props.showSpinner}/>
+                <WaitingSpinner activated={this.props.showSpinner} />
             </div>
 
         )

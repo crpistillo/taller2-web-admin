@@ -16,7 +16,9 @@ function App() {
       <Switch>
         <Route exact path='/' component={LoginContainer} />
         <Route path="/sign-in" component={LoginContainer} />
-        <Route path="/sign-up" component={SignUpContainer} />
+        <Route path="/sign-up">
+          <SignUpContainer text={"Sign up"} showLink={true}/>
+        </Route>
         <Route path="/home" component={HomeContainer} />
         <Route path="/users" component={UsersHomeContainer} />
       </Switch>

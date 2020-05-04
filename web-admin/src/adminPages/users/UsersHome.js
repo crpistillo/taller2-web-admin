@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from "react-router-dom";
-import AddUser from './AddUser';
 import ListUsers from './ListUsers';
 import UsersNavbar from './UsersNavbar';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import AddUserContainer from './AddUser';
 
 
 class UsersHome extends Component {
@@ -27,7 +27,7 @@ class UsersHome extends Component {
                         <Col xs={10}>
                             <Switch>
                                 <Route exact path="/users" render={() => <Redirect to="/users/add" />} />
-                                <Route path="/users/add" component={AddUser} />
+                                <Route path="/users/add" component={AddUserContainer} />
                                 <Route path="/users/list" component={ListUsers} />
                             </Switch>
                         </Col>
