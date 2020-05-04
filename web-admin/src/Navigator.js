@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import LoginNavbar from './loginPages/LoginNavbar';
 import { connect } from 'react-redux';
-import Sidebar from "./sidebar/Sidebar";
+import SidebarContainer from "./sidebar/Sidebar";
 
-class Navigator extends Component { 
+class Navigator extends Component {
     _navigatorComponent() {
         if (this.props.token === undefined) {
             return (<LoginNavbar />)
         } else {
-            return (<Sidebar />)
+            return (<SidebarContainer />)
         }
     }
 
@@ -21,7 +21,7 @@ class Navigator extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {token: state.appReducer.token}
+    return { token: state.appReducer.token }
 }
 
 const NavigatorContainer = connect(mapStateToProps)(Navigator)
