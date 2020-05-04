@@ -18,9 +18,6 @@ code {
   box-sizing: border-box;
 }
 body {
-  background: #1C8EF9 !important;
-
-
   min-height: 105vh;
   display: flex;
   font-weight: 400;
@@ -32,7 +29,7 @@ h1,h2,h3,h4,h5,h6,label,span {
   font-family: 'Fira Sans', sans-serif;
 }
 
-body, html, .App, #root, .auth-wrapper {
+body, html, .App, #root, .auth-wrapper, .home-wrapper {
   width: 100%;
   height: 100%;
 }
@@ -55,6 +52,7 @@ body, html, .App, #root, .auth-wrapper {
   justify-content: center;
   flex-direction: column;
   text-align: left;
+  background: #1C8EF9 !important;
 }
 
 .auth-inner {
@@ -176,5 +174,51 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+.home-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1C8EF9 !important;
+}
+
+.home-inner {
+  width: 600px;
+}
+
+.admin-page-wrapper {
+  background: #1C8EF9 !important;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.row-inversion {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.padding-top-100-px {
+  padding-top: 100px;
+}
+
+.padding-left-100-px {
+  padding-left: 150px;
+}
+
+.padding-bottom-100-px {
+  padding-bottom: 100px;
+}
+
+.occupy-whole-height {
+  height: 100%;
+}
+
+.white-backgound-color {
+  background: white
+}
+
+.border-radius-15-px {
+  border-radius: 15px;
 }
 

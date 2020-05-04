@@ -6,7 +6,7 @@ class Sidebar extends Component {
     render() {
         return (
             <Menu>
-                <Link className="nav-link" to={"/"}>Home</Link>
+                <Link className="nav-link" to={"/home"}>Home</Link>
                 <Link className="nav-link" to={"/users"}>Users</Link>
                 <Link className="nav-link" to={"/media"}>Media Server</Link>
             </Menu>

@@ -16,7 +16,7 @@ class FormContainer extends Component {
         this.props.setOnSpinner()
         fetch(request)
             .then(response => this.props.processResponse(response))
-            .catch() 
+            .catch()
     }
 
     handleSubmit(e) {
@@ -30,20 +30,24 @@ class FormContainer extends Component {
     }
 
     render() {
+        console.log("asd", this.props.showExtraLink)
         return (
-            <div>
-                <GeneralForm
-                    formHeader={this.props.formHeader}
-                    handleSubmit={this.handleSubmit.bind(this)}
-                    formFields={this.props.formFields}
-                    submitButtonText={this.props.submitButtonText}
-                    extraLinkSuffix={this.props.extraLinkSuffix}
-                    extraLinkHref={this.props.extraLinkHref}
-                    extraLinkText={this.props.extraLinkText}
-                    errorMessage={this.props.errorMessage}
-                    showError={this.props.showErrorMessage}
-                    setErrorMessage={this.props.setErrorMessage}
-                    showSpinner={this.props.showSpinner} />
+            <div className="auth-wrapper">
+                <div className="auth-inner">
+                    <GeneralForm
+                        formHeader={this.props.formHeader}
+                        handleSubmit={this.handleSubmit.bind(this)}
+                        formFields={this.props.formFields}
+                        submitButtonText={this.props.submitButtonText}
+                        extraLinkSuffix={this.props.extraLinkSuffix}
+                        extraLinkHref={this.props.extraLinkHref}
+                        extraLinkText={this.props.extraLinkText}
+                        showExtraLink={this.props.showExtraLink}
+                        errorMessage={this.props.errorMessage}
+                        showError={this.props.showErrorMessage}
+                        setErrorMessage={this.props.setErrorMessage}
+                        showSpinner={this.props.showSpinner} />
+                </div>
             </div>
         );
     }

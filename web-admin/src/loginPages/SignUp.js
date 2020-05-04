@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 
-import { SHOW_SIGNUP_ERROR_MESSAGE, SHOW_SIGNUP_SPINNER } from '../redux/signUpReducer';
+import { SHOW_SIGNUP_ERROR_MESSAGE, SHOW_SIGNUP_SPINNER, SHOW_SUCCESSFUL_SIGNUP } from '../redux/signUpReducer';
 
 import { USERS_ENDPOINT } from '../vars/endpoints';
 
@@ -33,14 +33,14 @@ class SignUp extends Component {
             placeholder: 'Full name',
             onChangeAction: (value) => (this.setState({ fullName: value })),
         }]
-        
+
         this.errorEmailText = "Please, review your email."
     }
 
     setOnSpinner = () => this.props.setSpinner(true)
-    setOffSpinner = () => this.props.setSpinner(false) 
+    setOffSpinner = () => this.props.setSpinner(false)
 
-    generateRequest() {        
+    generateRequest() {
         let data = {
             email: this.state.emailAddress,
             password: this.state.password,
@@ -60,19 +60,19 @@ class SignUp extends Component {
             body: JSON.stringify(data)
         })
 
-        return request; 
+        return request;
     }
 
     processResponse(response) {
-        if(response.ok) {
-            response.json().then(json => {console.log(json)})
+        if (response.ok) {
+            response.json().then(json => { console.log(json) })
+            this.props.setSuccessful()
         }
 
         else {
-            response.json().then(json => 
-                {   
-                    this.props.setErrorMessage(true, json.message)
-                })
+            response.json().then(json => {
+                this.props.setErrorMessage(true, json.message)
+            })
         }
 
         this.setOffSpinner()
@@ -80,24 +80,23 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div>
-                <FormContainer
-                    formHeader="Sign up"
-                    formFields={this.formFields}
-                    submitButtonText="Sign up"
-                    extraLinkSuffix="Already registered"
-                    extraLinkHref="/sign-in"
-                    extraLinkText="sign in?"
-                    errorMessage={this.props.errorMessage}
-                    showErrorMessage={this.props.showErrorMessage}
-                    setErrorMessage={this.props.setErrorMessage}
-                    errorEmailText={this.errorEmailText}
-                    generateRequest={this.generateRequest.bind(this)}
-                    emailAddress={this.state.emailAddress}
-                    showSpinner={this.props.showSpinner}
-                    setOnSpinner={this.setOnSpinner.bind(this)}
-                    processResponse={this.processResponse.bind(this)} />
-            </div>
+            <FormContainer
+                formHeader={this.props.text}
+                formFields={this.formFields}
+                submitButtonText={this.props.text}
+                extraLinkSuffix="Already registered"
+                extraLinkHref="/sign-in"
+                extraLinkText="sign in?"
+                showExtraLink={this.props.showLink}
+                errorMessage={this.props.errorMessage}
+                showErrorMessage={this.props.showErrorMessage}
+                setErrorMessage={this.props.setErrorMessage}
+                errorEmailText={this.errorEmailText}
+                generateRequest={this.generateRequest.bind(this)}
+                emailAddress={this.state.emailAddress}
+                showSpinner={this.props.showSpinner}
+                setOnSpinner={this.setOnSpinner.bind(this)}
+                processResponse={this.processResponse.bind(this)} />
         );
     }
 }
@@ -106,16 +105,18 @@ const mapStateToProps = (state) => {
     return {
         showErrorMessage: state.signUpReducer.showErrorMessage,
         errorMessage: state.signUpReducer.errorMessage,
-        showSpinner: state.signUpReducer.showSignUpSpinner
+        showSpinner: state.signUpReducer.showSignUpSpinner,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setErrorMessage: (value, message) =>{
-            dispatch({ type: SHOW_SIGNUP_ERROR_MESSAGE, payload: {showErrorMessage: value, errorMessage: message}}) 
+        setErrorMessage: (value, message) => {
+            dispatch({ type: SHOW_SIGNUP_ERROR_MESSAGE, payload: { showErrorMessage: value, errorMessage: message } })
         },
-        setSpinner: (value) => dispatch({type: SHOW_SIGNUP_SPINNER, payload: value}) 
+        setSpinner: (value) => dispatch({ type: SHOW_SIGNUP_SPINNER, payload: value }),
+
+        setSuccessful: (value) => dispatch( {type: SHOW_SUCCESSFUL_SIGNUP, payload: value})
     }
 }
 
