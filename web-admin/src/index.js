@@ -10,8 +10,9 @@ import { appReducer } from './redux/appReducers';
 import { loginReducer } from './redux/loginReducer'
 import { signUpReducer } from './redux/signUpReducer'
 import { createUserReducer } from './redux/createUserReducers' 
+import { listUsersReducer } from './redux/listUsersReducers'
 
-let reducers = combineReducers({appReducer, loginReducer, signUpReducer, createUserReducer});
+let reducers = combineReducers({appReducer, loginReducer, signUpReducer, createUserReducer, listUsersReducer});
 
 let store = createStore(reducers);
 

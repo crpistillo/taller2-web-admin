@@ -65,7 +65,6 @@ class SignUp extends Component {
 
     processResponse(response) {
         if (response.ok) {
-            response.json().then(json => { console.log(json) })
             this.props.setSuccessful()
         }
 

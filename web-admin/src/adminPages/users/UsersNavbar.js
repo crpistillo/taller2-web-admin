@@ -9,7 +9,7 @@ const UsersNavbar = (props) => (
             <Link to="/users/add">Add user</Link>
         </ListGroup.Item>
         <ListGroup.Item>
-            <Link to="/users/list">List users</Link>
+            <Link to="/users/list/1">List users</Link>
         </ListGroup.Item>
     </ListGroup>
 );
