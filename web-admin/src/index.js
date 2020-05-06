@@ -10,10 +10,11 @@ import { appReducer } from './redux/appReducers';
 import { loginReducer } from './redux/loginReducer'
 import { signUpReducer } from './redux/signUpReducer'
 import { createUserReducer } from './redux/createUserReducers' 
+import { listUsersReducer } from './redux/listUsersReducers'
 
-let reducers = combineReducers({appReducer, loginReducer, signUpReducer, createUserReducer});
+const reducers = combineReducers({appReducer, loginReducer, signUpReducer, createUserReducer, listUsersReducer});
 
-let store = createStore(reducers);
+export const store = createStore(reducers);
 
 ReactDOM.render(
   <React.StrictMode>

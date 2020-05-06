@@ -30,7 +30,6 @@ class FormContainer extends Component {
     }
 
     render() {
-        console.log("asd", this.props.showExtraLink)
         return (
             <div className="auth-wrapper">
                 <div className="auth-inner">
