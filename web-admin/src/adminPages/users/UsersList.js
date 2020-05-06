@@ -3,12 +3,14 @@ import JumbotronHeader from '../JumbotronHeader';
 
 import { connect } from 'react-redux';
 
+import { getAuthToken } from '../../redux/appReducers';
+
 import { FETCH_USERS } from '../../redux/listUsersReducers';
 
 class UsersList extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        
+
         this.usersPerPage = 10
         this.headerText = "Users list"
         this.descriptionText = "Here you can see a list of all the registered users. The list is ordered \
@@ -16,21 +18,20 @@ class UsersList extends Component {
                                 click on the corresponding button."
     }
 
-    componentDidMount(){
+    componentDidMount() {
         let { pageNumber } = this.props.match.params
-        console.log("UOOOO")
         this.props.fetchUsers(pageNumber, this.usersPerPage)
     }
 
-    render(){
+    render() {
         return (
-            <JumbotronHeader headerText={this.headerText} descriptionText={this.descriptionText}/>
-            
+            <JumbotronHeader headerText={this.headerText} descriptionText={this.descriptionText} />
         )
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log(state.listUsersReducer.users)
     return {
         users: state.listUsersReducer.users,
         totalPages: state.listUsersReducer.totalPages,
@@ -40,10 +41,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchUsers: (pageNumber, usersPerPage) =>{
-            console.log("ASDASDSA")
-            dispatch( {type: FETCH_USERS, payload: { pageNumber: pageNumber, usersPerPage: usersPerPage } } )
-        } 
+        fetchUsers: (pageNumber, usersPerPage) => {
+            const authToken = getAuthToken()
+            dispatch({
+                type: FETCH_USERS, payload: {
+                    pageNumber: pageNumber,
+                    usersPerPage: usersPerPage,
+                    token: authToken
+                }
+            })
+        }
     }
 }
 
