@@ -87,7 +87,7 @@ class Login extends Component {
                 formFields={this.formFields}
                 submitButtonText="Submit"
                 extraLinkSuffix="Forgot"
-                extraLinkHref="#"
+                extraLinkHref="/forgot_password"
                 extraLinkText="password?"
                 showExtraLink={true}
                 errorMessage={this.props.errorMessage}
