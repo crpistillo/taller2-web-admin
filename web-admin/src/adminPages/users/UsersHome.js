@@ -28,7 +28,7 @@ class UsersHome extends Component {
                             <Switch>
                                 <Route exact path="/users" render={() => <Redirect to="/users/add" />} />
                                 <Route path="/users/add" component={AddUserContainer} />
-                                <Route path="/users/list/:pageNumber" component={UsersListContainer} />
+                                <Route path="/users/list" component={UsersListContainer} />
                             </Switch>
                         </Col>
                     </Row>
