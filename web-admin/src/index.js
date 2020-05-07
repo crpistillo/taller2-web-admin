@@ -11,10 +11,18 @@ import { loginReducer } from './redux/loginReducer'
 import { signUpReducer } from './redux/signUpReducer'
 import { forgotPasswordReducer } from './redux/forgotPasswordReducers'
 import { newPasswordReducer } from './redux/newPasswordReducers'
-import { createUserReducer } from './redux/createUserReducers' 
+import { createUserReducer } from './redux/createUserReducers'
 import { listUsersReducer } from './redux/listUsersReducers'
 
-const reducers = combineReducers({appReducer, loginReducer, signUpReducer, createUserReducer, listUsersReducer,  forgotPasswordReducer, newPasswordReducer});
+const reducers = combineReducers({
+  appReducer,
+  loginReducer,
+  signUpReducer,
+  createUserReducer,
+  listUsersReducer,
+  forgotPasswordReducer,
+  newPasswordReducer
+});
 
 export const store = createStore(reducers);
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 
-import { SHOW_SIGNUP_ERROR_MESSAGE, SHOW_SIGNUP_SPINNER, SHOW_SUCCESSFUL_SIGNUP } from '../redux/signUpReducer';
+import { SHOW_SIGNUP_ERROR_MESSAGE, SHOW_SIGNUP_SPINNER, SHOW_SUCCESSFUL_SIGNUP, SHOW_SUCCESS_MESSAGE } from '../redux/signUpReducer';
 
 import { USERS_ENDPOINT } from '../vars/endpoints';
 
@@ -66,6 +66,7 @@ class SignUp extends Component {
     processResponse(response) {
         if (response.ok) {
             this.props.setSuccessful()
+            this.props.setSuccessMessage(true, "Successful signup!")
         }
 
         else {
@@ -120,7 +121,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         setSpinner: (value) => dispatch({ type: SHOW_SIGNUP_SPINNER, payload: value }),
 
-        setSuccessful: (value) => dispatch({ type: SHOW_SUCCESSFUL_SIGNUP, payload: value })
+        setSuccessful: (value) => dispatch({ type: SHOW_SUCCESSFUL_SIGNUP, payload: value }),
+
+        setSuccessMessage: (value, successMessage) => dispatch({
+            type: SHOW_SUCCESS_MESSAGE,
+            payload: { showSuccessMessage: value, successMessage: successMessage }
+        })
     }
 }
 
