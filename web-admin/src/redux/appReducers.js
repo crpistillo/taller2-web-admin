@@ -1,3 +1,5 @@
+import { store } from '../index';
+
 export const ADD_TOKEN = 'ADD_TOKEN';
 export const REMOVE_TOKEN = 'REMOVE_TOKEN';
 
@@ -17,5 +19,7 @@ export const appReducer = (state = initialState, action) => {
     }
 };
 
-
+export const getAuthToken = () => {
+    return store.getState().appReducer.token
+}
 

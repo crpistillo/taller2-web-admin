@@ -9,13 +9,14 @@ import { Provider } from 'react-redux';
 import { appReducer } from './redux/appReducers';
 import { loginReducer } from './redux/loginReducer'
 import { signUpReducer } from './redux/signUpReducer'
-import { createUserReducer } from './redux/createUserReducers'
 import { forgotPasswordReducer } from './redux/forgotPasswordReducers'
 import { newPasswordReducer } from './redux/newPasswordReducers'
+import { createUserReducer } from './redux/createUserReducers' 
+import { listUsersReducer } from './redux/listUsersReducers'
 
-let reducers = combineReducers({ appReducer, loginReducer, signUpReducer, createUserReducer, forgotPasswordReducer, newPasswordReducer });
+const reducers = combineReducers({appReducer, loginReducer, signUpReducer, createUserReducer, listUsersReducer,  forgotPasswordReducer, newPasswordReducer});
 
-let store = createStore(reducers);
+export const store = createStore(reducers);
 
 ReactDOM.render(
   <React.StrictMode>
