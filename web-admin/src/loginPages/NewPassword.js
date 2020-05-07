@@ -6,8 +6,6 @@ import {
     GO_LOGIN
 } from '../redux/newPasswordReducers';
 
-import { Redirect } from 'react-router-dom'
-
 import { NEW_PASSWORD_ENDPOINT } from '../vars/endpoints';
 
 import FormContainer from "./FormContainer";
@@ -85,20 +83,24 @@ class NewPassword extends Component {
 
     render() {
         return (
-            <FormContainer
-                formHeader={"Password Recovery"}
-                formFields={this.formFields}
-                submitButtonText={"Submit"}
-                showExtraLink={this.props.showLink}
-                errorMessage={this.props.errorMessage}
-                showErrorMessage={this.props.showErrorMessage}
-                setErrorMessage={this.props.setErrorMessage}
-                errorEmailText={this.errorEmailText}
-                generateRequest={this.generateRequest.bind(this)}
-                emailAddress={this.state.emailAddress}
-                showSpinner={this.props.showSpinner}
-                setOnSpinner={this.setOnSpinner.bind(this)}
-                processResponse={this.processResponse.bind(this)} />
+            <div>
+                <FormContainer
+                    formHeader={"Password Recovery"}
+                    formFields={this.formFields}
+                    submitButtonText={"Submit"}
+                    showExtraLink={this.props.showLink}
+                    errorMessage={this.props.errorMessage}
+                    showErrorMessage={this.props.showErrorMessage}
+                    setErrorMessage={this.props.setErrorMessage}
+                    showSuccessMessage={this.props.showErrorMessage}
+                    errorEmailText={this.errorEmailText}
+                    generateRequest={this.generateRequest.bind(this)}
+                    emailAddress={this.state.emailAddress}
+                    showSpinner={this.props.showSpinner}
+                    setOnSpinner={this.setOnSpinner.bind(this)}
+                    processResponse={this.processResponse.bind(this)} />
+
+            </div>
         );
     }
 }

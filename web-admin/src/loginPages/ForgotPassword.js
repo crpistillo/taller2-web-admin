@@ -74,7 +74,7 @@ class ForgotPassword extends Component {
             <FormContainer
                 formHeader={"Password Recovery"}
                 formFields={this.formFields}
-                submitButtonText={"Submit"}
+                submitButtonText={"Submit Email"}
                 showExtraLink={this.props.showLink}
                 errorMessage={this.props.errorMessage}
                 showErrorMessage={this.props.showErrorMessage}
