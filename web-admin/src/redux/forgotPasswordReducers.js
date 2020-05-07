@@ -7,7 +7,7 @@ const initialState = {
     showErrorMessage: false,
     errorMessage: '',
     showForgotPasswordSpinner: false,
-    newPassword: false,
+    newPasswordPage: false,
     success: false,
 }
 
@@ -25,7 +25,7 @@ export const forgotPasswordReducer = (state = initialState, action) => {
             return { ...state, success: action.payload }
 
         case GO_NEW_PASSWORD:
-            return { ...state, newPassword: true }
+            return { ...state, newPasswordPage: true }
 
         default:
             return state

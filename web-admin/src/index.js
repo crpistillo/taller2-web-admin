@@ -10,9 +10,10 @@ import { appReducer } from './redux/appReducers';
 import { loginReducer } from './redux/loginReducer'
 import { signUpReducer } from './redux/signUpReducer'
 import { createUserReducer } from './redux/createUserReducers'
-import { forgotPasswordReducer } from './redux/forgotPasswordReducer'
+import { forgotPasswordReducer } from './redux/forgotPasswordReducers'
+import { newPasswordReducer } from './redux/newPasswordReducers'
 
-let reducers = combineReducers({ appReducer, loginReducer, signUpReducer, createUserReducer, forgotPasswordReducer });
+let reducers = combineReducers({ appReducer, loginReducer, signUpReducer, createUserReducer, forgotPasswordReducer, newPasswordReducer });
 
 let store = createStore(reducers);
 

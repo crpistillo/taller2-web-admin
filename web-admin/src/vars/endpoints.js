@@ -6,3 +6,5 @@ export const LOGIN_ENDPOINT = USERS_ENDPOINT + "/login"
 
 export const RECOVER_PASSWORD_ENDPOINT = USERS_ENDPOINT + "/recover_password"
 
+export const NEW_PASSWORD_ENDPOINT = USERS_ENDPOINT + "/new_password"
+
