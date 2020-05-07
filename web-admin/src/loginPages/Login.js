@@ -93,6 +93,11 @@ class Login extends Component {
                 errorMessage={this.props.errorMessage}
                 showErrorMessage={this.props.showErrorMessage}
                 setErrorMessage={this.props.setErrorMessage}
+
+                successMessage={this.props.successMessage}
+                showSuccessMessage={this.props.showSuccessMessage}
+                setSuccessMessage={this.props.setSuccessMessage}
+
                 errorEmailText={this.errorEmailText}
                 generateRequest={this.generateRequest.bind(this)}
                 emailAddress={this.state.emailAddress}
@@ -108,7 +113,9 @@ const mapStateToProps = (state) => {
         showErrorMessage: state.loginReducer.showErrorMessage,
         errorMessage: state.loginReducer.errorMessage,
         showSpinner: state.loginReducer.showLoginSpinner,
-        loggedIn: state.appReducer.loggedIn
+        loggedIn: state.appReducer.loggedIn,
+        successMessage: state.loginReducer.successMessage,
+        showSuccessMessage: state.loginReducer.showSuccessMessage
     }
 }
 

@@ -6,7 +6,9 @@ const initialState = {
     showErrorMessage: false,
     errorMessage: '',
     showSignUpSpinner: false,
-    success: false
+    success: false,
+    successMessage: '',
+    showSuccessMessage: false
 }
 
 export const signUpReducer = (state = initialState, action) => {
@@ -20,7 +22,7 @@ export const signUpReducer = (state = initialState, action) => {
             return { ...state, showSignUpSpinner: action.payload }
 
         case SHOW_SUCCESSFUL_SIGNUP:
-            return {...state, success: action.payload}
+            return { ...state, success: action.payload }
 
         default:
             return state

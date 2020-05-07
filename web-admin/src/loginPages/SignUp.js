@@ -91,6 +91,9 @@ class SignUp extends Component {
                 errorMessage={this.props.errorMessage}
                 showErrorMessage={this.props.showErrorMessage}
                 setErrorMessage={this.props.setErrorMessage}
+                successMessage={this.props.successMessage}
+                showSuccessMessage={this.props.showSuccessMessage}
+                setSuccessMessage={this.props.setSuccessMessage}
                 errorEmailText={this.errorEmailText}
                 generateRequest={this.generateRequest.bind(this)}
                 emailAddress={this.state.emailAddress}
@@ -106,6 +109,8 @@ const mapStateToProps = (state) => {
         showErrorMessage: state.signUpReducer.showErrorMessage,
         errorMessage: state.signUpReducer.errorMessage,
         showSpinner: state.signUpReducer.showSignUpSpinner,
+        successMessage: state.signUpReducer.successMessage,
+        showSuccessMessage: state.signUpReducer.showSuccessMessage
     }
 }
 
@@ -116,7 +121,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         setSpinner: (value) => dispatch({ type: SHOW_SIGNUP_SPINNER, payload: value }),
 
-        setSuccessful: (value) => dispatch( {type: SHOW_SUCCESSFUL_SIGNUP, payload: value})
+        setSuccessful: (value) => dispatch({ type: SHOW_SUCCESSFUL_SIGNUP, payload: value })
     }
 }
 

@@ -30,7 +30,6 @@ class FormContainer extends Component {
     }
 
     render() {
-        // console.log("asd", this.props.showExtraLink)
         return (
             <div className="auth-wrapper">
                 <div className="auth-inner">
@@ -46,6 +45,10 @@ class FormContainer extends Component {
                         errorMessage={this.props.errorMessage}
                         showError={this.props.showErrorMessage}
                         setErrorMessage={this.props.setErrorMessage}
+                        // TODO: Alert Success
+                        successMessage={this.props.successMessage}
+                        showSuccess={this.props.showSuccessMessage}
+                        setSuccessMessage={this.props.setSuccessMessage}
                         showSpinner={this.props.showSpinner} />
                 </div>
             </div>

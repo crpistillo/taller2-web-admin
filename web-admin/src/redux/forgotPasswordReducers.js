@@ -9,6 +9,8 @@ const initialState = {
     showForgotPasswordSpinner: false,
     newPasswordPage: false,
     success: false,
+    successMessage: '',
+    showSuccessMessage: false
 }
 
 export const forgotPasswordReducer = (state = initialState, action) => {

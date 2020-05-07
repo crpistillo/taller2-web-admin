@@ -68,7 +68,6 @@ class ForgotPassword extends Component {
     }
 
     render() {
-        // console.log(this.props.newPasswordPage)
         if (this.props.newPasswordPage) return <Redirect to="/new_password" />
         return (
             <FormContainer
@@ -79,6 +78,11 @@ class ForgotPassword extends Component {
                 errorMessage={this.props.errorMessage}
                 showErrorMessage={this.props.showErrorMessage}
                 setErrorMessage={this.props.setErrorMessage}
+
+                successMessage={this.props.successMessage}
+                showSuccessMessage={this.props.showSuccessMessage}
+                setSuccessMessage={this.props.setSuccessMessage}
+
                 errorEmailText={this.errorEmailText}
                 generateRequest={this.generateRequest.bind(this)}
                 emailAddress={this.state.emailAddress}
@@ -94,7 +98,9 @@ const mapStateToProps = (state) => {
         newPasswordPage: state.forgotPasswordReducer.newPasswordPage,
         showErrorMessage: state.forgotPasswordReducer.showErrorMessage,
         errorMessage: state.forgotPasswordReducer.errorMessage,
-        showSpinner: state.forgotPasswordReducer.showForgotPasswordSpinner
+        showSpinner: state.forgotPasswordReducer.showForgotPasswordSpinner,
+        successMessage: state.forgotPasswordReducer.successMessage,
+        showSuccessMessage: state.forgotPasswordReducer.showSuccessMessage
     }
 }
 

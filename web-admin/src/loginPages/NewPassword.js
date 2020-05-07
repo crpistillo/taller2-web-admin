@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {
     SHOW_NEWPASS_ERROR_MESSAGE, SHOW_NEWPASS_SPINNER, SHOW_SUCCESSFUL_NEWPASS,
-    GO_LOGIN
+    SHOW_SUCCESS_MESSAGE
 } from '../redux/newPasswordReducers';
 
 import { NEW_PASSWORD_ENDPOINT } from '../vars/endpoints';
@@ -69,6 +69,8 @@ class NewPassword extends Component {
         console.log(response)
         if (response.ok) {
             response.json().then(json => { console.log(json) })
+            console.log("PROPS")
+            this.props.setSuccessMessage(true, "Succesfully password update")
             this.props.setSuccessful()
         }
 
@@ -83,24 +85,26 @@ class NewPassword extends Component {
 
     render() {
         return (
-            <div>
-                <FormContainer
-                    formHeader={"Password Recovery"}
-                    formFields={this.formFields}
-                    submitButtonText={"Submit"}
-                    showExtraLink={this.props.showLink}
-                    errorMessage={this.props.errorMessage}
-                    showErrorMessage={this.props.showErrorMessage}
-                    setErrorMessage={this.props.setErrorMessage}
-                    showSuccessMessage={this.props.showErrorMessage}
-                    errorEmailText={this.errorEmailText}
-                    generateRequest={this.generateRequest.bind(this)}
-                    emailAddress={this.state.emailAddress}
-                    showSpinner={this.props.showSpinner}
-                    setOnSpinner={this.setOnSpinner.bind(this)}
-                    processResponse={this.processResponse.bind(this)} />
+            <FormContainer
+                formHeader={"Password Recovery"}
+                formFields={this.formFields}
+                submitButtonText={"Submit"}
+                showExtraLink={this.props.showLink}
+                errorMessage={this.props.errorMessage}
+                showErrorMessage={this.props.showErrorMessage}
+                setErrorMessage={this.props.setErrorMessage}
 
-            </div>
+                // TODO: Alert Success
+                successMessage={this.props.successMessage}
+                showSuccessMessage={this.props.showSuccessMessage}
+                setSuccessMessage={this.props.setSuccessMessage}
+
+                errorEmailText={this.errorEmailText}
+                generateRequest={this.generateRequest.bind(this)}
+                emailAddress={this.state.emailAddress}
+                showSpinner={this.props.showSpinner}
+                setOnSpinner={this.setOnSpinner.bind(this)}
+                processResponse={this.processResponse.bind(this)} />
         );
     }
 }
@@ -110,7 +114,11 @@ const mapStateToProps = (state) => {
         newPassword: state.newPasswordReducer.newPassword,
         showErrorMessage: state.newPasswordReducer.showErrorMessage,
         errorMessage: state.newPasswordReducer.errorMessage,
-        showSpinner: state.newPasswordReducer.showNewPasswordSpinner
+        showSpinner: state.newPasswordReducer.showNewPasswordSpinner,
+
+        // TODO: Alert Success
+        successMessage: state.newPasswordReducer.successMessage,
+        showSuccessMessage: state.newPasswordReducer.showSuccessMessage
     }
 }
 
@@ -122,6 +130,12 @@ const mapDispatchToProps = (dispatch) => {
         setSpinner: (value) => dispatch({ type: SHOW_NEWPASS_SPINNER, payload: value }),
 
         setSuccessful: (value) => dispatch({ type: SHOW_SUCCESSFUL_NEWPASS, payload: value }),
+
+        // TODO: Alert Success
+        setSuccessMessage: (value, successMessage) => dispatch({
+            type: SHOW_SUCCESS_MESSAGE,
+            payload: { showSuccessMessage: value, successMessage: successMessage }
+        })
     }
 }
 
