@@ -48,7 +48,7 @@ class AddUser extends Component {
             <Row>
                 <JumbotronHeader headerText={this.headerText} descriptionText={this.descriptionText}/>
                 <Col xs={6}>
-                    <SignUpContainer text={"Create user in database"} showLink={false} />
+                    <SignUpContainer text={"Create user in database"} showLink={false} hasToShowMessage={false} />
                 </Col>
                 <Col xs={6}>
                     {successMessage}

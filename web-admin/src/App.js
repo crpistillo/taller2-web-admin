@@ -19,7 +19,7 @@ function App() {
         <Route exact path='/' component={LoginContainer} />
         <Route path="/sign-in" component={LoginContainer} />
         <Route path="/sign-up">
-          <SignUpContainer text={"Sign up"} showLink={true} />
+          <SignUpContainer text={"Sign up"} hasToShowMessage={true} showLink={true} />
         </Route>
         <Route path="/home" component={HomeContainer} />
         <Route path="/users" component={UsersHomeContainer} />

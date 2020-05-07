@@ -3,6 +3,7 @@ import { slide as Menu } from 'react-burger-menu'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { REMOVE_TOKEN } from '../redux/appReducers';
+import { SHOW_SUCCESSFUL_SIGNUP, SHOW_SUCCESS_MESSAGE } from '../redux/signUpReducer';
 
 class Sidebar extends Component {
 
@@ -10,7 +11,7 @@ class Sidebar extends Component {
         return (
             <Menu>
                 <Link className="nav-link" to={"/home"}>Home</Link>
-                <Link className="nav-link" to={"/users"}>Users</Link>
+                <Link className="nav-link" to={"/users"} onClick={() => this.props.setSuccessful(false)}>Users</Link>
                 <Link className="nav-link" to={"/media"}>Media Server</Link>
                 <Link className="nav-link" to={"/sign-in"} onClick={this.props.removeToken}>Logout</Link>
             </Menu>
@@ -26,7 +27,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        removeToken: () => dispatch({ type: REMOVE_TOKEN })
+        removeToken: () => dispatch({ type: REMOVE_TOKEN }),
+        setSuccessful: (value) =>{
+            dispatch( {type: SHOW_SUCCESSFUL_SIGNUP, payload: value})
+            dispatch( {type: SHOW_SUCCESS_MESSAGE, payload: {
+                showSuccessMessage: false,
+                successMessage: ''
+            }})
+
+        } 
     }
 }
 
