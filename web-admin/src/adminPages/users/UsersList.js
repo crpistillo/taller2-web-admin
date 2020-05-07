@@ -24,7 +24,7 @@ class UsersList extends Component {
         this.usersPerPage = 10
         this.headerText = "Users list"
         this.descriptionText = "Here you can see a list of all the registered users. The list is ordered \
-                                alphabetically by email address field. If you want to edit a user profile,\
+                                alphabetically by email address field. If you want to delete a user profile,\
                                 click on the corresponding button."
     }
 
