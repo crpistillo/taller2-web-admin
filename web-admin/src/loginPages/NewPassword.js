@@ -67,7 +67,7 @@ class NewPassword extends Component {
         return request;
     }
 
-    processResponse(response) { // TODO: Ver como procesar la request de new_password
+    processResponse(response) {
         console.log(response)
         if (response.ok) {
             response.json().then(json => { console.log(json) })
