@@ -4,7 +4,9 @@ export const SHOW_LOGIN_SPINNER = 'SHOW_LOGIN_SPINNER'
 const initialState = {
     showErrorMessage: false,
     errorMessage: '',
-    showLoginSpinner: false
+    showLoginSpinner: false,
+    successMessage: '',
+    showSuccessMessage: false
 }
 
 export const loginReducer = (state = initialState, action) => {

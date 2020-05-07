@@ -1,37 +1,29 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 
-import { SHOW_SIGNUP_ERROR_MESSAGE, SHOW_SIGNUP_SPINNER, SHOW_SUCCESSFUL_SIGNUP } from '../redux/signUpReducer';
+import {
+    SHOW_RECOVER_ERROR_MESSAGE, SHOW_RECOVER_SPINNER, SHOW_SUCCESSFUL_RECOVER, GO_NEW_PASSWORD
+} from '../redux/forgotPasswordReducers';
 
-import { USERS_ENDPOINT } from '../vars/endpoints';
+import { Redirect } from 'react-router-dom'
+
+import { RECOVER_PASSWORD_ENDPOINT } from '../vars/endpoints';
 
 import FormContainer from "./FormContainer";
 
-class SignUp extends Component {
+class ForgotPassword extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            fullName: '',
             emailAddress: '',
-            password: '',
         };
 
         this.formFields = [{
             label: 'Email address',
             type: 'text',
-            placeholder: 'Enter email',
+            placeholder: 'Enter email to recover your password',
             onChangeAction: (value) => (this.setState({ emailAddress: value }))
-        }, {
-            label: 'Password',
-            type: 'password',
-            placeholder: 'Enter password',
-            onChangeAction: (value) => (this.setState({ password: value }))
-        }, {
-            label: 'Full name',
-            type: 'text',
-            placeholder: 'Full name',
-            onChangeAction: (value) => (this.setState({ fullName: value })),
         }]
 
         this.errorEmailText = "Please, review your email."
@@ -42,11 +34,7 @@ class SignUp extends Component {
 
     generateRequest() {
         let data = {
-            email: this.state.emailAddress,
-            password: this.state.password,
-            fullname: this.state.fullName,
-            phone_number: "1111-1111",
-            photo: ""
+            email: this.state.emailAddress
         }
 
         let requestHeaders = {
@@ -54,7 +42,7 @@ class SignUp extends Component {
             'Content-Type': 'application/json',
         }
 
-        let request = new Request(USERS_ENDPOINT, {
+        let request = new Request(RECOVER_PASSWORD_ENDPOINT, {
             method: 'POST',
             headers: requestHeaders,
             body: JSON.stringify(data)
@@ -65,6 +53,8 @@ class SignUp extends Component {
 
     processResponse(response) {
         if (response.ok) {
+            response.json().then(json => { console.log(json) })
+            this.props.goNewPassword()
             this.props.setSuccessful()
         }
 
@@ -78,21 +68,21 @@ class SignUp extends Component {
     }
 
     render() {
+        if (this.props.newPasswordPage) return <Redirect to="/new_password" />
         return (
             <FormContainer
-                formHeader={this.props.text}
+                formHeader={"Password Recovery"}
                 formFields={this.formFields}
-                submitButtonText={this.props.text}
-                extraLinkSuffix="Already registered"
-                extraLinkHref="/sign-in"
-                extraLinkText="sign in?"
+                submitButtonText={"Submit Email"}
                 showExtraLink={this.props.showLink}
                 errorMessage={this.props.errorMessage}
                 showErrorMessage={this.props.showErrorMessage}
                 setErrorMessage={this.props.setErrorMessage}
+
                 successMessage={this.props.successMessage}
                 showSuccessMessage={this.props.showSuccessMessage}
                 setSuccessMessage={this.props.setSuccessMessage}
+
                 errorEmailText={this.errorEmailText}
                 generateRequest={this.generateRequest.bind(this)}
                 emailAddress={this.state.emailAddress}
@@ -105,26 +95,29 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        showErrorMessage: state.signUpReducer.showErrorMessage,
-        errorMessage: state.signUpReducer.errorMessage,
-        showSpinner: state.signUpReducer.showSignUpSpinner,
-        successMessage: state.signUpReducer.successMessage,
-        showSuccessMessage: state.signUpReducer.showSuccessMessage
+        newPasswordPage: state.forgotPasswordReducer.newPasswordPage,
+        showErrorMessage: state.forgotPasswordReducer.showErrorMessage,
+        errorMessage: state.forgotPasswordReducer.errorMessage,
+        showSpinner: state.forgotPasswordReducer.showForgotPasswordSpinner,
+        successMessage: state.forgotPasswordReducer.successMessage,
+        showSuccessMessage: state.forgotPasswordReducer.showSuccessMessage
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         setErrorMessage: (value, message) => {
-            dispatch({ type: SHOW_SIGNUP_ERROR_MESSAGE, payload: { showErrorMessage: value, errorMessage: message } })
+            dispatch({ type: SHOW_RECOVER_ERROR_MESSAGE, payload: { showErrorMessage: value, errorMessage: message } })
         },
-        setSpinner: (value) => dispatch({ type: SHOW_SIGNUP_SPINNER, payload: value }),
+        setSpinner: (value) => dispatch({ type: SHOW_RECOVER_SPINNER, payload: value }),
 
-        setSuccessful: (value) => dispatch({ type: SHOW_SUCCESSFUL_SIGNUP, payload: value })
+        setSuccessful: (value) => dispatch({ type: SHOW_SUCCESSFUL_RECOVER, payload: value }),
+
+        goNewPassword: (value) => dispatch({ type: GO_NEW_PASSWORD, payload: value })
     }
 }
 
-const SignUpContainer = connect(mapStateToProps, mapDispatchToProps)(SignUp)
+const ForgotPasswordContainer = connect(mapStateToProps, mapDispatchToProps)(ForgotPassword)
 
-export default SignUpContainer;
+export default ForgotPasswordContainer;
 

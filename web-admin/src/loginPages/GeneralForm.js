@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AlertError from "../common/AlertError";
+import AlertSuccess from "../common/AlertSuccess";
 import WaitingSpinner from "../common/WaitingSpinner";
 
 
@@ -26,6 +27,7 @@ class GeneralForm extends Component {
         return (
             <div>
                 <AlertError errorText={this.props.errorMessage} show={this.props.showError} setShow={this.props.setErrorMessage} />
+                <AlertSuccess successText={this.props.successMessage} show={this.props.showSuccess} setShow={this.props.setSuccessMessage} />
 
                 <form onSubmit={e => this.props.handleSubmit(e)}>
                     <h3>{this.props.formHeader}</h3>
@@ -39,7 +41,7 @@ class GeneralForm extends Component {
                     ))}
 
                     <button type="submit" className="btn btn-primary btn-block">{this.props.submitButtonText}</button>
-                    
+
                     {showExtraLink}
                 </form>
 
