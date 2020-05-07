@@ -7,6 +7,8 @@ import NavigatorContainer from './Navigator';
 import LoginContainer from './loginPages/Login';
 import HomeContainer from './adminPages/Home';
 import UsersHomeContainer from './adminPages/users/UsersHome';
+import ForgotPasswordContainer from './loginPages/ForgotPassword';
+import NewPasswordContainer from './loginPages/NewPassword'
 
 function App() {
   return (<Router>
@@ -17,10 +19,12 @@ function App() {
         <Route exact path='/' component={LoginContainer} />
         <Route path="/sign-in" component={LoginContainer} />
         <Route path="/sign-up">
-          <SignUpContainer text={"Sign up"} showLink={true}/>
+          <SignUpContainer text={"Sign up"} showLink={true} />
         </Route>
         <Route path="/home" component={HomeContainer} />
         <Route path="/users" component={UsersHomeContainer} />
+        <Route path="/forgot_password" component={ForgotPasswordContainer} />
+        <Route path="/new_password" component={NewPasswordContainer} />
       </Switch>
 
 
