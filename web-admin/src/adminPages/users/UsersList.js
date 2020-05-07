@@ -3,15 +3,17 @@ import JumbotronHeader from '../JumbotronHeader';
 
 import { connect } from 'react-redux';
 
-import { Redirect } from 'react-router-dom';
-
 import { getAuthToken } from '../../redux/appReducers';
 
-import { FETCH_USERS, CHANGE_LIST_PAGE, RESET_PAGE_STATE } from '../../redux/listUsersReducers';
+import {
+    FETCH_USERS, CHANGE_LIST_PAGE, RESET_PAGE_STATE,
+    DISPLAY_DELETE_POPUP, CLOSE_POPUP, DELETE_USER
+} from '../../redux/listUsersReducers';
 
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import UsersTable from './UsersTable';
+import GeneralModal from '../../common/GeneralModal';
 
 class UsersList extends Component {
     constructor(props) {
@@ -62,18 +64,39 @@ class UsersList extends Component {
             return <UsersTable users={this.props.users}
                 page={this.state.page}
                 totalPages={this.props.totalPages}
-                setNextPage={this.props.setNextPage} />
+                setNextPage={this.props.setNextPage}
+                clickDeleteButton={this.props.displayDeletePopup} />
+        }
+    }
+
+    deleteUserPopup() {
+        if (this.props.showDeletePopup) {
+            return <GeneralModal
+                title={"Delete user"}
+                body={`Do you really want to delete user ${this.props.userToDelete} ?`}
+                confirmationText={"Yes"}
+                userEmail={this.props.userToDelete}
+                handleClose={this.props.closeDeletePopup}
+                confirmPayload={this.props.userToDelete}
+                confirmAction={this.props.deleteUser}
+                activateSpinner={this.props.waitingSpinnerDelete}
+                showDeleteSuccessBagde={this.props.showDeleteSuccessBagde}
+                showDeleteErrorBagde={this.props.showDeleteErrorBagde}
+            />
+        } else {
+            return <div />
         }
     }
 
     render() {
         const fetched = this.fetched()
+        const deleteUser = this.deleteUserPopup()
         return (
             <div>
+                {deleteUser}
                 <JumbotronHeader headerText={this.headerText} descriptionText={this.descriptionText} />
                 {fetched}
             </div>
-
         )
     }
 }
@@ -84,7 +107,12 @@ const mapStateToProps = (state) => {
         totalPages: state.listUsersReducer.totalPages,
         alreadyFetched: state.listUsersReducer.alreadyFetched,
         hasToChangePage: state.listUsersReducer.hasToChangePage,
-        nextPage: state.listUsersReducer.nextPage
+        nextPage: state.listUsersReducer.nextPage,
+        showDeletePopup: state.listUsersReducer.showDeletePopup,
+        userToDelete: state.listUsersReducer.userToDelete,
+        waitingSpinnerDelete: state.listUsersReducer.waitingSpinnerDelete,
+        showDeleteSuccessBagde: state.listUsersReducer.showDeleteSuccessBagde,
+        showDeleteErrorBagde: state.listUsersReducer.showDeleteErrorBagde
     }
 }
 
@@ -101,7 +129,18 @@ const mapDispatchToProps = (dispatch) => {
             })
         },
         setNextPage: (nextPage) => dispatch({ type: CHANGE_LIST_PAGE, payload: nextPage }),
-        resetPageState: () => dispatch({ type: RESET_PAGE_STATE })
+        resetPageState: () => dispatch({ type: RESET_PAGE_STATE }),
+        displayDeletePopup: (userToDelete) => dispatch({ type: DISPLAY_DELETE_POPUP, payload: userToDelete }),
+        closeDeletePopup: () => dispatch({ type: CLOSE_POPUP }),
+        deleteUser: (userEmail) => {
+            const authToken = getAuthToken()
+            dispatch({
+                type: DELETE_USER, payload: {
+                    email: userEmail,
+                    token: authToken
+                }
+            })
+        }
     }
 }
 

@@ -9,10 +9,16 @@ import { Provider } from 'react-redux';
 import { appReducer } from './redux/appReducers';
 import { loginReducer } from './redux/loginReducer'
 import { signUpReducer } from './redux/signUpReducer'
-import { createUserReducer } from './redux/createUserReducers' 
+import { createUserReducer } from './redux/createUserReducers'
 import { listUsersReducer } from './redux/listUsersReducers'
 
-const reducers = combineReducers({appReducer, loginReducer, signUpReducer, createUserReducer, listUsersReducer});
+const reducers = combineReducers({
+  appReducer,
+  loginReducer,
+  signUpReducer,
+  createUserReducer,
+  listUsersReducer
+});
 
 export const store = createStore(reducers);
 

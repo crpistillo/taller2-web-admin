@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
-import { Redirect } from 'react-router-dom';
-
+import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 
 class UsersTable extends Component {
     constructor(props) {
         super(props);
+
+        this.helpStyle = {
+            display: 'flex',
+            justifyContent: 'space-between'
+        }
     }
 
     changePage(page) {
@@ -95,7 +99,9 @@ class UsersTable extends Component {
                     <tbody>
                         {this.props.users.map((user) => (
                             <tr>
-                                <th>{user.email}</th>
+                                <th style={this.helpStyle}>
+                                {user.email}
+                                <Button variant="primary" onClick={() => this.props.clickDeleteButton(user.email)}>X</Button></th>
                                 <th>{user.fullname}</th>
                                 <th>{user.phone_number}</th>
                                 <th>{user.admin ? "Admin" : "User"}</th>
