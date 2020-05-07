@@ -93,12 +93,9 @@ class NewPassword extends Component {
                 errorMessage={this.props.errorMessage}
                 showErrorMessage={this.props.showErrorMessage}
                 setErrorMessage={this.props.setErrorMessage}
-
-                // TODO: Alert Success
                 successMessage={this.props.successMessage}
                 showSuccessMessage={this.props.showSuccessMessage}
                 setSuccessMessage={this.props.setSuccessMessage}
-
                 errorEmailText={this.errorEmailText}
                 generateRequest={this.generateRequest.bind(this)}
                 emailAddress={this.state.emailAddress}
@@ -115,8 +112,6 @@ const mapStateToProps = (state) => {
         showErrorMessage: state.newPasswordReducer.showErrorMessage,
         errorMessage: state.newPasswordReducer.errorMessage,
         showSpinner: state.newPasswordReducer.showNewPasswordSpinner,
-
-        // TODO: Alert Success
         successMessage: state.newPasswordReducer.successMessage,
         showSuccessMessage: state.newPasswordReducer.showSuccessMessage
     }
@@ -131,7 +126,6 @@ const mapDispatchToProps = (dispatch) => {
 
         setSuccessful: (value) => dispatch({ type: SHOW_SUCCESSFUL_NEWPASS, payload: value }),
 
-        // TODO: Alert Success
         setSuccessMessage: (value, successMessage) => dispatch({
             type: SHOW_SUCCESS_MESSAGE,
             payload: { showSuccessMessage: value, successMessage: successMessage }

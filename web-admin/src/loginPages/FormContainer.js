@@ -45,7 +45,6 @@ class FormContainer extends Component {
                         errorMessage={this.props.errorMessage}
                         showError={this.props.showErrorMessage}
                         setErrorMessage={this.props.setErrorMessage}
-                        // TODO: Alert Success
                         successMessage={this.props.successMessage}
                         showSuccess={this.props.showSuccessMessage}
                         setSuccessMessage={this.props.setSuccessMessage}

@@ -27,7 +27,6 @@ class GeneralForm extends Component {
         return (
             <div>
                 <AlertError errorText={this.props.errorMessage} show={this.props.showError} setShow={this.props.setErrorMessage} />
-                {/* TODO : AGREGAR ALERT SUCCESS */}
                 <AlertSuccess successText={this.props.successMessage} show={this.props.showSuccess} setShow={this.props.setSuccessMessage} />
 
                 <form onSubmit={e => this.props.handleSubmit(e)}>

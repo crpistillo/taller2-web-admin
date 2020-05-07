@@ -8,8 +8,6 @@ const initialState = {
     errorMessage: '',
     showNewPasswordSpinner: false,
     success: false,
-
-    // TODO: Alert success
     showSuccessMessage: false,
     successMessage: ''
 
@@ -28,7 +26,6 @@ export const newPasswordReducer = (state = initialState, action) => {
         case SHOW_SUCCESSFUL_NEWPASS:
             return { ...state, success: action.payload }
 
-        //TODO : Alert Success
         case SHOW_SUCCESS_MESSAGE:
             return {
                 ...state, showSuccessMessage: action.payload.showSuccessMessage,
