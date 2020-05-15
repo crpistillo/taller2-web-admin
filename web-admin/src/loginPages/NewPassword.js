@@ -34,7 +34,7 @@ class NewPassword extends Component {
         },
         {
             label: 'New Password',
-            type: 'text',
+            type: 'password',
             placeholder: 'Type your new password',
             onChangeAction: (value) => (this.setState({ new_target_password: value }))
         }]
