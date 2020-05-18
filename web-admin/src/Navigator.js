@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import LoginNavbar from './loginPages/LoginNavbar';
 import { connect } from 'react-redux';
-import SidebarContainer from "./sidebar/Sidebar";
+import AdminNavbarContainer from "./adminPages/AdminNavbar";
 
 class Navigator extends Component {
     _navigatorComponent() {
         if (this.props.token === undefined) {
             return (<LoginNavbar />)
         } else {
-            return (<SidebarContainer />)
+            return (<AdminNavbarContainer />)
         }
     }
 

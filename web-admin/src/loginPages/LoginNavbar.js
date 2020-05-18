@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import CommonNavbar from '../common/CommonNavbar';
 
-const LoginNavbar = (props) => (
+class LoginNavbar extends Component {
+  render() {
+    return (
       <CommonNavbar chotuveLink="/sign-in" links={[{
         redirectLink: "/sign-in",
         linkText: "Login"
@@ -9,6 +11,8 @@ const LoginNavbar = (props) => (
         redirectLink: "/sign-up",
         linkText: "Sign up"
       }]} />
-);
+    );
+  }
+}
 
 export default LoginNavbar;
