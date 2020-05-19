@@ -222,3 +222,27 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .border-radius-15-px {
   border-radius: 15px;
 }
+
+.list-group-item{
+  border-radius: .3rem !important;
+}
+
+.list-group-item:hover{
+  /* transform: scale(1.05); */
+  background-color: #e9ecef;
+  transition: transform 0.5s;
+  transition: all 0.5s;
+  transition-delay: 100ms;
+  }
+
+.list-group-item{
+  border-radius: .3rem !important;
+}
+  
+.list-group-item:hover{
+  background-color: #e9ecef;
+  transition: transform 0.5s;
+  transition: all 0.5s;
+  transition-delay: 100ms;
+}
+  
