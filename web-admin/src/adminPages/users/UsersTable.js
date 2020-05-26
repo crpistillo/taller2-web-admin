@@ -115,13 +115,17 @@ class UsersTable extends Component {
               <th>Fullname</th>
               <th>Phone number</th>
               <th>Type</th>
+              <th>Operation</th>
             </tr>
           </thead>
           <tbody>
             {this.props.users.map((user) => (
               <tr>
+                <th>{user.email}</th>
+                <th>{user.fullname}</th>
+                <th>{user.phone_number}</th>
+                <th>{user.admin ? "Admin" : "User"}</th>
                 <th style={this.helpStyle}>
-                  {user.email}
                   <Button
                     variant="success"
                     data-toggle="tooltip"
@@ -131,8 +135,6 @@ class UsersTable extends Component {
                   >
                     <FaPencilAlt />
                   </Button>
-                </th>
-                <th style={this.helpStyle}>
                   <Button
                     variant="danger"
                     data-toggle="tooltip"
@@ -144,9 +146,6 @@ class UsersTable extends Component {
                   </Button>
                 </th>
 
-                <th>{user.fullname}</th>
-                <th>{user.phone_number}</th>
-                <th>{user.admin ? "Admin" : "User"}</th>
               </tr>
             ))}
           </tbody>
