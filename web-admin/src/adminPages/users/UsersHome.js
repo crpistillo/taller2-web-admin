@@ -9,10 +9,6 @@ import AddUserContainer from "./AddUser";
 import UsersListContainer from "./UsersList";
 
 class UsersHome extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     if (!this.props.loggedIn) return <Redirect to="/sign-in" />;
 
