@@ -131,7 +131,7 @@ class UsersTable extends Component {
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Edit"
-                    onClick={() => this.props.clickDeleteButton(user.email)}
+                    onClick={() => this.props.clickEditButton(user.email)}
                   >
                     <FaPencilAlt />
                   </Button>
@@ -145,7 +145,6 @@ class UsersTable extends Component {
                     <FaTrash />
                   </Button>
                 </th>
-
               </tr>
             ))}
           </tbody>
@@ -156,7 +155,5 @@ class UsersTable extends Component {
     );
   }
 }
-
-// TODO: Ver tema de la logica del edit, si va a una nueva vista, o pop-up
 
 export default UsersTable;
