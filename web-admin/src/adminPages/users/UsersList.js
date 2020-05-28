@@ -102,12 +102,11 @@ class UsersList extends Component {
 
   editUserPopup() {
     if (this.props.showEditPopup) {
-      let form = 
       return (
         <GeneralModal
           title={"Edit user"}
           confirmationText={"Submit"}
-          body={<EditForm userToEdit={this.props.userToEdit} />;}
+          body={<EditForm userToEdit={this.props.userToEdit} />}
           userEmail={this.props.userToEdit}
           // confirmPayload={this.props.}
 
