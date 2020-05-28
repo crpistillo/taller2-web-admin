@@ -13,7 +13,6 @@ import {
   CLOSE_POPUP,
   DELETE_USER,
   DISPLAY_EDIT_POPUP,
-  EDIT_USER,
 } from "../../redux/listUsersReducers";
 
 import Button from "react-bootstrap/Button";
