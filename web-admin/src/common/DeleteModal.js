@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
 import WaitingSpinner from "./WaitingSpinner";
 
-class GeneralModal extends Component {
+class DeleteModal extends Component {
   _successBagde() {
     if (this.props.showDeleteSuccessBagde) {
       return (
@@ -65,4 +65,4 @@ class GeneralModal extends Component {
   }
 }
 
-export default GeneralModal;
+export default DeleteModal;

@@ -20,7 +20,7 @@ import {
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import UsersTable from "./UsersTable";
-import GeneralModal from "../../common/GeneralModal";
+import DeleteModal from "../../common/DeleteModal";
 
 class UsersList extends Component {
   constructor(props) {
@@ -82,7 +82,7 @@ class UsersList extends Component {
   deleteUserPopup() {
     if (this.props.showDeletePopup) {
       return (
-        <GeneralModal
+        <DeleteModal
           title={"Delete user"}
           body={`Do you really want to delete user ${this.props.userToDelete} ?`}
           confirmationText={"Yes"}
@@ -103,7 +103,7 @@ class UsersList extends Component {
   editUserPopup() {
     if (this.props.showEditPopup) {
       return (
-        <GeneralModal
+        <DeleteModal
           title={"Edit user"}
           confirmationText={"Submit"}
           body={<EditForm userToEdit={this.props.userToEdit} />}
