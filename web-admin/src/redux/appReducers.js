@@ -4,16 +4,18 @@ export const ADD_TOKEN = 'ADD_TOKEN';
 export const REMOVE_TOKEN = 'REMOVE_TOKEN';
 
 const initialState = {
-    token: undefined,
-    loggedIn: false
+    token: sessionStorage.getItem("token"),
+    loggedIn: sessionStorage.getItem("token") !== null
 };
 
 export const appReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_TOKEN:
+            sessionStorage.setItem("token", action.payload)
             return { ...state, token: action.payload, loggedIn: true }
         case REMOVE_TOKEN:
-            return initialState
+            sessionStorage.removeItem("token")
+            return {token: null, loggedIn: false}
         default:
             return state
     }
