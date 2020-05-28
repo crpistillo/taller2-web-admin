@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import JumbotronHeader from "../JumbotronHeader";
-import EditForm from "./EditForm";
 
 import { connect } from "react-redux";
 
@@ -21,6 +20,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import UsersTable from "./UsersTable";
 import DeleteModal from "../../common/DeleteModal";
+import EditModal from "../../common/EditModal";
 
 class UsersList extends Component {
   constructor(props) {
@@ -103,14 +103,10 @@ class UsersList extends Component {
   editUserPopup() {
     if (this.props.showEditPopup) {
       return (
-        <DeleteModal
+        <EditModal
           title={"Edit user"}
           confirmationText={"Submit"}
-          body={<EditForm userToEdit={this.props.userToEdit} />}
           userEmail={this.props.userToEdit}
-          // confirmPayload={this.props.}
-
-          // confirmAction={this.props.editUser}
           confirmAction={console.log("Se apretó el boton de submit")}
           handleClose={this.props.closeEditPopup}
         />
@@ -190,19 +186,6 @@ const mapDispatchToProps = (dispatch) => {
     displayEditPopup: (userToEdit) =>
       dispatch({ type: DISPLAY_EDIT_POPUP, payload: userToEdit }),
     closeEditPopup: () => dispatch({ type: CLOSE_POPUP }),
-    editUser: (userEmail, userPassword, userFullName, userPhoneNumber) => {
-      const authToken = getAuthToken();
-      dispatch({
-        type: EDIT_USER,
-        payload: {
-          email: userEmail,
-          token: authToken,
-          password: userPassword,
-          fullname: userFullName,
-          phoneNumber: userPhoneNumber,
-        },
-      });
-    },
   };
 };
 
