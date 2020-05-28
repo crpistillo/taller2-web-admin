@@ -15,7 +15,7 @@ export const appReducer = (state = initialState, action) => {
             return { ...state, token: action.payload, loggedIn: true }
         case REMOVE_TOKEN:
             sessionStorage.removeItem("token")
-            return initialState
+            return {token: null, loggedIn: false}
         default:
             return state
     }
