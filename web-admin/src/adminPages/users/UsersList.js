@@ -14,6 +14,7 @@ import {
   CLOSE_POPUP,
   DELETE_USER,
   DISPLAY_EDIT_POPUP,
+  EDIT_USER,
 } from "../../redux/listUsersReducers";
 
 import Button from "react-bootstrap/Button";
@@ -101,11 +102,18 @@ class UsersList extends Component {
 
   editUserPopup() {
     if (this.props.showEditPopup) {
+      let form = 
       return (
         <GeneralModal
           title={"Edit user"}
           confirmationText={"Submit"}
-          body={<EditForm userToEdit={this.props.userToEdit} />}
+          body={<EditForm userToEdit={this.props.userToEdit} />;}
+          userEmail={this.props.userToEdit}
+          // confirmPayload={this.props.}
+
+          // confirmAction={this.props.editUser}
+          confirmAction={console.log("Se apretó el boton de submit")}
+          handleClose={this.props.closeEditPopup}
         />
       );
     } else {
@@ -182,6 +190,20 @@ const mapDispatchToProps = (dispatch) => {
     },
     displayEditPopup: (userToEdit) =>
       dispatch({ type: DISPLAY_EDIT_POPUP, payload: userToEdit }),
+    closeEditPopup: () => dispatch({ type: CLOSE_POPUP }),
+    editUser: (userEmail, userPassword, userFullName, userPhoneNumber) => {
+      const authToken = getAuthToken();
+      dispatch({
+        type: EDIT_USER,
+        payload: {
+          email: userEmail,
+          token: authToken,
+          password: userPassword,
+          fullname: userFullName,
+          phoneNumber: userPhoneNumber,
+        },
+      });
+    },
   };
 };
 
