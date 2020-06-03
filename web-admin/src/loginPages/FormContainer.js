@@ -32,26 +32,24 @@ class FormContainer extends Component {
 
   render() {
     return (
-      <div className="auth-wrapper">
-        <div className="auth-inner">
-          <GeneralForm
-            formHeader={this.props.formHeader}
-            handleSubmit={this.handleSubmit.bind(this)}
-            formFields={this.props.formFields}
-            submitButtonText={this.props.submitButtonText}
-            extraLinkSuffix={this.props.extraLinkSuffix}
-            extraLinkHref={this.props.extraLinkHref}
-            extraLinkText={this.props.extraLinkText}
-            showExtraLink={this.props.showExtraLink}
-            errorMessage={this.props.errorMessage}
-            showError={this.props.showErrorMessage}
-            setErrorMessage={this.props.setErrorMessage}
-            successMessage={this.props.successMessage}
-            showSuccess={this.props.showSuccessMessage}
-            setSuccessMessage={this.props.setSuccessMessage}
-            showSpinner={this.props.showSpinner}
-          />
-        </div>
+      <div className="auth-inner">
+        <GeneralForm
+          formHeader={this.props.formHeader}
+          handleSubmit={this.handleSubmit.bind(this)}
+          formFields={this.props.formFields}
+          submitButtonText={this.props.submitButtonText}
+          extraLinkSuffix={this.props.extraLinkSuffix}
+          extraLinkHref={this.props.extraLinkHref}
+          extraLinkText={this.props.extraLinkText}
+          showExtraLink={this.props.showExtraLink}
+          errorMessage={this.props.errorMessage}
+          showError={this.props.showErrorMessage}
+          setErrorMessage={this.props.setErrorMessage}
+          successMessage={this.props.successMessage}
+          showSuccess={this.props.showSuccessMessage}
+          setSuccessMessage={this.props.setSuccessMessage}
+          showSpinner={this.props.showSpinner}
+        />
       </div>
     );
   }

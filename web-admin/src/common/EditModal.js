@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import WaitingSpinner from "./WaitingSpinner";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
+import FormContainer from "../loginPages/FormContainer";
 
 import { connect } from "react-redux";
 
@@ -22,14 +23,42 @@ class EditModal extends Component {
   constructor(props) {
     super(props);
 
+    // this.state = {
+    //   spinner: false,
+    //   email: this.props.userEmail,
+    //   password: "",
+    //   fullname: "",
+    //   phoneNumber: "",
+    //   photo: "",
+    // };
     this.state = {
-      spinner: false,
-      email: this.props.userEmail,
+      fullName: "",
+      emailAddress: props.userEmail,
       password: "",
-      fullname: "",
-      phoneNumber: "",
-      photo: "",
     };
+
+    this.formFields = [
+      {
+        label: "Email address",
+        type: "text",
+        placeholder: "Enter email",
+        defaultValue: this.props.userEmail,
+        readonly: true,
+        onChangeAction: (value) => this.setState({ emailAddress: value }),
+      },
+      {
+        label: "Password",
+        type: "password",
+        placeholder: "Enter password",
+        onChangeAction: (value) => this.setState({ password: value }),
+      },
+      {
+        label: "Full name",
+        type: "text",
+        placeholder: "Full name",
+        onChangeAction: (value) => this.setState({ fullName: value }),
+      },
+    ];
   }
 
   setOnSpinner = () => this.setState({ spinner: true });
@@ -84,7 +113,7 @@ class EditModal extends Component {
           <Modal.Title>{this.props.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Row>
+          {/* <Row>
             <Col xs={12}>
               <Form>
                 <Form.Group controlId="readOnlyEmail">
@@ -136,16 +165,38 @@ class EditModal extends Component {
                 Se edito al usuario correctamente
               </Alert>
             </Col>
-          </Row>
+          </Row> */}
+          <FormContainer
+            style={{ background: "white !important" }}
+            formHeader={this.props.text}
+            formFields={this.formFields}
+            submitButtonText="Edit"
+            extraLinkSuffix="Already registered"
+            extraLinkHref="/sign-in"
+            extraLinkText="sign in?"
+            showExtraLink={this.props.showLink}
+            errorMessage={this.props.errorMessage}
+            showErrorMessage={this.props.showErrorMessage}
+            setErrorMessage={this.props.setErrorMessage}
+            successMessage={this.props.successMessage}
+            showSuccessMessage={this.props.showSuccessMessage}
+            setSuccessMessage={this.props.setSuccessMessage}
+            errorEmailText={this.errorEmailText}
+            generateRequest={this.generateRequest.bind(this)}
+            emailAddress={this.state.emailAddress}
+            showSpinner={this.props.showSpinner}
+            setOnSpinner={this.setOnSpinner.bind(this)}
+            processResponse={this.processResponse.bind(this)}
+          />
         </Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <Button variant="secondary" onClick={this.props.handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={this.setOnSpinner}>
             {this.props.confirmationText}
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     );
   }

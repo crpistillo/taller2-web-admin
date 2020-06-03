@@ -90,24 +90,26 @@ class NewPassword extends Component {
 
   render() {
     return (
-      <FormContainer
-        formHeader={"Password Recovery"}
-        formFields={this.formFields}
-        submitButtonText={"Submit"}
-        showExtraLink={this.props.showLink}
-        errorMessage={this.props.errorMessage}
-        showErrorMessage={this.props.showErrorMessage}
-        setErrorMessage={this.props.setErrorMessage}
-        successMessage={this.props.successMessage}
-        showSuccessMessage={this.props.showSuccessMessage}
-        setSuccessMessage={this.props.setSuccessMessage}
-        errorEmailText={this.errorEmailText}
-        generateRequest={this.generateRequest.bind(this)}
-        emailAddress={this.state.emailAddress}
-        showSpinner={this.props.showSpinner}
-        setOnSpinner={this.setOnSpinner.bind(this)}
-        processResponse={this.processResponse.bind(this)}
-      />
+      <div className="auth-wrapper">
+        <FormContainer
+          formHeader={"Password Recovery"}
+          formFields={this.formFields}
+          submitButtonText={"Submit"}
+          showExtraLink={this.props.showLink}
+          errorMessage={this.props.errorMessage}
+          showErrorMessage={this.props.showErrorMessage}
+          setErrorMessage={this.props.setErrorMessage}
+          successMessage={this.props.successMessage}
+          showSuccessMessage={this.props.showSuccessMessage}
+          setSuccessMessage={this.props.setSuccessMessage}
+          errorEmailText={this.errorEmailText}
+          generateRequest={this.generateRequest.bind(this)}
+          emailAddress={this.state.emailAddress}
+          showSpinner={this.props.showSpinner}
+          setOnSpinner={this.setOnSpinner.bind(this)}
+          processResponse={this.processResponse.bind(this)}
+        />
+      </div>
     );
   }
 }

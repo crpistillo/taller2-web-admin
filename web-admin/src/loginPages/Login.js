@@ -82,27 +82,29 @@ class Login extends Component {
   render() {
     if (this.props.loggedIn) return <Redirect to="/home" />;
     return (
-      <FormContainer
-        formHeader="Sign in"
-        formFields={this.formFields}
-        submitButtonText="Submit"
-        extraLinkSuffix="Forgot"
-        extraLinkHref="/forgot_password"
-        extraLinkText="password?"
-        showExtraLink={true}
-        errorMessage={this.props.errorMessage}
-        showErrorMessage={this.props.showErrorMessage}
-        setErrorMessage={this.props.setErrorMessage}
-        successMessage={this.props.successMessage}
-        showSuccessMessage={this.props.showSuccessMessage}
-        setSuccessMessage={this.props.setSuccessMessage}
-        errorEmailText={this.errorEmailText}
-        generateRequest={this.generateRequest.bind(this)}
-        emailAddress={this.state.emailAddress}
-        showSpinner={this.props.showSpinner}
-        setOnSpinner={this.setOnSpinner.bind(this)}
-        processResponse={this.processResponse.bind(this)}
-      />
+      <div className="auth-wrapper">
+        <FormContainer
+          formHeader="Sign in"
+          formFields={this.formFields}
+          submitButtonText="Submit"
+          extraLinkSuffix="Forgot"
+          extraLinkHref="/forgot_password"
+          extraLinkText="password?"
+          showExtraLink={true}
+          errorMessage={this.props.errorMessage}
+          showErrorMessage={this.props.showErrorMessage}
+          setErrorMessage={this.props.setErrorMessage}
+          successMessage={this.props.successMessage}
+          showSuccessMessage={this.props.showSuccessMessage}
+          setSuccessMessage={this.props.setSuccessMessage}
+          errorEmailText={this.errorEmailText}
+          generateRequest={this.generateRequest.bind(this)}
+          emailAddress={this.state.emailAddress}
+          showSpinner={this.props.showSpinner}
+          setOnSpinner={this.setOnSpinner.bind(this)}
+          processResponse={this.processResponse.bind(this)}
+        />
+      </div>
     );
   }
 }

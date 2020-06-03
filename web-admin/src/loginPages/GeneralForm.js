@@ -43,6 +43,8 @@ class GeneralForm extends Component {
                 className="form-control"
                 placeholder={formField.placeholder}
                 onChange={(e) => formField.onChangeAction(e.target.value)}
+                defaultValue={formField.defaultValue}
+                readOnly={formField.readonly !== undefined}
               />
             </div>
           ))}
