@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { SHOW_SIGNUP_ERROR_MESSAGE, SHOW_SIGNUP_SPINNER, SHOW_SUCCESSFUL_SIGNUP, SHOW_SUCCESS_MESSAGE } from '../redux/signUpReducer';
 
-import { USERS_ENDPOINT } from '../vars/endpoints';
+import { CREATE_USER_ENDPOINT } from '../vars/endpoints';
 
 import FormContainer from "./FormContainer";
 
@@ -54,7 +54,7 @@ class SignUp extends Component {
             'Content-Type': 'application/json',
         }
 
-        let request = new Request(USERS_ENDPOINT, {
+        let request = new Request(CREATE_USER_ENDPOINT, {
             method: 'POST',
             headers: requestHeaders,
             body: JSON.stringify(data)
