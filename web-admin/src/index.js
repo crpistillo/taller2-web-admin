@@ -17,6 +17,8 @@ import { editModalReducer } from "./redux/editModalReducers";
 
 require('dotenv').config()
 
+require('dotenv').config()
+
 const reducers = combineReducers({
   appReducer,
   loginReducer,

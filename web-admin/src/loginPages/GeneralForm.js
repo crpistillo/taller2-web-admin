@@ -53,8 +53,13 @@ class GeneralForm extends Component {
             {this.props.submitButtonText}
           </button>
 
-          {showExtraLink}
-        </form>
+                    {this.props.formFields.map((formField, index) => (
+                        <div className="form-group" key={index}>
+                            <label>{formField.label}</label>
+                            <input type={formField.type} className="form-control" placeholder={formField.placeholder}
+                                onChange={(e) => formField.onChangeAction(e.target)} />
+                        </div>
+                    ))}
 
         <WaitingSpinner activated={this.props.showSpinner} />
       </div>

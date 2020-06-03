@@ -16,32 +16,34 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      fullName: "",
-      emailAddress: "",
-      password: "",
-    };
+        this.state = {
+            fullName: '',
+            emailAddress: '',
+            password: '',
+            photo: null
+        };
 
-    this.formFields = [
-      {
-        label: "Email address",
-        type: "text",
-        placeholder: "Enter email",
-        onChangeAction: (value) => this.setState({ emailAddress: value }),
-      },
-      {
-        label: "Password",
-        type: "password",
-        placeholder: "Enter password",
-        onChangeAction: (value) => this.setState({ password: value }),
-      },
-      {
-        label: "Full name",
-        type: "text",
-        placeholder: "Full name",
-        onChangeAction: (value) => this.setState({ fullName: value }),
-      },
-    ];
+        this.formFields = [{
+            label: 'Email address',
+            type: 'text',
+            placeholder: 'Enter email',
+            onChangeAction: (target) => (this.setState({ emailAddress: target.value }))
+        }, {
+            label: 'Password',
+            type: 'password',
+            placeholder: 'Enter password',
+            onChangeAction: (target) => (this.setState({ password: target.value }))
+        }, {
+            label: 'Full name',
+            type: 'text',
+            placeholder: 'Full name',
+            onChangeAction: (target) => (this.setState({ fullName: target.value })),
+        }, {
+            label: 'Choose photo',
+            type: 'file',
+            placeholder: 'Select photo',
+            onChangeAction: (target) => (this.setState( {photo: target.files[0]} ))
+        }]
 
     this.errorEmailText = "Please, review your email.";
   }
@@ -49,24 +51,23 @@ class SignUp extends Component {
   setOnSpinner = () => this.props.setSpinner(true);
   setOffSpinner = () => this.props.setSpinner(false);
 
-  generateRequest() {
-    let data = {
-      email: this.state.emailAddress,
-      password: this.state.password,
-      fullname: this.state.fullName,
-      phone_number: "1111-1111",
-      photo: "",
-    };
+    generateRequest() {
+        var formData = new FormData()
 
-    let requestHeaders = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
+        formData.append('email', this.state.emailAddress)
+        formData.append('password', this.state.password)
+        formData.append('fullname', this.state.fullName)
+        formData.append('phone_number', '1111-1111')
+        formData.append('photo', this.state.photo, 'image')
+
+        let requestHeaders = {
+            'Accept': 'application/json',
+        }
 
         let request = new Request(CREATE_USER_ENDPOINT, {
             method: 'POST',
             headers: requestHeaders,
-            body: JSON.stringify(data)
+            body: formData
         })
 
     return request;

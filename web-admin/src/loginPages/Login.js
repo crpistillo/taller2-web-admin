@@ -18,25 +18,18 @@ class Login extends Component {
       password: "",
     };
 
-    this.formFields = [
-      {
-        label: "Email adress",
-        type: "text",
-        placeholder: "Enter email",
-        onChangeAction: (value) => this.setState({ emailAddress: value }),
-      },
-      {
-        label: "Password",
-        type: "password",
-        placeholder: "Enter password",
-        onChangeAction: (value) => this.setState({ password: value }),
-      },
-    ];
-    // eslint-disable-next-line
-    this.emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    this.errorEmailText = "Please, enter a valid email.";
-    this.notAdminErrorText = "You don't have access permission.";
-  }
+        this.formFields = [{
+            label: 'Email adress',
+            type: 'text',
+            placeholder: 'Enter email',
+            onChangeAction: target => this.setState({ emailAddress: target.value })
+        },
+        {
+            label: 'Password',
+            type: 'password',
+            placeholder: 'Enter password',
+            onChangeAction: target => (this.setState({ password: target.value })),
+        }]
 
   setOnSpinner = () => this.props.setSpinner(true);
   setOffSpinner = () => this.props.setSpinner(false);
