@@ -14,6 +14,8 @@ import { newPasswordReducer } from './redux/newPasswordReducers'
 import { createUserReducer } from './redux/createUserReducers'
 import { listUsersReducer } from './redux/listUsersReducers'
 
+require('dotenv').config()
+
 const reducers = combineReducers({
   appReducer,
   loginReducer,

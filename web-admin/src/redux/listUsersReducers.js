@@ -1,4 +1,4 @@
-import { REGISTERED_USERS_ENDPOINT, USERS_ENDPOINT } from '../vars/endpoints';
+import { REGISTERED_USERS_ENDPOINT, CREATE_USER_ENDPOINT } from '../vars/endpoints';
 
 import { store } from '../index';
 
@@ -40,7 +40,7 @@ const generateRequest = (endpoint, authToken, requestMethod) => {
 }
 
 const generateListUsersRequest = (pageNumber, usersPerPage, authToken) => {
-    let fetchEndpoint = REGISTERED_USERS_ENDPOINT + `?page=${pageNumber - 1}&users_per_page=${usersPerPage}`
+    let fetchEndpoint = REGISTERED_USERS_ENDPOINT + `&page=${pageNumber - 1}&users_per_page=${usersPerPage}`
 
     let request = generateRequest(fetchEndpoint, authToken, 'GET')
 
@@ -56,7 +56,7 @@ const fetchUsers = (pageNumber, usersPerPage, authToken) => {
 }
 
 const generateDeleteUserRequest = (userEmail, authToken) => {
-    let fetchEndpoint = USERS_ENDPOINT + `?email=${userEmail}`
+    let fetchEndpoint = CREATE_USER_ENDPOINT + `&email=${userEmail}`
 
     let request =  generateRequest(fetchEndpoint, authToken, 'DELETE')
 
