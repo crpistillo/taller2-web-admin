@@ -5,7 +5,7 @@ import SidebarContainer from "./sidebar/Sidebar";
 
 class Navigator extends Component {
     _navigatorComponent() {
-        if (this.props.token === undefined) {
+        if (!this.props.loggedIn) {
             return (<LoginNavbar />)
         } else {
             return (<SidebarContainer />)
@@ -21,7 +21,7 @@ class Navigator extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { token: state.appReducer.token }
+    return { loggedIn: state.appReducer.loggedIn }
 }
 
 const NavigatorContainer = connect(mapStateToProps)(Navigator)
