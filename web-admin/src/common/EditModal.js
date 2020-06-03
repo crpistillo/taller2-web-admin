@@ -9,6 +9,7 @@ import {
   SHOW_EDIT_ERROR_MESSAGE,
   SHOW_SUCCESSFUL_EDIT,
   SHOW_SUCCESS_MESSAGE,
+  SHOW_EDIT_SPINNER,
 } from "../redux/editModalReducers";
 
 import { USERS_ENDPOINT } from "../vars/endpoints";
@@ -17,18 +18,12 @@ class EditModal extends Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   spinner: false,
-    //   email: this.props.userEmail,
-    //   password: "",
-    //   fullname: "",
-    //   phoneNumber: "",
-    //   photo: "",
-    // };
     this.state = {
       fullName: "",
       emailAddress: props.userEmail,
       password: "",
+      phoneNumber: "",
+      photo: "",
     };
 
     this.formFields = [
@@ -52,6 +47,12 @@ class EditModal extends Component {
         placeholder: "Full name",
         onChangeAction: (value) => this.setState({ fullName: value }),
       },
+      {
+        label: "Phone number",
+        type: "text",
+        placeholder: "Enter Phone number",
+        onChangeAction: (value) => this.setState({ phoneNumber: value }),
+      },
     ];
   }
 
@@ -60,7 +61,7 @@ class EditModal extends Component {
 
   generateRequest() {
     let data = {
-      email: this.state.email,
+      email: this.state.emailAddress,
       password: this.state.password,
       fullname: this.state.fullname,
       phoneNumber: this.state.phoneNumber,
@@ -100,82 +101,22 @@ class EditModal extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <Modal show={true} onHide={this.props.handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{this.props.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* <Row>
-            <Col xs={12}>
-              <Form>
-                <Form.Group controlId="readOnlyEmail">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    readOnly
-                    type="text"
-                    defaultValue={this.props.userEmail}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formBasicFullName">
-                  <Form.Label>Fullname</Form.Label>
-                  <Form.Control
-                    onChange={(event) =>
-                      this.setState({ fullname: event.target.value })
-                    }
-                    placeholder="Enter Full Name"
-                  />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    onChange={(event) =>
-                      this.setState({ password: event.target.value })
-                    }
-                    type="password"
-                    placeholder="Password"
-                  />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicPhoneNumber">
-                  <Form.Label>Phone number</Form.Label>
-                  <Form.Control
-                    onChange={(event) =>
-                      this.setState({ phoneNumber: event.target.value })
-                    }
-                    placeholder="Enter Phone Number"
-                  />
-                </Form.Group>
-              </Form>
-            </Col>
-            <Col xs={12}>
-              <WaitingSpinner activated={this.state.spinner} />
-              <Alert show={this.props.showErrorMessage} variant="danger">
-                No se pudo editar al usuario
-              </Alert>
-              <Alert variant="success" show={this.props.showSuccessMessage}>
-                Se edito al usuario correctamente
-              </Alert>
-            </Col>
-          </Row> */}
           <FormContainer
-            style={{ background: "white !important" }}
             formHeader={this.props.text}
             formFields={this.formFields}
             submitButtonText="Edit"
-            extraLinkSuffix="Already registered"
-            extraLinkHref="/sign-in"
-            extraLinkText="sign in?"
-            showExtraLink={this.props.showLink}
             errorMessage={this.props.errorMessage}
             showErrorMessage={this.props.showErrorMessage}
             setErrorMessage={this.props.setErrorMessage}
             successMessage={this.props.successMessage}
             showSuccessMessage={this.props.showSuccessMessage}
             setSuccessMessage={this.props.setSuccessMessage}
-            errorEmailText={this.errorEmailText}
             generateRequest={this.generateRequest.bind(this)}
             emailAddress={this.state.emailAddress}
             showSpinner={this.props.showSpinner}
@@ -183,14 +124,6 @@ class EditModal extends Component {
             processResponse={this.processResponse.bind(this)}
           />
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={this.setOnSpinner}>
-            {this.props.confirmationText}
-          </Button>
-        </Modal.Footer> */}
       </Modal>
     );
   }
@@ -203,6 +136,7 @@ const mapStateToProps = (state) => {
     success: state.editModalReducer.success,
     successMessage: state.editModalReducer.successMessage,
     showSuccessMessage: state.editModalReducer.showSuccessMessage,
+    showSpinner: state.editModalReducer.showEditSpinner,
   };
 };
 
@@ -214,6 +148,9 @@ const mapDispatchToProps = (dispatch) => {
         payload: { showErrorMessage: value, errorMessage: message },
       });
     },
+    setSpinner: (value) =>
+      dispatch({ type: SHOW_EDIT_SPINNER, payload: value }),
+
     setSuccessful: (value) =>
       dispatch({ type: SHOW_SUCCESSFUL_EDIT, payload: value }),
 

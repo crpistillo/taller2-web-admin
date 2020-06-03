@@ -6,9 +6,10 @@ export const SHOW_SUCCESS_MESSAGE = "SHOW_SUCCESS_MESSAGE";
 const initialState = {
   showErrorMessage: false,
   errorMessage: "",
+  showEditSpinner: false,
   success: false,
-  showSuccessMessage: false,
   successMessage: "",
+  showSuccessMessage: false,
 };
 
 export const editModalReducer = (state = initialState, action) => {
@@ -19,6 +20,10 @@ export const editModalReducer = (state = initialState, action) => {
         showErrorMessage: action.payload.showErrorMessage,
         errorMessage: action.payload.errorMessage,
       };
+
+    case SHOW_EDIT_SPINNER:
+      return { ...state, showEditSpinner: action.payload };
+
     case SHOW_SUCCESSFUL_EDIT:
       return { ...state, success: action.payload };
 
