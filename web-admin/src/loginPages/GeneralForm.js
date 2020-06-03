@@ -36,7 +36,7 @@ class GeneralForm extends Component {
                         <div className="form-group" key={index}>
                             <label>{formField.label}</label>
                             <input type={formField.type} className="form-control" placeholder={formField.placeholder}
-                                onChange={(e) => formField.onChangeAction(e.target.value)} />
+                                onChange={(e) => formField.onChangeAction(e.target)} />
                         </div>
                     ))}
 

@@ -19,13 +19,13 @@ class Login extends Component {
             label: 'Email adress',
             type: 'text',
             placeholder: 'Enter email',
-            onChangeAction: value => this.setState({ emailAddress: value })
+            onChangeAction: target => this.setState({ emailAddress: target.value })
         },
         {
             label: 'Password',
             type: 'password',
             placeholder: 'Enter password',
-            onChangeAction: value => (this.setState({ password: value })),
+            onChangeAction: target => (this.setState({ password: target.value })),
         }]
 
         this.emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
