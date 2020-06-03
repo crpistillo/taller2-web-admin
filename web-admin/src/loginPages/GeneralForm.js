@@ -42,7 +42,7 @@ class GeneralForm extends Component {
                 type={formField.type}
                 className="form-control"
                 placeholder={formField.placeholder}
-                onChange={(e) => formField.onChangeAction(e.target.value)}
+                onChange={(e) => formField.onChangeAction(e.target)}
                 defaultValue={formField.defaultValue}
                 readOnly={formField.readonly !== undefined}
               />

@@ -33,7 +33,12 @@ class Login extends Component {
         onChangeAction: (target) => this.setState({ password: target.value }),
       },
     ];
+
+    this.emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    this.errorEmailText = "Please, enter a valid email.";
+    this.notAdminErrorText = "You don't have access permission.";
   }
+
   setOnSpinner = () => this.props.setSpinner(true);
   setOffSpinner = () => this.props.setSpinner(false);
 
@@ -42,6 +47,7 @@ class Login extends Component {
       email: this.state.emailAddress,
       password: this.state.password,
     };
+    console.log(data);
 
     let requestHeaders = {
       Accept: "application/json",
