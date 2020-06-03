@@ -34,6 +34,7 @@ class Login extends Component {
       },
     ];
 
+    // eslint-disable-next-line
     this.emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     this.errorEmailText = "Please, enter a valid email.";
     this.notAdminErrorText = "You don't have access permission.";
