@@ -10,6 +10,7 @@ import WaitingSpinner from "./WaitingSpinner";
 class DeleteModal extends Component {
   _successBagde() {
     if (this.props.showDeleteSuccessBagde) {
+      window.location.reload();
       return (
         <Badge color="success" pill>
           User deleted

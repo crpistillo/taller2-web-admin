@@ -5,6 +5,8 @@ import FormContainer from "../loginPages/FormContainer";
 
 import { connect } from "react-redux";
 
+import { getAuthToken } from "../redux/appReducers";
+
 import {
   SHOW_EDIT_ERROR_MESSAGE,
   SHOW_SUCCESSFUL_EDIT,
@@ -12,18 +14,18 @@ import {
   SHOW_EDIT_SPINNER,
 } from "../redux/editModalReducers";
 
-import { EDIT_ENDPOINT } from "../vars/endpoints";
+import { EDIT_USER_ENDPOINT } from "../vars/endpoints";
 
 class EditModal extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fullName: "",
+      name: "",
       emailAddress: props.userEmail,
       password: "",
       phoneNumber: "",
-      photo: "",
+      photo: null,
     };
 
     this.formFields = [
@@ -33,25 +35,31 @@ class EditModal extends Component {
         placeholder: "Enter email",
         defaultValue: this.props.userEmail,
         readonly: true,
-        onChangeAction: (value) => this.setState({ emailAddress: value }),
       },
       {
         label: "Password",
         type: "password",
         placeholder: "Enter password",
-        onChangeAction: (value) => this.setState({ password: value }),
+        onChangeAction: (target) => this.setState({ password: target.value }),
       },
       {
         label: "Full name",
         type: "text",
         placeholder: "Full name",
-        onChangeAction: (value) => this.setState({ fullName: value }),
+        onChangeAction: (target) => this.setState({ name: target.value }),
       },
       {
         label: "Phone number",
         type: "text",
         placeholder: "Enter Phone number",
-        onChangeAction: (value) => this.setState({ phoneNumber: value }),
+        onChangeAction: (target) =>
+          this.setState({ phoneNumber: target.value }),
+      },
+      {
+        label: "Choose photo",
+        type: "file",
+        placeholder: "Select photo",
+        onChangeAction: (target) => this.setState({ photo: target.files[0] }),
       },
     ];
   }
@@ -60,26 +68,29 @@ class EditModal extends Component {
   setOffSpinner = () => this.setState({ spinner: false });
 
   generateRequest() {
-    let data = {
-      email: this.state.emailAddress,
-      password: this.state.password,
-      fullname: this.state.fullname,
-      phoneNumber: this.state.phoneNumber,
-      photo: this.state.photo,
-    };
+    var formData = new FormData();
+    const authToken = getAuthToken();
+
+    formData.append("fullname", this.state.name);
+    formData.append("password", this.state.password);
+    formData.append("phone_number", this.state.phoneNumber);
+    if (this.state.photo) formData.append("photo", this.state.photo, "image");
 
     let requestHeaders = {
       Accept: "application/json",
-      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`,
+      email: this.state.emailAddress,
     };
 
-    let request = new Request(EDIT_ENDPOINT, {
-      method: "PUT",
-      headers: requestHeaders,
-      body: JSON.stringify(data),
-    });
-
-    console.log(data);
+    let request = new Request(
+      EDIT_USER_ENDPOINT + `&email=${this.state.emailAddress}`,
+      {
+        method: "PUT",
+        headers: requestHeaders,
+        body: formData,
+      }
+    );
+    console.log(request);
     return request;
   }
 
@@ -90,9 +101,10 @@ class EditModal extends Component {
         console.log(json);
       });
       this.props.setSuccessMessage(true, "Succesfully edited");
-      this.props.setSuccessful();
+      window.location.reload();
     } else {
       response.json().then((json) => {
+        console.log(json.message);
         this.props.setErrorMessage(true, json.message);
       });
     }

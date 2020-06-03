@@ -8,7 +8,7 @@ import {
   SHOW_SUCCESS_MESSAGE,
 } from "../redux/signUpReducer";
 
-import { CREATE_USER_ENDPOINT } from '../vars/endpoints';
+import { CREATE_USER_ENDPOINT } from "../vars/endpoints";
 
 import FormContainer from "./FormContainer";
 
@@ -16,34 +16,40 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
 
-        this.state = {
-            fullName: '',
-            emailAddress: '',
-            password: '',
-            photo: null
-        };
+    this.state = {
+      fullName: "",
+      emailAddress: "",
+      password: "",
+      photo: null,
+    };
 
-        this.formFields = [{
-            label: 'Email address',
-            type: 'text',
-            placeholder: 'Enter email',
-            onChangeAction: (target) => (this.setState({ emailAddress: target.value }))
-        }, {
-            label: 'Password',
-            type: 'password',
-            placeholder: 'Enter password',
-            onChangeAction: (target) => (this.setState({ password: target.value }))
-        }, {
-            label: 'Full name',
-            type: 'text',
-            placeholder: 'Full name',
-            onChangeAction: (target) => (this.setState({ fullName: target.value })),
-        }, {
-            label: 'Choose photo',
-            type: 'file',
-            placeholder: 'Select photo',
-            onChangeAction: (target) => (this.setState( {photo: target.files[0]} ))
-        }]
+    this.formFields = [
+      {
+        label: "Email address",
+        type: "text",
+        placeholder: "Enter email",
+        onChangeAction: (target) =>
+          this.setState({ emailAddress: target.value }),
+      },
+      {
+        label: "Password",
+        type: "password",
+        placeholder: "Enter password",
+        onChangeAction: (target) => this.setState({ password: target.value }),
+      },
+      {
+        label: "Full name",
+        type: "text",
+        placeholder: "Full name",
+        onChangeAction: (target) => this.setState({ fullName: target.value }),
+      },
+      {
+        label: "Choose photo",
+        type: "file",
+        placeholder: "Select photo",
+        onChangeAction: (target) => this.setState({ photo: target.files[0] }),
+      },
+    ];
 
     this.errorEmailText = "Please, review your email.";
   }
@@ -51,24 +57,24 @@ class SignUp extends Component {
   setOnSpinner = () => this.props.setSpinner(true);
   setOffSpinner = () => this.props.setSpinner(false);
 
-    generateRequest() {
-        var formData = new FormData()
+  generateRequest() {
+    var formData = new FormData();
 
-        formData.append('email', this.state.emailAddress)
-        formData.append('password', this.state.password)
-        formData.append('fullname', this.state.fullName)
-        formData.append('phone_number', '1111-1111')
-        formData.append('photo', this.state.photo, 'image')
+    formData.append("email", this.state.emailAddress);
+    formData.append("password", this.state.password);
+    formData.append("fullname", this.state.fullName);
+    formData.append("phone_number", "1111-1111");
+    formData.append("photo", this.state.photo, "image");
 
-        let requestHeaders = {
-            'Accept': 'application/json',
-        }
+    let requestHeaders = {
+      Accept: "application/json",
+    };
 
-        let request = new Request(CREATE_USER_ENDPOINT, {
-            method: 'POST',
-            headers: requestHeaders,
-            body: formData
-        })
+    let request = new Request(CREATE_USER_ENDPOINT, {
+      method: "POST",
+      headers: requestHeaders,
+      body: formData,
+    });
 
     return request;
   }

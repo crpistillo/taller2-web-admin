@@ -148,8 +148,6 @@ const mapStateToProps = (state) => {
 
     showEditPopup: state.listUsersReducer.showEditPopup,
     userToEdit: state.listUsersReducer.userToEdit,
-
-    // TODO : Agregar las props de edit
   };
 };
 

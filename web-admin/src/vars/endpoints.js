@@ -19,4 +19,4 @@ export const NEW_PASSWORD_ENDPOINT =
 export const REGISTERED_USERS_ENDPOINT =
   SERVER_ENDPOINT + "/registered_users" + API_KEY_PARAM;
 
-export const EDIT_ENDPOINT = SERVER_ENDPOINT + "/user";
+export const EDIT_USER_ENDPOINT = USERS_ENDPOINT + API_KEY_PARAM;
