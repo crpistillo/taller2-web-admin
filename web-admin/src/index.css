@@ -179,3 +179,7 @@ html,
   transition: all 0.5s;
   transition-delay: 100ms;
 }
+
+input[type="file"] {
+  padding-bottom: 10%;
+}
