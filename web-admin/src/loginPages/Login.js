@@ -59,7 +59,6 @@ class Login extends Component {
 
     processResponse(response) {
         if (response.ok) {
-            console.log(response)
             response.json().then(json => {
                 if (!json.user.admin) {
                     this.props.setErrorMessage(true, this.notAdminErrorText)
@@ -71,7 +70,6 @@ class Login extends Component {
         }
 
         else {
-            console.log(response)
             response.json().then(json => {
                 this.props.setErrorMessage(true, json.message)
             })
