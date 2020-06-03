@@ -1,8 +1,6 @@
 const API_KEY = process.env.REACT_APP_API_KEY
 
-console.log('api_key: ', API_KEY)
-
-const SERVER_ENDPOINT = "https://chotuve-auth-server.herokuapp.com"
+const SERVER_ENDPOINT = process.env.REACT_APP_SERVER_ENDPOINT
 
 const API_KEY_PARAM  = "?api_key=" + API_KEY
 
