@@ -8,7 +8,7 @@ import {
   SHOW_SUCCESS_MESSAGE,
 } from "../redux/signUpReducer";
 
-import { USERS_ENDPOINT } from "../vars/endpoints";
+import { CREATE_USER_ENDPOINT } from '../vars/endpoints';
 
 import FormContainer from "./FormContainer";
 
@@ -63,11 +63,11 @@ class SignUp extends Component {
       "Content-Type": "application/json",
     };
 
-    let request = new Request(USERS_ENDPOINT, {
-      method: "POST",
-      headers: requestHeaders,
-      body: JSON.stringify(data),
-    });
+        let request = new Request(CREATE_USER_ENDPOINT, {
+            method: 'POST',
+            headers: requestHeaders,
+            body: JSON.stringify(data)
+        })
 
     return request;
   }

@@ -15,6 +15,8 @@ import { createUserReducer } from "./redux/createUserReducers";
 import { listUsersReducer } from "./redux/listUsersReducers";
 import { editModalReducer } from "./redux/editModalReducers";
 
+require('dotenv').config()
+
 const reducers = combineReducers({
   appReducer,
   loginReducer,

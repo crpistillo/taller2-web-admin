@@ -61,19 +61,36 @@ class Login extends Component {
     return request;
   }
 
-  processResponse(response) {
-    if (response.ok) {
-      response.json().then((json) => {
-        if (!json.user.admin) {
-          this.props.setErrorMessage(true, this.notAdminErrorText);
-        } else {
-          this.props.setToken(json.login_token);
+        let request = new Request(LOGIN_ENDPOINT, {
+            method: 'POST',
+            headers: requestHeaders,
+            body: JSON.stringify(data)
+        })
+
+        return request;
+    }
+
+    processResponse(response) {
+        if (response.ok) {
+            console.log(response)
+            response.json().then(json => {
+                if (!json.user.admin) {
+                    this.props.setErrorMessage(true, this.notAdminErrorText)
+                }
+                else {
+                    this.props.setToken(json.login_token)
+                }
+            })
         }
-      });
-    } else {
-      response.json().then((json) => {
-        this.props.setErrorMessage(true, json.message);
-      });
+
+        else {
+            console.log(response)
+            response.json().then(json => {
+                this.props.setErrorMessage(true, json.message)
+            })
+        }
+
+        this.setOffSpinner()
     }
 
     this.setOffSpinner();
