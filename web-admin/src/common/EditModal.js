@@ -12,7 +12,7 @@ import {
   SHOW_EDIT_SPINNER,
 } from "../redux/editModalReducers";
 
-import { USERS_ENDPOINT } from "../vars/endpoints";
+import { EDIT_ENDPOINT } from "../vars/endpoints";
 
 class EditModal extends Component {
   constructor(props) {
@@ -73,7 +73,7 @@ class EditModal extends Component {
       "Content-Type": "application/json",
     };
 
-    let request = new Request(USERS_ENDPOINT, {
+    let request = new Request(EDIT_ENDPOINT, {
       method: "PUT",
       headers: requestHeaders,
       body: JSON.stringify(data),

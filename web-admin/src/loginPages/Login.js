@@ -18,19 +18,22 @@ class Login extends Component {
       password: "",
     };
 
-        this.formFields = [{
-            label: 'Email adress',
-            type: 'text',
-            placeholder: 'Enter email',
-            onChangeAction: target => this.setState({ emailAddress: target.value })
-        },
-        {
-            label: 'Password',
-            type: 'password',
-            placeholder: 'Enter password',
-            onChangeAction: target => (this.setState({ password: target.value })),
-        }]
-
+    this.formFields = [
+      {
+        label: "Email adress",
+        type: "text",
+        placeholder: "Enter email",
+        onChangeAction: (target) =>
+          this.setState({ emailAddress: target.value }),
+      },
+      {
+        label: "Password",
+        type: "password",
+        placeholder: "Enter password",
+        onChangeAction: (target) => this.setState({ password: target.value }),
+      },
+    ];
+  }
   setOnSpinner = () => this.props.setSpinner(true);
   setOffSpinner = () => this.props.setSpinner(false);
 
