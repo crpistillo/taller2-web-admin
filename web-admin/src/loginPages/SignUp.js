@@ -49,10 +49,10 @@ class SignUp extends Component {
     generateRequest() {
         var formData = new FormData()
 
-        formData.append('email', this.state.email)
+        formData.append('email', this.state.emailAddress)
         formData.append('password', this.state.password)
         formData.append('fullname', this.state.fullName)
-        formData.append('phone-number', '1111-1111')
+        formData.append('phone_number', '1111-1111')
         formData.append('photo', this.state.photo, 'image')
 
         let requestHeaders = {
