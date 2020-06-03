@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import WaitingSpinner from "./WaitingSpinner";
-import Form from "react-bootstrap/Form";
-import Alert from "react-bootstrap/Alert";
 import FormContainer from "../loginPages/FormContainer";
 
 import { connect } from "react-redux";
