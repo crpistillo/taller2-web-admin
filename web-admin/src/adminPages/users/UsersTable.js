@@ -53,7 +53,7 @@ class UsersTable extends Component {
     let nextItems = [];
     const netxItem = (
       <Pagination.Next
-        disabled={currentPage === this.props.totalPages ? true : false}
+        disabled={currentPage === this.props.totalPages}
         onClick={() => this.changePage(currentPage + 1)}
       />
     );
@@ -108,13 +108,14 @@ class UsersTable extends Component {
     const pagination = this.paginationComponent();
     return (
       <div>
-        <Table striped bordered hover variant="light">
+        <Table striped bordered hover variant="light" size="sm">
           <thead>
             <tr>
               <th>Email adress</th>
               <th>Fullname</th>
               <th>Phone number</th>
               <th>Type</th>
+              <th>Photo</th>
               <th>Operation</th>
             </tr>
           </thead>
@@ -125,6 +126,9 @@ class UsersTable extends Component {
                 <th>{user.fullname}</th>
                 <th>{user.phone_number}</th>
                 <th>{user.admin ? "Admin" : "User"}</th>
+                <th>
+                  <img src={`data:image/png;base64, ${user.photo}`} />
+                </th>
                 <th style={this.helpStyle}>
                   <Button
                     variant="success"
