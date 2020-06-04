@@ -9,7 +9,7 @@ const CommonNavbar = (props) => (
             <ul className="navbar-nav ml-auto">
                 {props.links.map((link, index) => (
                     <li className="nav-item">
-                        <Link className="nav-link" to={link.redirectLink}>{link.linkText}</Link>
+                        <Link className="nav-link" to={link.redirectLink} onClick={link.onClick}>{link.linkText}</Link>
                     </li>
                 ))}
             </ul>
