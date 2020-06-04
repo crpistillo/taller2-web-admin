@@ -1,18 +1,18 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800");
 
 * {
   box-sizing: border-box;
@@ -21,15 +21,27 @@ body {
   min-height: 105vh;
   display: flex;
   font-weight: 400;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: "Fira Sans", sans-serif;
 }
 
-h1,h2,h3,h4,h5,h6,label,span {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+span {
   font-weight: 500;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: "Fira Sans", sans-serif;
 }
 
-body, html, .App, #root, .auth-wrapper, .home-wrapper {
+body,
+html,
+.App,
+#root,
+.auth-wrapper,
+.home-wrapper {
   width: 100%;
   height: 100%;
 }
@@ -39,20 +51,20 @@ body, html, .App, #root, .auth-wrapper, .home-wrapper {
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
 }
 
-.nav-link:hover{
-  transform: scale(1.15 );
+.nav-link:hover {
+  transform: scale(1.15);
   color: black !important;
   transition: transform 0.5s;
   transition: all 0.5s;
   transition-delay: 100ms;
-  }
+}
 
 .auth-wrapper {
   display: flex;
   justify-content: center;
   flex-direction: column;
   text-align: left;
-  background: #1C8EF9 !important;
+  background: #1c8ef9 !important;
 }
 
 .auth-inner {
@@ -62,16 +74,16 @@ body, html, .App, #root, .auth-wrapper, .home-wrapper {
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   padding: 40px 55px 45px 55px;
   border-radius: 15px;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .auth-wrapper .form-control:focus {
-  border-color: #167bff;  
+  border-color: #167bff;
   box-shadow: none;
 }
 
-.auth-wrapper .form-control-invalid{
-  border-color: red
+.auth-wrapper .form-control-invalid {
+  border-color: red;
 }
 
 .auth-wrapper h3 {
@@ -98,89 +110,11 @@ body, html, .App, #root, .auth-wrapper, .home-wrapper {
   color: #167bff;
 }
 
-/* Sidebar */
-
-/* Position and sizing of burger button */
-.bm-burger-button {
-  position: fixed;
-  width: 36px;
-  height: 30px;
-  left: 36px;
-  top: 36px;
-}
-
-/* Color/shape of burger icon bars */
-.bm-burger-bars {
-  background: #373a47;
-}
-
-/* Color/shape of burger icon bars on hover*/
-.bm-burger-bars:hover{
-  background: #555353;
-}
-
-/* Position and sizing of clickable cross button */
-.bm-cross-button {
-  height: 24px;
-  width: 24px;
-}
-
-/* Color/shape of close button cross */
-.bm-cross {
-  background: #bdc3c7;
-}
-
-/*
-Sidebar wrapper styles
-Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
-*/
-.bm-menu-wrap {
-  position: fixed;
-  height: 100%;
-}
-
-/* General sidebar styles */
-.bm-menu {
-  background: #373a47;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.35em;
-  opacity: 0.95;
-}
-
-
-/* Wrapper for item list */
-.bm-item-list {
-  text-align: center;
-}
-
-/* Individual item */
-.bm-item {
-  display: inline-block;
-  color: #ffffff;
-  font-family: 'Fira Sans', sans-serif;
-  padding: 0.5em;
-}
-
-.bm-item:hover{
-  color:white;
-  background-color: #54596e;
-  transform: scale(1.15 );
-  transition: transform 0.5s;
-  transition: all 0.5s;
-  transition-delay: 100ms;
-  border-radius: 3mm;
-}
-
-/* Styling of overlay */
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
-}
-
 .home-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #1C8EF9 !important;
+  background: #1c8ef9 !important;
 }
 
 .home-inner {
@@ -188,12 +122,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .admin-page-wrapper {
-  background: #1C8EF9 !important;
+  background: #1c8ef9 !important;
   width: 100%;
   padding-bottom: 50px;
-  height: 150%;
 }
-  
+
 .row-inversion {
   display: flex;
   flex-direction: row-reverse;
@@ -212,13 +145,40 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .occupy-whole-height {
-  height: 100%;
+  height: 105%;
 }
 
 .white-backgound-color {
-  background: white
+  background: white;
 }
 
 .border-radius-15-px {
   border-radius: 15px;
+}
+
+.list-group-item {
+  border-radius: 0.3rem !important;
+}
+
+.list-group-item:hover {
+  /* transform: scale(1.05); */
+  background-color: #e9ecef;
+  transition: transform 0.5s;
+  transition: all 0.5s;
+  transition-delay: 100ms;
+}
+
+.list-group-item {
+  border-radius: 0.3rem !important;
+}
+
+.list-group-item:hover {
+  background-color: #e9ecef;
+  transition: transform 0.5s;
+  transition: all 0.5s;
+  transition-delay: 100ms;
+}
+
+input[type="file"] {
+  padding-bottom: 10%;
 }
