@@ -125,7 +125,6 @@ html,
   background: #1c8ef9 !important;
   width: 100%;
   padding-bottom: 50px;
-  height: 150%;
 }
 
 .row-inversion {
@@ -146,7 +145,7 @@ html,
 }
 
 .occupy-whole-height {
-  height: 100%;
+  height: 105%;
 }
 
 .white-backgound-color {
