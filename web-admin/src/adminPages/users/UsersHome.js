@@ -13,7 +13,7 @@ class UsersHome extends Component {
     if (!this.props.loggedIn) return <Redirect to="/sign-in" />;
 
     return (
-      <div className="admin-page-wrapper">
+      <div className={"admin-page-wrapper " + (this.props.isLoadingUsers ? "occupy-whole-height" : "")}>
         <Container fluid className="occupy-whole-height">
           <Row className="row-inversion padding-top-100-px padding-left-100-px">
             <Col xs={2}>
@@ -40,6 +40,7 @@ class UsersHome extends Component {
 const mapStateToProps = (state) => {
   return {
     loggedIn: state.appReducer.loggedIn,
+    isLoadingUsers: !state.listUsersReducer.alreadyFetched
   };
 };
 

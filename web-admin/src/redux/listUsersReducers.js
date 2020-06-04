@@ -57,6 +57,7 @@ const generateListUsersRequest = (pageNumber, usersPerPage, authToken) => {
 };
 
 const fetchUsers = (pageNumber, usersPerPage, authToken) => {
+  window.scroll(0,0)
   let request = generateListUsersRequest(pageNumber, usersPerPage, authToken);
   fetch(request)
     .then((response) => response.json())

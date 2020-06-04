@@ -48,7 +48,6 @@ class Login extends Component {
       email: this.state.emailAddress,
       password: this.state.password,
     };
-    console.log(data);
 
     let requestHeaders = {
       Accept: "application/json",
