@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Repositorio web-admin de taller de programacion 2 - FIUBA
 
 ## Available Scripts
 
