@@ -64,7 +64,7 @@ html,
   justify-content: center;
   flex-direction: column;
   text-align: left;
-  background: #1c8ef9 !important;
+  background: #00335c !important;
 }
 
 .auth-inner {
@@ -78,7 +78,7 @@ html,
 }
 
 .auth-wrapper .form-control:focus {
-  border-color: #167bff;
+  border-color: #00335c;
   box-shadow: none;
 }
 
@@ -107,14 +107,14 @@ html,
 }
 
 .forgot-password a {
-  color: #167bff;
+  color: #00335c;
 }
 
 .home-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #1c8ef9 !important;
+  background: #00335c !important;
 }
 
 .home-inner {
@@ -122,7 +122,7 @@ html,
 }
 
 .admin-page-wrapper {
-  background: #1c8ef9 !important;
+  background: #00335c !important;
   width: 100%;
   padding-bottom: 50px;
 }
@@ -178,6 +178,8 @@ html,
   transition: all 0.5s;
   transition-delay: 100ms;
 }
+
+.btn-primary
 
 input[type="file"] {
   padding-bottom: 10%;
