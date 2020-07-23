@@ -49,7 +49,7 @@ const generateRequest = (endpoint, authToken, requestMethod) => {
 const generateListUsersRequest = (pageNumber, usersPerPage, authToken) => {
   let fetchEndpoint =
     REGISTERED_USERS_ENDPOINT +
-    `&page=${pageNumber - 1}&users_per_page=${usersPerPage}`;
+    `?page=${pageNumber - 1}&users_per_page=${usersPerPage}`;
 
   let request = generateRequest(fetchEndpoint, authToken, "GET");
 

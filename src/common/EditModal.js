@@ -83,7 +83,7 @@ class EditModal extends Component {
     };
 
     let request = new Request(
-      EDIT_USER_ENDPOINT + `&email=${this.state.emailAddress}`,
+      EDIT_USER_ENDPOINT + `?email=${this.state.emailAddress}`,
       {
         method: "PUT",
         headers: requestHeaders,
