@@ -14,6 +14,10 @@ class AdminNavbar extends Component {
                     redirectLink: "/media",
                     linkText: "Media Server"
                 }, {
+                    redirectLink: "/stats",
+                    linkText: "Statistics"
+                }
+                , {
                     redirectLink: "/sign-in",
                     linkText: "Logout",
                     onClick: this.props.removeToken
