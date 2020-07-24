@@ -9,6 +9,7 @@ import HomeContainer from './adminPages/Home';
 import UsersHomeContainer from './adminPages/users/UsersHome';
 import ForgotPasswordContainer from './loginPages/ForgotPassword';
 import NewPasswordContainer from './loginPages/NewPassword'
+import VideoResources from "./adminPages/resources/VideoResources";
 
 function App() {
   return (<Router>
@@ -21,10 +22,12 @@ function App() {
         <Route path="/sign-up">
           <SignUpContainer text={"Sign up"} hasToShowMessage={true} showLink={true} />
         </Route>
-        <Route path="/home" component={HomeContainer} />
-        <Route path="/users" component={UsersHomeContainer} />
         <Route path="/forgot_password" component={ForgotPasswordContainer} />
         <Route path="/new_password" component={NewPasswordContainer} />
+        <Route path="/home" component={HomeContainer} />
+        <Route path="/users" component={UsersHomeContainer} />
+        <Route path="/resources" component={VideoResources} />
+
       </Switch>
 
 

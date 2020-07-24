@@ -5,14 +5,14 @@ import { connect } from 'react-redux'
 import { REMOVE_TOKEN } from '../redux/appReducers';
 import { SHOW_SUCCESSFUL_SIGNUP, SHOW_SUCCESS_MESSAGE } from '../redux/signUpReducer';
 
-class Sidebar extends Component {
+class LoggedNavbar extends Component {
 
     render() {
         return (
             <Menu>
                 <Link className="nav-link" to={"/home"}>Home</Link>
                 <Link className="nav-link" to={"/users"} onClick={() => this.props.setSuccessful(false)}>Users</Link>
-                <Link className="nav-link" to={"/media"}>Media Server</Link>
+                <Link className="nav-link" to={"/resources"}>Video Resources</Link>
                 <Link className="nav-link" to={"/sign-in"} onClick={this.props.removeToken}>Logout</Link>
             </Menu>
         );
@@ -39,6 +39,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(Sidebar)
+const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(LoggedNavbar)
 
 export default SidebarContainer;

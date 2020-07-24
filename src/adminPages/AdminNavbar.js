@@ -11,8 +11,8 @@ class AdminNavbar extends Component {
                     redirectLink: "/users/add",
                     linkText: "Users"
                 }, {
-                    redirectLink: "/media",
-                    linkText: "Media Server"
+                    redirectLink: "/resources",
+                    linkText: "Video Resources"
                 }, {
                     redirectLink: "/sign-in",
                     linkText: "Logout",

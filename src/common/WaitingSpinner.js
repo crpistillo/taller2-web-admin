@@ -15,7 +15,7 @@ class WaitingSpinner extends Component {
         return this.props.activated ?
             (
                 <div style={this.styles}>
-                    <Spinner animation="border" variant="primary" style={this.styles} />
+                    <Spinner animation="border" variant={this.props.variant} style={this.styles} />
                 </div>) :
             (<div />)
 
