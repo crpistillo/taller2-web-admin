@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-import Pagination from "react-bootstrap/Pagination";
-import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import {FaPencilAlt, FaTrash} from "react-icons/fa";
 import CustomPagination from "../../common/CustomPagination";
 
 class UsersTable extends Component {
