@@ -266,6 +266,27 @@ export default function StatsDashboardContainer() {
                         />
                     </Paper>
                 </Grid>
+                {/* Chart api call mean*/}
+                <Grid item xs={12} md={8} lg={9}>
+                    <Paper className={fixedHeightPaper}>
+                        <Chart
+                            data={stats["last_day_mean_api_call_time"]}
+                            title={"API calls in average response time in the last " + valueDays + " days"}
+                            ylabel={"Time of response"}
+                            truncate={"4"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* cumulative info */}
+                <Grid item xs={12} md={4} lg={3}>
+                    <Paper className={fixedHeightPaper}>
+                        <CumulativeComponent
+                            cumulative={sum(stats["last_days_api_call_amount"]) + " API calls"}
+                            title={"API calls in the last " + valueDays + " days"}
+                            text={"Since " + Moment().subtract(valueDays, 'days').format('LL')}
+                        />
+                    </Paper>
+                </Grid>
                 {/* Sankey chart api call amount*/}
                 <Grid item xs={12}>
                     <Paper style={{height: 600}} className={fixedHeightPaper}>
@@ -282,6 +303,17 @@ export default function StatsDashboardContainer() {
                         <PieComponent
                             data={stats["last_days_api_calls_by_path"]}
                             title={"API calls in the last " + valueDays + " days"}
+                            ylabel={"API calls"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* Bar chart api call amount by method*/}
+                <Grid item xs={12}>
+                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                        <Histogram
+                            data={stats["last_days_api_calls_response_times_sample"]}
+                            title={"Histogram of API call response time in the last " + valueDays + " days."}
+                            subtitle={"Response times over 0.2 seconds where filtered due to low amount of samples."}
                             ylabel={"API calls"}
                         />
                     </Paper>
@@ -316,17 +348,7 @@ export default function StatsDashboardContainer() {
                         />
                     </Paper>
                 </Grid>
-                {/* Bar chart api call amount by method*/}
-                <Grid item xs={12}>
-                    <Paper style={{height: 600}} className={fixedHeightPaper}>
-                        <Histogram
-                            data={stats["last_days_api_calls_response_times_sample"]}
-                            title={"Histogram of API call response time in the last " + valueDays + " days."}
-                            subtitle={"Response times over 0.2 seconds where filtered due to low amount of samples."}
-                            ylabel={"API calls"}
-                        />
-                    </Paper>
-                </Grid>
+
             </Grid>
         );
     }

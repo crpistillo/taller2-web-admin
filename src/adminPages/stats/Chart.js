@@ -7,7 +7,14 @@ function createData(time, amount) {
     return { time, amount };
 }
 
-function generateData(json_data){
+function generateData(json_data, truncate){
+    if(truncate !== undefined){ // Uso esto cuando el eje y es float para no tener todos los decimales
+        var truncate_pot = Math.pow(10, truncate);
+        for (var type1 in json_data) {
+            json_data[type1] = Math.trunc(json_data[type1]*truncate_pot)/truncate_pot;
+            console.log(json_data[type1]);
+        }
+    }
     var data = [];
 
     for (var type in json_data) {
@@ -24,7 +31,7 @@ export default function Chart(props) {
     const theme = useTheme();
     const [data, setData] = useState({});
     useEffect(() => {
-        setData(generateData(props.data));
+        setData(generateData(props.data, props.truncate));
     }, []);
 
     return (
