@@ -1,6 +1,5 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 
@@ -18,18 +17,13 @@ export default function Deposits(props) {
     const classes = useStyles();
     return (
         <React.Fragment>
-            <Title>Videos en los últimos 30 dias</Title>
+            <Title>{props.title}</Title>
             <Typography component="p" variant="h4">
-                {props.totalVideosSubidos}
+                {props.cummulate}
             </Typography>
             <Typography color="textSecondary" className={classes.depositContext}>
-                on 15 March, 2019
+                {props.text}
             </Typography>
-            <div>
-                <Link color="primary" href="#" onClick={preventDefault}>
-                    View balance
-                </Link>
-            </div>
         </React.Fragment>
     );
 }

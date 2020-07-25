@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, Tooltip } from 'recharts';
 import Title from './Title';
 
-// Generate Sales Data
 function createData(time, amount) {
     return { time, amount };
 }
@@ -17,14 +16,17 @@ function generateData(json_data){
         data.push(createData(fecha,json_data[type]));
     }
     data.sort().reverse();
-    console.log(data);
     return data;
+
 }
 
 export default function Chart(props) {
     const theme = useTheme();
-    const data = generateData(props.data);
-    console.log(props.data);
+    const [data, setData] = useState({});
+    useEffect(() => {
+        setData(generateData(props.data));
+    }, []);
+
     return (
         <React.Fragment>
             <Title>{props.title}</Title>
@@ -38,6 +40,7 @@ export default function Chart(props) {
                         left: 24,
                     }}
                 >
+                    {/*<CartesianGrid strokeDasharray="3 3" />*/}
                     <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
                     <YAxis stroke={theme.palette.text.secondary}>
                         <Label
@@ -48,6 +51,8 @@ export default function Chart(props) {
                             {props.ylabel}
                         </Label>
                     </YAxis>
+                    <Tooltip/>
+                    {/*<Legend />*/}
                     <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={true} />
                 </LineChart>
             </ResponsiveContainer>
