@@ -333,7 +333,7 @@ export default function StatsDashboardContainer() {
 
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-    let typeToShow = statsType === 'user' ? userComponent() : apiComponent() ;
+    let typeToShow = statsType === 'user' ? userComponent() : apiComponent();
 
     return (
         (isFetching)
