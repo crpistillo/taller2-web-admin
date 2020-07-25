@@ -1,10 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import {BarChart, CartesianGrid, LabelList, Tooltip, XAxis, YAxis, Bar, Legend, ResponsiveContainer} from 'recharts';
+import {
+    BarChart,
+    CartesianGrid,
+    LabelList,
+    Tooltip,
+    XAxis,
+    YAxis,
+    Bar,
+    Legend,
+    ResponsiveContainer,
+    Label
+} from 'recharts';
 import Title from './Title';
 
 function createData(name, amount) {
-    return { "name": name, "value": amount };
+    return { "name": name, "calls": amount };
 }
 
 function generateData(json_data){
@@ -28,14 +39,20 @@ export default function BarComponent(props) {
         <React.Fragment>
             <Title>{props.title}</Title>
             <ResponsiveContainer>
-                <BarChart width={730} height={250} data={data}>
+                <BarChart width={900} height={250} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" angle={270}/>
-                    <YAxis />
+                    <XAxis dataKey="name"/>
+                    <YAxis>
+                        <Label
+                            angle={270}
+                            position="insideLeft"
+                            style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
+                        >
+                            {props.ylabel}
+                        </Label>
+                    </YAxis>
                     <Tooltip />
-                    <Legend />
-                    <Bar dataKey="value" fill="#8884d8" />
-
+                    <Bar dataKey="calls" fill="#8884d8" />
                 </BarChart>
             </ResponsiveContainer>
         </React.Fragment>

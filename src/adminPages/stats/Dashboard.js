@@ -355,6 +355,16 @@ export default function StatsDashboardContainer() {
                                     />
                                 </Paper>
                             </Grid>
+                            {/* Bar chart api call amount*/}
+                            <Grid item xs={12}>
+                                <Paper style={{height:600}} className={fixedHeightPaper}>
+                                    <BarComponent
+                                        data={stats["last_days_api_calls_by_method"]}
+                                        title={"API calls by method in the last " + DEFAULT_DAYS + " days"}
+                                        ylabel={"API calls"}
+                                    />
+                                </Paper>
+                            </Grid>
 
                         </Grid>
                         <Box pt={4}>
