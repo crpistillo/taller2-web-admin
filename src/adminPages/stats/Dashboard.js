@@ -23,6 +23,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import Sankey from "./Sankey";
 import PieComponent from "./PieComponent";
 import BarComponent from "./BarComponent";
+import Histogram from "./Histogram";
 
 const DEFAULT_DAYS = 30;
 
@@ -355,12 +356,23 @@ export default function StatsDashboardContainer() {
                                     />
                                 </Paper>
                             </Grid>
-                            {/* Bar chart api call amount*/}
+                            {/* Bar chart api call amount by method*/}
                             <Grid item xs={12}>
                                 <Paper style={{height:600}} className={fixedHeightPaper}>
                                     <BarComponent
                                         data={stats["last_days_api_calls_by_method"]}
                                         title={"API calls by method in the last " + DEFAULT_DAYS + " days"}
+                                        ylabel={"API calls"}
+                                    />
+                                </Paper>
+                            </Grid>
+                            {/* Bar chart api call amount by method*/}
+                            <Grid item xs={12}>
+                                <Paper style={{height:600}} className={fixedHeightPaper}>
+                                    <Histogram
+                                        data={stats["last_days_api_calls_response_times_sample"]}
+                                        title={"Histogram of API call response time in the last" + DEFAULT_DAYS + " days."}
+                                        subtitle={"Response times over 0.2 seconds where filtered due to low amount of samples."}
                                         ylabel={"API calls"}
                                     />
                                 </Paper>
