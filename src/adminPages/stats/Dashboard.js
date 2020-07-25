@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import Chart from './Chart';
-import Deposits from './Deposits';
+import CumulativeComponent from './CumulativeComponent';
 import {GET_STATS_ENDPOINT} from "../../vars/endpoints";
 import Moment from "moment";
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -255,11 +255,11 @@ export default function StatsDashboardContainer() {
                                     />
                                 </Paper>
                             </Grid>
-                            {/* Cummulate info */}
+                            {/* cumulative info */}
                             <Grid item xs={12} md={4} lg={3}>
                                 <Paper className={fixedHeightPaper}>
-                                    <Deposits
-                                        cummulate={sum(stats["last_days_uploaded_videos"]) + " videos"}
+                                    <CumulativeComponent
+                                        cumulative={sum(stats["last_days_uploaded_videos"]) + " videos"}
                                         title={"Videos in the last " + DEFAULT_DAYS + " days"}
                                         text={"Since " + Moment().subtract(DEFAULT_DAYS, 'days').format('LL')}
                                     />
@@ -275,11 +275,11 @@ export default function StatsDashboardContainer() {
                                     />
                                 </Paper>
                             </Grid>
-                            {/* Cummulate info */}
+                            {/* cumulative info */}
                             <Grid item xs={12} md={4} lg={3}>
                                 <Paper className={fixedHeightPaper}>
-                                    <Deposits
-                                        cummulate={sum(stats["last_days_user_registrations"]) + " users"}
+                                    <CumulativeComponent
+                                        cumulative={sum(stats["last_days_user_registrations"]) + " users"}
                                         title={"Registrations in the last " + DEFAULT_DAYS + " days"}
                                         text={"Since " + Moment().subtract(DEFAULT_DAYS, 'days').format('LL')}
                                     />
@@ -295,11 +295,11 @@ export default function StatsDashboardContainer() {
                                     />
                                 </Paper>
                             </Grid>
-                            {/* Cummulate info */}
+                            {/* cumulative info */}
                             <Grid item xs={12} md={4} lg={3}>
                                 <Paper className={fixedHeightPaper}>
-                                    <Deposits
-                                        cummulate={sum(stats["last_days_users_logins"]) + " users"}
+                                    <CumulativeComponent
+                                        cumulative={sum(stats["last_days_users_logins"]) + " users"}
                                         title={"Logins in the last " + DEFAULT_DAYS + " days"}
                                         text={"Since " + Moment().subtract(DEFAULT_DAYS, 'days').format('LL')}
                                     />
@@ -315,11 +315,11 @@ export default function StatsDashboardContainer() {
                                     />
                                 </Paper>
                             </Grid>
-                            {/* Cummulate info */}
+                            {/* cumulative info */}
                             <Grid item xs={12} md={4} lg={3}>
                                 <Paper className={fixedHeightPaper}>
-                                    <Deposits
-                                        cummulate={sum(stats["last_days_api_call_amount"]) + " API calls"}
+                                    <CumulativeComponent
+                                        cumulative={sum(stats["last_days_api_call_amount"]) + " API calls"}
                                         title={"API calls in the last " + DEFAULT_DAYS + " days"}
                                         text={"Since " + Moment().subtract(DEFAULT_DAYS, 'days').format('LL')}
                                     />
