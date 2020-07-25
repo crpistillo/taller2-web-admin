@@ -15,3 +15,5 @@ export const REGISTERED_USERS_ENDPOINT = SERVER_ENDPOINT + "/users"
 export const EDIT_USER_ENDPOINT = USERS_ENDPOINT
 
 export const VIDEOS_ENDPOINT = SERVER_ENDPOINT + "/videos"
+
+export const DELETE_VIDEO_ENDPOINT = USERS_ENDPOINT + "/video"
