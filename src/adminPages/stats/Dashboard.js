@@ -366,12 +366,22 @@ export default function StatsDashboardContainer() {
                                     />
                                 </Paper>
                             </Grid>
+                            {/* Bar chart api call amount by status*/}
+                            <Grid item xs={12}>
+                                <Paper style={{height:600}} className={fixedHeightPaper}>
+                                    <BarComponent
+                                        data={stats["last_days_api_calls_by_status"]}
+                                        title={"API calls by status in the last " + DEFAULT_DAYS + " days"}
+                                        ylabel={"API calls"}
+                                    />
+                                </Paper>
+                            </Grid>
                             {/* Bar chart api call amount by method*/}
                             <Grid item xs={12}>
                                 <Paper style={{height:600}} className={fixedHeightPaper}>
                                     <Histogram
                                         data={stats["last_days_api_calls_response_times_sample"]}
-                                        title={"Histogram of API call response time in the last" + DEFAULT_DAYS + " days."}
+                                        title={"Histogram of API call response time in the last " + DEFAULT_DAYS + " days."}
                                         subtitle={"Response times over 0.2 seconds where filtered due to low amount of samples."}
                                         ylabel={"API calls"}
                                     />
