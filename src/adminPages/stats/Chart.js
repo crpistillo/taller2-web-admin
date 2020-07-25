@@ -40,7 +40,6 @@ export default function Chart(props) {
                         left: 24,
                     }}
                 >
-                    {/*<CartesianGrid strokeDasharray="3 3" />*/}
                     <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
                     <YAxis stroke={theme.palette.text.secondary}>
                         <Label
