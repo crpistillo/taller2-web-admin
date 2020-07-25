@@ -11,21 +11,17 @@ import Chart from './Chart';
 import CumulativeComponent from './CumulativeComponent';
 import {GET_STATS_ENDPOINT} from "../../vars/endpoints";
 import Moment from "moment";
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import Sankey from "./Sankey";
 import PieComponent from "./PieComponent";
 import BarComponent from "./BarComponent";
 import Histogram from "./Histogram";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import Button from "@material-ui/core/Button";
 
-const DEFAULT_DAYS = 30;
 
 function Copyright() {
     return (
@@ -47,6 +43,7 @@ function sum(json_data) {
     }
     return cnt;
 }
+
 
 const drawerWidth = 240;
 
@@ -127,14 +124,31 @@ const useStyles = makeStyles((theme) => ({
     fixedHeight: {
         height: 240,
     },
+    formControl: {
+        margin: theme.spacing(3),
+    },
+    button: {
+        margin: theme.spacing(1, 1, 0, 0),
+    }
 }));
 
 export default function StatsDashboardContainer() {
     const classes = useStyles();
-    const [open, setOpen] = useState(true);
     const [stats, setStats] = useState({});
-    const [isFetching, setIsFectching] = useState(true);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isFetching, setIsFetching] = useState(true);
+
+    const [valueDays, setValueDays] = React.useState('7');
+    const [chosenDay, setChosenDay] = React.useState('7');
+    const [statsType, setStatsType] = React.useState('user');
+    const [chosenType, setChosenType] = React.useState('user');
+
+    const handleRadioChangeDay = (event) => {
+        setChosenDay(event.target.value);
+    };
+    const handleRadioChangeType = (event) => {
+        setChosenType(event.target.value);
+    };
+
     // API FUNCTIONS
     const generateRequest = (days) => {
         let requestHeaders = {
@@ -147,32 +161,179 @@ export default function StatsDashboardContainer() {
             headers: requestHeaders,
         });
     }
-
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setIsSidebarOpen(!isSidebarOpen);
-    };
-
-
-    const handleSubmit = async (days) => {
-        let request = generateRequest(days);
+    const handleSubmit = async () => {
+        setIsFetching(true);
+        setValueDays(chosenDay);
+        setStatsType(chosenType);
+        let request = generateRequest(chosenDay);
         const response = await fetch(request);
         const data = await response.json();
         setStats(data);
-        setIsFectching(false);
+        setIsFetching(false);
     }
 
     useEffect(() => {
-        handleSubmit(DEFAULT_DAYS);
+        handleSubmit(Number(valueDays));
     }, []);
 
+    //Types of stats to show
+    const userComponent = () => {
+        return (
+            <Grid container spacing={3} direction={"row"} justify={"center"}>
+                {/* Chart uploaded videos*/}
+                <Grid item xs={12} md={8} lg={9}>
+                    <Paper className={fixedHeightPaper}>
+                        <Chart
+                            data={stats["last_days_uploaded_videos"]}
+                            title={"Uploaded videos in the last " + valueDays + " days"}
+                            ylabel={"Videos"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* cumulative info */}
+                <Grid item xs={12} md={4} lg={3}>
+                    <Paper className={fixedHeightPaper}>
+                        <CumulativeComponent
+                            cumulative={sum(stats["last_days_uploaded_videos"]) + " videos"}
+                            title={"Videos in the last " + valueDays + " days"}
+                            text={"Since " + Moment().subtract(valueDays, 'days').format('LL')}
+                        />
+                    </Paper>
+                </Grid>
+                {/* Chart registered users*/}
+                <Grid item xs={12} md={8} lg={9}>
+                    <Paper className={fixedHeightPaper}>
+                        <Chart
+                            data={stats["last_days_user_registrations"]}
+                            title={"Registered users in the last " + valueDays + " days"}
+                            ylabel={"Users"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* cumulative info */}
+                <Grid item xs={12} md={4} lg={3}>
+                    <Paper className={fixedHeightPaper}>
+                        <CumulativeComponent
+                            cumulative={sum(stats["last_days_user_registrations"]) + " users"}
+                            title={"Registrations in the last " + valueDays + " days"}
+                            text={"Since " + Moment().subtract(valueDays, 'days').format('LL')}
+                        />
+                    </Paper>
+                </Grid>
+                {/* Chart users logins*/}
+                <Grid item xs={12} md={8} lg={9}>
+                    <Paper className={fixedHeightPaper}>
+                        <Chart
+                            data={stats["last_days_users_logins"]}
+                            title={"Logged users in the last " + valueDays + " days"}
+                            ylabel={"Users"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* cumulative info */}
+                <Grid item xs={12} md={4} lg={3}>
+                    <Paper className={fixedHeightPaper}>
+                        <CumulativeComponent
+                            cumulative={sum(stats["last_days_users_logins"]) + " users"}
+                            title={"Logins in the last " + valueDays + " days"}
+                            text={"Since " + Moment().subtract(valueDays, 'days').format('LL')}
+                        />
+                    </Paper>
+                </Grid>
+            </Grid>
+        );
+    }
+    const apiComponent = () => {
+        return (
+            <Grid container spacing={3} direction={"row"} justify={"center"}>
+                {/* Chart api call amount*/}
+                <Grid item xs={12} md={8} lg={9}>
+                    <Paper className={fixedHeightPaper}>
+                        <Chart
+                            data={stats["last_days_api_call_amount"]}
+                            title={"API calls in the last " + valueDays + " days"}
+                            ylabel={"API calls"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* cumulative info */}
+                <Grid item xs={12} md={4} lg={3}>
+                    <Paper className={fixedHeightPaper}>
+                        <CumulativeComponent
+                            cumulative={sum(stats["last_days_api_call_amount"]) + " API calls"}
+                            title={"API calls in the last " + valueDays + " days"}
+                            text={"Since " + Moment().subtract(valueDays, 'days').format('LL')}
+                        />
+                    </Paper>
+                </Grid>
+                {/* Sankey chart api call amount*/}
+                <Grid item xs={12}>
+                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                        <Sankey
+                            data={stats["last_days_api_calls_by_path"]}
+                            title={"API calls in the last " + valueDays + " days"}
+                            ylabel={"API calls"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* Pie chart api call amount*/}
+                <Grid item xs={12}>
+                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                        <PieComponent
+                            data={stats["last_days_api_calls_by_path"]}
+                            title={"API calls in the last " + valueDays + " days"}
+                            ylabel={"API calls"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* Bar chart api call amount*/}
+                <Grid item xs={12}>
+                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                        <BarComponent
+                            data={stats["last_days_api_calls_by_path"]}
+                            title={"API calls in the last " + valueDays + " days"}
+                            ylabel={"API calls"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* Bar chart api call amount by method*/}
+                <Grid item xs={12}>
+                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                        <BarComponent
+                            data={stats["last_days_api_calls_by_method"]}
+                            title={"API calls by method in the last " + valueDays + " days"}
+                            ylabel={"API calls"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* Bar chart api call amount by status*/}
+                <Grid item xs={12}>
+                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                        <BarComponent
+                            data={stats["last_days_api_calls_by_status"]}
+                            title={"API calls by status in the last " + valueDays + " days"}
+                            ylabel={"API calls"}
+                        />
+                    </Paper>
+                </Grid>
+                {/* Bar chart api call amount by method*/}
+                <Grid item xs={12}>
+                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                        <Histogram
+                            data={stats["last_days_api_calls_response_times_sample"]}
+                            title={"Histogram of API call response time in the last " + valueDays + " days."}
+                            subtitle={"Response times over 0.2 seconds where filtered due to low amount of samples."}
+                            ylabel={"API calls"}
+                        />
+                    </Paper>
+                </Grid>
+            </Grid>
+        );
+    }
 
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+    let typeToShow = statsType === 'user' ? userComponent() : apiComponent() ;
 
     return (
         (isFetching)
@@ -181,214 +342,42 @@ export default function StatsDashboardContainer() {
             :
 
             <div className={classes.root}>
-                {/*<CssBaseline />*/}
-                {/*<AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>*/}
-                {/*<Toolbar className={classes.toolbar}>*/}
-                {/*    <IconButton*/}
-                {/*        edge="start"*/}
-                {/*        color="inherit"*/}
-                {/*        aria-label="open drawer"*/}
-                {/*        onClick={handleDrawerOpen}*/}
-                {/*        className={clsx(classes.menuButton, open && classes.menuButtonHidden)}*/}
-                {/*    >*/}
-                {/*        <MenuIcon />*/}
-                {/*    </IconButton>*/}
-                {/*    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>*/}
-                {/*        Dashboard*/}
-                {/*    </Typography>*/}
-                {/*    <IconButton color="inherit">*/}
-                {/*        <Badge badgeContent={4} color="secondary">*/}
-                {/*            <NotificationsIcon />*/}
-                {/*        </Badge>*/}
-                {/*    </IconButton>*/}
-                {/*</Toolbar>*/}
-                {/*</AppBar>*/}
-
-                <SwipeableDrawer
-                    anchor={'bottom'}
-                    open={isSidebarOpen}
-                    onClose={toggleDrawer(false)}
-                    onOpen={toggleDrawer(true)}
-                >
-                    <div
-                        className={clsx(classes.list, {
-                            [classes.fullList]: true
-                        })}
-                        role="presentation"
-                        onClick={toggleDrawer(false)}
-                        onKeyDown={toggleDrawer(false)}
-                    >
-                        <List>
-                            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                                <ListItem button key={text}>
-                                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            ))}
-                        </List>
-                        <Divider />
-                        <List>
-                            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                                <ListItem button key={text}>
-                                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            ))}
-                        </List>
-                    </div>
-
-                </SwipeableDrawer>
 
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer}/>
 
                     <Container maxWidth="lg" className={classes.container}>
-                        <Button onClick={toggleDrawer(true)}>Bottom</Button>
-
-                        <Grid container spacing={3}>
-                            {/* Chart uploaded videos*/}
-                            <Grid item xs={12} md={8} lg={9}>
-                                <Paper className={fixedHeightPaper}>
-                                    <Chart
-                                        data={stats["last_days_uploaded_videos"]}
-                                        title={"Uploaded videos in the last " + DEFAULT_DAYS + " days"}
-                                        ylabel={"Videos"}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* cumulative info */}
-                            <Grid item xs={12} md={4} lg={3}>
-                                <Paper className={fixedHeightPaper}>
-                                    <CumulativeComponent
-                                        cumulative={sum(stats["last_days_uploaded_videos"]) + " videos"}
-                                        title={"Videos in the last " + DEFAULT_DAYS + " days"}
-                                        text={"Since " + Moment().subtract(DEFAULT_DAYS, 'days').format('LL')}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* Chart registered users*/}
-                            <Grid item xs={12} md={8} lg={9}>
-                                <Paper className={fixedHeightPaper}>
-                                    <Chart
-                                        data={stats["last_days_user_registrations"]}
-                                        title={"Registered users in the last " + DEFAULT_DAYS + " days"}
-                                        ylabel={"Users"}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* cumulative info */}
-                            <Grid item xs={12} md={4} lg={3}>
-                                <Paper className={fixedHeightPaper}>
-                                    <CumulativeComponent
-                                        cumulative={sum(stats["last_days_user_registrations"]) + " users"}
-                                        title={"Registrations in the last " + DEFAULT_DAYS + " days"}
-                                        text={"Since " + Moment().subtract(DEFAULT_DAYS, 'days').format('LL')}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* Chart users logins*/}
-                            <Grid item xs={12} md={8} lg={9}>
-                                <Paper className={fixedHeightPaper}>
-                                    <Chart
-                                        data={stats["last_days_users_logins"]}
-                                        title={"Login users in the last " + DEFAULT_DAYS + " days"}
-                                        ylabel={"Users"}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* cumulative info */}
-                            <Grid item xs={12} md={4} lg={3}>
-                                <Paper className={fixedHeightPaper}>
-                                    <CumulativeComponent
-                                        cumulative={sum(stats["last_days_users_logins"]) + " users"}
-                                        title={"Logins in the last " + DEFAULT_DAYS + " days"}
-                                        text={"Since " + Moment().subtract(DEFAULT_DAYS, 'days').format('LL')}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* Chart api call amount*/}
-                            <Grid item xs={12} md={8} lg={9}>
-                                <Paper className={fixedHeightPaper}>
-                                    <Chart
-                                        data={stats["last_days_api_call_amount"]}
-                                        title={"API calls in the last " + DEFAULT_DAYS + " days"}
-                                        ylabel={"API calls"}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* cumulative info */}
-                            <Grid item xs={12} md={4} lg={3}>
-                                <Paper className={fixedHeightPaper}>
-                                    <CumulativeComponent
-                                        cumulative={sum(stats["last_days_api_call_amount"]) + " API calls"}
-                                        title={"API calls in the last " + DEFAULT_DAYS + " days"}
-                                        text={"Since " + Moment().subtract(DEFAULT_DAYS, 'days').format('LL')}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* Sankey chart api call amount*/}
-                            <Grid item xs={12}>
-                                <Paper style={{height:600}} className={fixedHeightPaper}>
-                                    <Sankey
-                                        data={stats["last_days_api_calls_by_path"]}
-                                        title={"API calls in the last " + DEFAULT_DAYS + " days"}
-                                        ylabel={"API calls"}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* Pie chart api call amount*/}
-                            <Grid item xs={12}>
-                                <Paper style={{height:600}} className={fixedHeightPaper}>
-                                    <PieComponent
-                                        data={stats["last_days_api_calls_by_path"]}
-                                        title={"API calls in the last " + DEFAULT_DAYS + " days"}
-                                        ylabel={"API calls"}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* Bar chart api call amount*/}
-                            <Grid item xs={12}>
-                                <Paper style={{height:600}} className={fixedHeightPaper}>
-                                    <BarComponent
-                                        data={stats["last_days_api_calls_by_path"]}
-                                        title={"API calls in the last " + DEFAULT_DAYS + " days"}
-                                        ylabel={"API calls"}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* Bar chart api call amount by method*/}
-                            <Grid item xs={12}>
-                                <Paper style={{height:600}} className={fixedHeightPaper}>
-                                    <BarComponent
-                                        data={stats["last_days_api_calls_by_method"]}
-                                        title={"API calls by method in the last " + DEFAULT_DAYS + " days"}
-                                        ylabel={"API calls"}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* Bar chart api call amount by status*/}
-                            <Grid item xs={12}>
-                                <Paper style={{height:600}} className={fixedHeightPaper}>
-                                    <BarComponent
-                                        data={stats["last_days_api_calls_by_status"]}
-                                        title={"API calls by status in the last " + DEFAULT_DAYS + " days"}
-                                        ylabel={"API calls"}
-                                    />
-                                </Paper>
-                            </Grid>
-                            {/* Bar chart api call amount by method*/}
-                            <Grid item xs={12}>
-                                <Paper style={{height:600}} className={fixedHeightPaper}>
-                                    <Histogram
-                                        data={stats["last_days_api_calls_response_times_sample"]}
-                                        title={"Histogram of API call response time in the last " + DEFAULT_DAYS + " days."}
-                                        subtitle={"Response times over 0.2 seconds where filtered due to low amount of samples."}
-                                        ylabel={"API calls"}
-                                    />
-                                </Paper>
-                            </Grid>
-
+                        {/*Form*/}
+                        <Grid container spacing={3} direction={"row"} justify={"center"}>
+                            <form onSubmit={handleSubmit}>
+                                <FormControl component="fieldset" className={classes.formControl}>
+                                    <FormLabel component="legend">Choose statistics you wish to
+                                        visualise...</FormLabel>
+                                    <RadioGroup aria-label="quiz" name="quiz" value={chosenType}
+                                                style={{flexDirection: 'row'}} onChange={handleRadioChangeType}>
+                                        <FormControlLabel value="user" control={<Radio/>} label="Users Statistics"/>
+                                        <FormControlLabel value="api" control={<Radio/>} label="API Statistics"/>
+                                    </RadioGroup>
+                                </FormControl>
+                                <FormControl component="fieldset" className={classes.formControl}>
+                                    <FormLabel component="legend">Choose amount of last days to
+                                        visualise...</FormLabel>
+                                    <RadioGroup aria-label="quiz" name="quiz" value={chosenDay}
+                                                style={{flexDirection: 'row'}} onChange={handleRadioChangeDay}>
+                                        <FormControlLabel value="1" control={<Radio/>} label="Last day"/>
+                                        <FormControlLabel value="3" control={<Radio/>} label="Last 3 days"/>
+                                        <FormControlLabel value="7" control={<Radio/>} label="Last 7 days"/>
+                                        <FormControlLabel value="15" control={<Radio/>} label="Last 15 days"/>
+                                        <FormControlLabel value="30" control={<Radio/>} label="Last 30 days"/>
+                                    </RadioGroup>
+                                </FormControl>
+                                <Button style={{marginTop: 30}} type="submit" variant="outlined" color="primary"
+                                        className={classes.button}>
+                                    Stats!
+                                </Button>
+                            </form>
                         </Grid>
+                        {typeToShow}
                         <Box pt={4}>
                             <Copyright/>
                         </Box>
