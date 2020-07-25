@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import Chart from './Chart';
 import CumulativeComponent from './CumulativeComponent';
-import {GET_STATS_ENDPOINT} from "../../vars/endpoints";
+import { GET_STATS_ENDPOINT } from "../../vars/endpoints";
 import Moment from "moment";
 import Sankey from "./Sankey";
 import PieComponent from "./PieComponent";
@@ -21,7 +21,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
-
+import Loader from 'react-loader-spinner'
 
 function Copyright() {
     return (
@@ -289,7 +289,7 @@ export default function StatsDashboardContainer() {
                 </Grid>
                 {/* Sankey chart api call amount*/}
                 <Grid item xs={12}>
-                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                    <Paper style={{ height: 600 }} className={fixedHeightPaper}>
                         <Sankey
                             data={stats["last_days_api_calls_by_path"]}
                             title={"API calls in the last " + valueDays + " days"}
@@ -299,7 +299,7 @@ export default function StatsDashboardContainer() {
                 </Grid>
                 {/* Pie chart api call amount*/}
                 <Grid item xs={12}>
-                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                    <Paper style={{ height: 600 }} className={fixedHeightPaper}>
                         <PieComponent
                             data={stats["last_days_api_calls_by_path"]}
                             title={"API calls in the last " + valueDays + " days"}
@@ -309,7 +309,7 @@ export default function StatsDashboardContainer() {
                 </Grid>
                 {/* Bar chart api call amount by method*/}
                 <Grid item xs={12}>
-                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                    <Paper style={{ height: 600 }} className={fixedHeightPaper}>
                         <Histogram
                             data={stats["last_days_api_calls_response_times_sample"]}
                             title={"Histogram of API call response time in the last " + valueDays + " days."}
@@ -320,7 +320,7 @@ export default function StatsDashboardContainer() {
                 </Grid>
                 {/* Bar chart api call amount*/}
                 <Grid item xs={12}>
-                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                    <Paper style={{ height: 600 }} className={fixedHeightPaper}>
                         <BarComponent
                             data={stats["last_days_api_calls_by_path"]}
                             title={"API calls in the last " + valueDays + " days"}
@@ -330,7 +330,7 @@ export default function StatsDashboardContainer() {
                 </Grid>
                 {/* Bar chart api call amount by method*/}
                 <Grid item xs={12}>
-                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                    <Paper style={{ height: 600 }} className={fixedHeightPaper}>
                         <BarComponent
                             data={stats["last_days_api_calls_by_method"]}
                             title={"API calls by method in the last " + valueDays + " days"}
@@ -340,7 +340,7 @@ export default function StatsDashboardContainer() {
                 </Grid>
                 {/* Bar chart api call amount by status*/}
                 <Grid item xs={12}>
-                    <Paper style={{height: 600}} className={fixedHeightPaper}>
+                    <Paper style={{ height: 600 }} className={fixedHeightPaper}>
                         <BarComponent
                             data={stats["last_days_api_calls_by_status"]}
                             title={"API calls by status in the last " + valueDays + " days"}
@@ -360,13 +360,26 @@ export default function StatsDashboardContainer() {
     return (
         (isFetching)
             ?
-            <div/>
+            <div style={{ position: 'absolute', marginLeft: "45%", marginTop:"20%" }}>
+                <Loader
+                    type="Audio"
+                    color="#4A4CB3"
+                    height={100}
+                    width={100}
+                    timeout={5000} //3 secs
+                />
+                <Typography component="h2" variant="h6" color="primary" gutterBottom>
+                    Loading Statistics...
+                </Typography>
+                
+            </div>
             :
+
 
             <div className={classes.root}>
 
                 <main className={classes.content}>
-                    <div className={classes.appBarSpacer}/>
+                    <div className={classes.appBarSpacer} />
 
                     <Container maxWidth="lg" className={classes.container}>
                         {/*Form*/}
@@ -376,32 +389,32 @@ export default function StatsDashboardContainer() {
                                     <FormLabel component="legend">Choose statistics you wish to
                                         visualise...</FormLabel>
                                     <RadioGroup aria-label="quiz" name="quiz" value={chosenType}
-                                                style={{flexDirection: 'row'}} onChange={handleRadioChangeType}>
-                                        <FormControlLabel value="user" control={<Radio/>} label="Users Statistics"/>
-                                        <FormControlLabel value="api" control={<Radio/>} label="API Statistics"/>
+                                        style={{ flexDirection: 'row' }} onChange={handleRadioChangeType}>
+                                        <FormControlLabel value="user" control={<Radio />} label="Users Statistics" />
+                                        <FormControlLabel value="api" control={<Radio />} label="API Statistics" />
                                     </RadioGroup>
                                 </FormControl>
                                 <FormControl component="fieldset" className={classes.formControl}>
                                     <FormLabel component="legend">Choose amount of last days to
                                         visualise...</FormLabel>
                                     <RadioGroup aria-label="quiz" name="quiz" value={chosenDay}
-                                                style={{flexDirection: 'row'}} onChange={handleRadioChangeDay}>
-                                        <FormControlLabel value="1" control={<Radio/>} label="Last day"/>
-                                        <FormControlLabel value="3" control={<Radio/>} label="Last 3 days"/>
-                                        <FormControlLabel value="7" control={<Radio/>} label="Last 7 days"/>
-                                        <FormControlLabel value="15" control={<Radio/>} label="Last 15 days"/>
-                                        <FormControlLabel value="30" control={<Radio/>} label="Last 30 days"/>
+                                        style={{ flexDirection: 'row' }} onChange={handleRadioChangeDay}>
+                                        <FormControlLabel value="1" control={<Radio />} label="Last day" />
+                                        <FormControlLabel value="3" control={<Radio />} label="Last 3 days" />
+                                        <FormControlLabel value="7" control={<Radio />} label="Last 7 days" />
+                                        <FormControlLabel value="15" control={<Radio />} label="Last 15 days" />
+                                        <FormControlLabel value="30" control={<Radio />} label="Last 30 days" />
                                     </RadioGroup>
                                 </FormControl>
-                                <Button style={{marginTop: 30}} type="submit" variant="outlined" color="primary"
-                                        className={classes.button}>
+                                <Button style={{ marginTop: 30 }} type="submit" variant="outlined" color="primary"
+                                    className={classes.button}>
                                     Stats!
                                 </Button>
                             </form>
                         </Grid>
                         {typeToShow}
                         <Box pt={4}>
-                            <Copyright/>
+                            <Copyright />
                         </Box>
                     </Container>
                 </main>
