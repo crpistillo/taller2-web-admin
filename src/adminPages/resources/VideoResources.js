@@ -17,6 +17,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import CancelIcon from '@material-ui/icons/Cancel';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 export default class VideoResources extends Component{
@@ -30,7 +32,9 @@ export default class VideoResources extends Component{
             totalPages: 0,
             openModal: false,
             videoToDelete: "",
-            userEmailOfVideoToDelete: ""
+            userEmailOfVideoToDelete: "",
+            showSuccessfulAlert: false,
+            showErrorAlert: false
         }
 
         this.videosPerPage = 10;
@@ -56,7 +60,6 @@ export default class VideoResources extends Component{
         fetch(request)
             .then(response => response.json())
             .then(json => {
-                console.log(json)
                 this.setState({videos: json.results, isLoadingVideos: false, totalPages: json.pages})
             })
     }
@@ -111,11 +114,11 @@ export default class VideoResources extends Component{
         fetch(request)
             .then(response => {
                 if(response.ok){
-                    console.log("200, ok")
+                    this.setState({showSuccessfulAlert: true})
                     this.changePage(this.state.videos.length === 1 ?
                                     this.state.currentPage - 1 : this.state.currentPage)
                 } else {
-                    console.log("Fallo el borrado")
+                    this.setState({showErrorAlert: true, isLoadingVideos: false})
                 }
             })
     }
@@ -126,17 +129,14 @@ export default class VideoResources extends Component{
                 <Grid container direction="row">
                     <Grid item xs={12} >
                         <Paper style={{padding: 20, borderRadius: 20}}>
-                            <Grid container >
+                            <Grid container spacing={2}>
                                 <Grid container item xs={12} direction="row" justify="center">
                                     <CustomTypography
-                                        variant="subtitle2"
                                         captionText="Are you sure you want to delete"
                                     />
                                 </Grid>
-                                <Grid container item xs={12} direction="row" justify="center">
-
+                                <Grid container item xs={12} direction="row" justify="center" alignContent="center">
                                 <CustomTypography
-                                    variant="subtitle2"
                                     overlineText={`${this.state.videoToDelete.title} ?`}
                                 />
                                 </Grid>
@@ -147,7 +147,7 @@ export default class VideoResources extends Component{
                                         color="primary"
                                         style={{margin: 1}}
                                         startIcon={<CancelIcon/>}
-                                        onClick={() => this.setState({openModal: false, videoToDelete: "", userEmailOfVideoToDelete: ""})}>
+                                        onClick={() => this.setState({openModal: false})}>
                                         CANCEL
                                     </Button>
                                     </Grid>
@@ -270,6 +270,30 @@ export default class VideoResources extends Component{
         )
     }
 
+    errorSnackBar(){
+        return(
+            <Snackbar open={this.state.showErrorAlert} autoHideDuration={6000}
+                      anchorOrigin={{vertical: "top", horizontal: "right"}}
+                      onClose={() => this.setState({showErrorAlert: false})}>
+                <MuiAlert elevation={6} variant="filled" onClose={() => this.setState({showErrorAlert: false})} severity="warning">
+                    Error deleting video.
+                </MuiAlert>
+            </Snackbar>
+        )
+    }
+
+    successSnackBar(){
+        return(
+            <Snackbar open={this.state.showSuccessfulAlert} autoHideDuration={6000}
+                      anchorOrigin={{vertical: "top", horizontal: "right"}}
+                      onClose={() => this.setState({showSuccessfulAlert: false})}>
+                <MuiAlert elevation={6} variant="filled" onClose={() => this.setState({showSuccessfulAlert: false})} severity="success">
+                    Video deleted successfully!
+                </MuiAlert>
+            </Snackbar>
+        )
+    }
+
     render(){
         const componentToShow = this.state.isLoadingVideos ?
             <WaitingSpinner activated={true} variant="secondary"/> :
@@ -280,6 +304,8 @@ export default class VideoResources extends Component{
                     <AdminHeader title={this.title} headerText={this.headerText}  descriptionText={this.descriptionText}/>
                     {componentToShow}
                     {this.deleteModal()}
+                    {this.successSnackBar()}
+                    {this.errorSnackBar()}
                 </Grid>
             </div>
 
