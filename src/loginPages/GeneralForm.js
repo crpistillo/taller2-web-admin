@@ -55,7 +55,7 @@ class GeneralForm extends Component {
           {showExtraLink}
         </form>
 
-        <WaitingSpinner activated={this.props.showSpinner} />
+        <WaitingSpinner activated={this.props.showSpinner} variant="primary"/>
       </div>
     );
   }

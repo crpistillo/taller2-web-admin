@@ -86,6 +86,7 @@ class SignUp extends Component {
         this.props.setSuccessMessage(true, "Successful signup!");
       }
     } else {
+      console.log(response)
       response.json().then((json) => {
         this.props.setErrorMessage(true, json.message);
       });

@@ -28,7 +28,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://web-admin-chotuve.herokuapp.com/">
-                Choutuve Web Admin
+                Chotuve Web Admin
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}

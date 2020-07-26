@@ -8,8 +8,11 @@ import LoginContainer from './loginPages/Login';
 import HomeContainer from './adminPages/Home';
 import UsersHomeContainer from './adminPages/users/UsersHome';
 import ForgotPasswordContainer from './loginPages/ForgotPassword';
+
+import VideoResources from "./adminPages/resources/VideoResources";
 import NewPasswordContainer from './loginPages/NewPassword';
 import StatsDashboardContainer from "./adminPages/stats/Dashboard";
+
 
 function App() {
   return (<Router>
@@ -20,18 +23,19 @@ function App() {
         <Route exact path='/' component={LoginContainer} />
         <Route path="/sign-in" component={LoginContainer} />
         <Route path="/sign-up">
-          <SignUpContainer text={"Sign up"} hasToShowMessage={true} showLink={true} />
+            <SignUpContainer text={"Sign up"} hasToShowMessage={true} showLink={true} />
         </Route>
-        <Route path="/home" component={HomeContainer} />
-        <Route path="/users" component={UsersHomeContainer} />
-        <Route path="/stats" component={StatsDashboardContainer} />
-        <Route path="/forgot_password" component={ForgotPasswordContainer} />
-        <Route path="/new_password" component={NewPasswordContainer} />
+          <Route path="/home" component={HomeContainer} />
+          <Route path="/users" component={UsersHomeContainer} />
+          <Route path="/forgot_password" component={ForgotPasswordContainer} />
+          <Route path="/new_password" component={NewPasswordContainer} />
+          <Route path="/home" component={HomeContainer} />
+          <Route path="/users" component={UsersHomeContainer} />
+          <Route path="/resources" component={VideoResources} />
+          <Route path="/stats" component={StatsDashboardContainer} />
       </Switch>
-
-
     </div>
-  </Router>
+      </Router>
   );
 }
 

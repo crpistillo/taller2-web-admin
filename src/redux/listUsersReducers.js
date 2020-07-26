@@ -71,7 +71,7 @@ const fetchUsers = (pageNumber, usersPerPage, authToken) => {
 };
 
 const generateDeleteUserRequest = (userEmail, authToken) => {
-  let fetchEndpoint = CREATE_USER_ENDPOINT + `&email=${userEmail}`;
+  let fetchEndpoint = CREATE_USER_ENDPOINT + `?email=${userEmail}`;
 
   let request = generateRequest(fetchEndpoint, authToken, "DELETE");
 

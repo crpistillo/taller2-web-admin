@@ -43,7 +43,7 @@ class DeleteModal extends Component {
           <Row>
             <Col xs={8}>{this.props.body}</Col>
             <Col xs={4}>
-              <WaitingSpinner activated={this.props.activateSpinner} />
+              <WaitingSpinner activated={this.props.activateSpinner} variant="primary"/>
               {successBagde}
               {errorBagde}
             </Col>
