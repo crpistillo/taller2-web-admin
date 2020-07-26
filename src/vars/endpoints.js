@@ -17,3 +17,6 @@ export const EDIT_USER_ENDPOINT = USERS_ENDPOINT
 export const VIDEOS_ENDPOINT = SERVER_ENDPOINT + "/videos"
 
 export const DELETE_VIDEO_ENDPOINT = USERS_ENDPOINT + "/video"
+
+export const GET_STATS_ENDPOINT = SERVER_ENDPOINT + "/api_call_statistics"
+
