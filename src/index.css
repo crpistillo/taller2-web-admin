@@ -64,7 +64,6 @@ html,
   justify-content: center;
   flex-direction: column;
   text-align: left;
-  background: #00335c !important;
 }
 
 .auth-inner {
@@ -201,4 +200,12 @@ input[type="file"] {
 .delete-modal-container {
   position: absolute;
   width: 400px;
+}
+
+.user-pagination {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  text-align: left;
+  padding-bottom: 50px;
 }
