@@ -1,11 +1,14 @@
 import React from "react";
 import Alert from 'react-bootstrap/Alert'
+import CustomTypography from "./CustomTypography";
 
 const AdminHeader = props => (
     <Alert variant="secondary">
-        <Alert.Heading>{props.title}</Alert.Heading>
+        <Alert.Heading>
+            <CustomTypography overlineText={props.title} />
+        </Alert.Heading>
         <p>
-            {props.headerText}
+            <CustomTypography overlineText={props.headerText} />
         </p>
         <hr />
         <p className="mb-0">

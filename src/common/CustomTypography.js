@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 
 const CustomTypography = props => (
     <div>
-        <Typography variant="overline" style={{justifyContent: "center"}}>
+        <Typography variant="h7" style={{justifyContent: "center"}}>
             {props.overlineText ? props.overlineText : ""}
         </Typography>
         <Typography variant="caption" style={{justifyContent: "center"}}>
