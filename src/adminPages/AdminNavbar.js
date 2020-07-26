@@ -8,7 +8,7 @@ class AdminNavbar extends Component {
         return (
             <CommonNavbar chotuveLink="/home" links={
                 [{
-                    redirectLink: "/users/add",
+                    redirectLink: "/users/list",
                     linkText: "Users"
                 }, {
                     redirectLink: "/resources",

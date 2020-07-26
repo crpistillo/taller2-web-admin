@@ -20,12 +20,13 @@ import Spinner from "react-bootstrap/Spinner";
 import UsersTable from "./UsersTable";
 import DeleteModal from "../../common/DeleteModal";
 import EditModal from "../../common/EditModal";
+import WaitingSpinner from "../../common/WaitingSpinner";
 
 class UsersList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { page: 0 };
+    this.state = { page: 1 };
 
     this.usersPerPage = 10;
     this.headerText = "Users list";
@@ -53,16 +54,7 @@ class UsersList extends Component {
   fetched() {
     if (!this.props.alreadyFetched) {
       return (
-        <Button variant="light" disabled>
-          <Spinner
-            as="span"
-            animation="border"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-          />
-          <span className="sr-only">Loading...</span>
-        </Button>
+          <WaitingSpinner activated={true} variant="secondary"/>
       );
     } else {
       return (

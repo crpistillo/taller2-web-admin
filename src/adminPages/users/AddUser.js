@@ -9,6 +9,8 @@ import SignUpContainer from "../../loginPages/SignUp";
 import { connect } from "react-redux";
 
 import { SHOW_SUCCESSFUL_SIGNUP } from "../../redux/signUpReducer";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 class AddUser extends Component {
   constructor(props) {
@@ -23,45 +25,34 @@ class AddUser extends Component {
       "In order to create a user in the database, please fill the following form. After sending it, a user of the main application will be able to log-in with the specified credentials";
   }
 
-  closeSuccessMessage() {
-    this.setState({ showSuccessMessage: false });
-  }
-
   _successMessage() {
-    return (
-      <div className="home-inner">
-        <Alert
-          variant="success"
-          show={this.props.success}
-          onClose={() => this.props.setSuccessful(false)}
-          dismissible
-        >
-          <Alert.Heading>Successful creation!</Alert.Heading>
-          <p>
-            User created correctly. Now, try to login with the specified
-            credentials in the main app!
-          </p>
-        </Alert>
-      </div>
+    return(
+        <Snackbar open={this.props.success} autoHideDuration={6000}
+                  onClose={() => this.props.setSuccessful(false)}>
+          <MuiAlert elevation={6} variant="filled" onClose={() => this.props.setSuccessful(false)} severity="success">
+            User created successfully!
+          </MuiAlert>
+        </Snackbar>
     );
   }
 
   render() {
     const successMessage = this._successMessage();
+    console.log(this.props.success)
     return (
       <Row>
         <JumbotronHeader
           headerText={this.headerText}
           descriptionText={this.descriptionText}
         />
-        <Col xs={6}>
+        <Col xs={12}>
           <SignUpContainer
             text={"Create user in database"}
             showLink={false}
             hasToShowMessage={false}
           />
         </Col>
-        <Col xs={6}>{successMessage}</Col>
+        {successMessage}
       </Row>
     );
   }

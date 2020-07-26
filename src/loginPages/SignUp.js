@@ -81,7 +81,7 @@ class SignUp extends Component {
 
   processResponse(response) {
     if (response.ok) {
-      this.props.setSuccessful();
+      this.props.setSuccessful(true);
       if (this.props.hasToShowMessage) {
         this.props.setSuccessMessage(true, "Successful signup!");
       }

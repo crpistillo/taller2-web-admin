@@ -299,7 +299,7 @@ export default class VideoResources extends Component{
             <WaitingSpinner activated={true} variant="secondary"/> :
             this.videosComponent();
         return (
-            <div style={{padding: 20, paddingTop: 100}}>
+            <div style={{padding: 100, paddingTop: 100}}>
                 <Grid container justify="center">
                     <AdminHeader title={this.title} headerText={this.headerText}  descriptionText={this.descriptionText}/>
                     {componentToShow}
