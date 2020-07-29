@@ -20,3 +20,5 @@ export const DELETE_VIDEO_ENDPOINT = USERS_ENDPOINT + "/video"
 
 export const GET_STATS_ENDPOINT = SERVER_ENDPOINT + "/api_call_statistics"
 
+export const APP_SERVERS_ENDPOINT = SERVER_ENDPOINT + "/app_servers"
+
