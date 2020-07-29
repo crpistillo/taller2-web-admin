@@ -64,7 +64,9 @@ class SignUp extends Component {
     formData.append("password", this.state.password);
     formData.append("fullname", this.state.fullName);
     formData.append("phone_number", "1111-1111");
-    formData.append("photo", this.state.photo, "image");
+    if(this.state.photo != null){
+      formData.append("photo", this.state.photo, "image");
+    }
 
     let requestHeaders = {
       Accept: "application/json",
@@ -118,6 +120,7 @@ class SignUp extends Component {
           showSpinner={this.props.showSpinner}
           setOnSpinner={this.setOnSpinner.bind(this)}
           processResponse={this.processResponse.bind(this)}
+          password={this.state.password}
         />
       </div>
     );

@@ -8,18 +8,17 @@ class Home extends Component {
   render() {
     if (!this.props.loggedIn) return <Redirect to="/sign-in" />;
     return (
-      <div className="home-wrapper">
-        <div className="home-inner">
-          <Alert variant="success">
+        <div style={{padding: 300}}>
+          <Alert variant="secondary">
             <Alert.Heading>Successful login!</Alert.Heading>
             <p>
-              Welcome to chotuve application administrator interface. On the
-              left sidebar you will find different application aspects. Click on
+              Welcome to ChoTuve ® application administrator interface. On the
+              navigation bar you will find different application aspects. Click on
               them to administrate it!
             </p>
           </Alert>
         </div>
-      </div>
+
     );
   }
 }

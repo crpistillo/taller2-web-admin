@@ -24,10 +24,17 @@ class FormContainer extends Component {
     e.preventDefault();
     if (!this.validateEmail()) {
       this.props.setErrorMessage(true, this.props.errorEmailText);
-    } else {
-      let request = this.props.generateRequest();
-      this.processRequest(request);
+      return;
     }
+
+    if(this.props.password.length < 4 || !/\d/.test(this.props.password)){
+      this.props.setErrorMessage(true, "Your password should have at least four characters and a number.")
+      return;
+    }
+
+    let request = this.props.generateRequest();
+    this.processRequest(request);
+
   }
 
   render() {

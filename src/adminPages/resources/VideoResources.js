@@ -19,6 +19,7 @@ import Button from '@material-ui/core/Button';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import {Redirect} from "react-router-dom";
 
 
 export default class VideoResources extends Component{
@@ -295,6 +296,7 @@ export default class VideoResources extends Component{
     }
 
     render(){
+            if (!store.getState().appReducer.loggedIn) return <Redirect to="/sign-in" />
         const componentToShow = this.state.isLoadingVideos ?
             <WaitingSpinner activated={true} variant="secondary"/> :
             this.videosComponent();

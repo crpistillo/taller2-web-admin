@@ -30,8 +30,6 @@ function App() {
           <Route path="/users" component={UsersHomeContainer} />
           <Route path="/forgot_password" component={ForgotPasswordContainer} />
           <Route path="/new_password" component={NewPasswordContainer} />
-          <Route path="/home" component={HomeContainer} />
-          <Route path="/users" component={UsersHomeContainer} />
           <Route path="/resources" component={VideoResources} />
           <Route path="/stats" component={StatsDashboardContainer} />
           <Route path="/app-servers" component={AppServers} />

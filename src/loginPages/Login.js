@@ -105,6 +105,7 @@ class Login extends Component {
           showSpinner={this.props.showSpinner}
           setOnSpinner={this.setOnSpinner.bind(this)}
           processResponse={this.processResponse.bind(this)}
+          password={this.state.password}
         />
       </div>
     );

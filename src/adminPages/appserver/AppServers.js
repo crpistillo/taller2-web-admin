@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Alert from "@material-ui/lab/Alert";
+import {Redirect} from "react-router-dom";
 
 export default class AppServers extends Component {
     title = "App Servers"
@@ -133,6 +134,7 @@ export default class AppServers extends Component {
 
 
     render() {
+        if (!store.getState().appReducer.loggedIn) return <Redirect to="/sign-in" />
         const componentToShow = this.state.isLoadingServers ?
             <WaitingSpinner activated={true} variant="secondary"/> :
             this.serversComponent();

@@ -22,6 +22,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
 import Loader from 'react-loader-spinner'
+import {store} from "../../index";
+import {Redirect} from "react-router-dom";
 
 function Copyright() {
     return (
@@ -354,6 +356,8 @@ export default function StatsDashboardContainer() {
     }
 
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+    if (!store.getState().appReducer.loggedIn) return <Redirect to="/sign-in" />
 
     let typeToShow = statsType === 'user' ? userComponent() : apiComponent();
 
