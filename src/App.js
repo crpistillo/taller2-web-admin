@@ -12,6 +12,7 @@ import ForgotPasswordContainer from './loginPages/ForgotPassword';
 import VideoResources from "./adminPages/resources/VideoResources";
 import NewPasswordContainer from './loginPages/NewPassword';
 import StatsDashboardContainer from "./adminPages/stats/Dashboard";
+import AppServers from "./adminPages/appserver/AppServers";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/users" component={UsersHomeContainer} />
           <Route path="/resources" component={VideoResources} />
           <Route path="/stats" component={StatsDashboardContainer} />
+          <Route path="/app-servers" component={AppServers} />
       </Switch>
     </div>
       </Router>

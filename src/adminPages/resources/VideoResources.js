@@ -199,7 +199,7 @@ export default class VideoResources extends Component{
                     {this.state.videos.map((video, index) => (
                         <Grid container>
                             <Grid item xs={12} key={index}>
-                                <Paper elevation={10} >
+                                    <Paper elevation={10} >
                                     <Grid container style={{margin: 20}} spacing={2} direction="row">
                                         <Grid item xs={3} style={{marginLeft: 5}}>
                                             <Grid container spacing={2}>

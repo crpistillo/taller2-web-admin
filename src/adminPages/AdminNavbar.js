@@ -16,6 +16,9 @@ class AdminNavbar extends Component {
                 }, {
                     redirectLink: "/stats",
                     linkText: "Statistics"
+                }, {
+                    redirectLink: "/app-servers",
+                    linkText: "App servers"
                 }
                 , {
                     redirectLink: "/sign-in",
